@@ -1,0 +1,133 @@
+.login {
+  width: 100%;
+  padding: 0 0 2rem;
+}
+
+.login .login-header {
+  margin-bottom: 2rem;
+}
+
+.login .login-header img {
+  width: 30%;
+  min-width: 200px;
+  max-width: 300px;
+  position: relative;
+  left: 53%;
+  transform: translateX(-50%);
+  margin-top: -2rem;
+}
+
+.login .login-header h3 {
+  text-align: center;
+  margin-top: -0.5rem;
+}
+
+.login .login-body {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  color: #fff;
+  background: var(--main-dark-color);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.login .login-body p {
+  color: #ddd;
+}
+
+.login .login-body h3 {
+  margin: 1rem 0 2rem;
+  text-align: center;
+}
+
+.login .login-body-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.login .login-body-main .login-social,
+.login .login-body-main .login-form {
+  flex: 1;
+  min-width: 280px;
+}
+
+.login .login-body-main .login-form div {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  background: #777;
+  color: #eee;
+  height: 50px;
+  overflow: hidden;
+}
+
+.login .login-body-main .login-form label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  left: 0.75rem;
+  transition: 0.2s;
+}
+
+.login .login-body-main .login-form input {
+  border: none;
+  outline: none;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  padding-left: 0.75rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.login .login-body-main .login-form input:valid,
+.login .login-body-main .login-form input:focus {
+  height: 80%;
+}
+
+.login .login-body-main .login-form input:valid + label,
+.login .login-body-main .login-form input:focus + label {
+  top: 20%;
+  font-size: 0.825rem;
+  color: #ccc;
+}
+
+.forgot-password {
+  margin: -0.5rem 0 1rem;
+  text-align: right;
+}
+
+.forgot-password a {
+  color: var(--main-green-color) !important;
+  text-decoration: none !important;
+}
+
+.login .login-body-main button {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  border: none;
+  outline: none;
+  background: var(--main-green-color);
+  font-weight: bold;
+  color: var(--main-dark-color);
+  margin-bottom: 1rem;
+}
+
+.login .login-body-main .login-form-suggest {
+  text-align: center;
+}
+
+.login .login-body-main .login-form-suggest a {
+  color: var(--main-green-color);
+}
+
+@media (max-width: 768px) {
+  .login .login-body-main .login-social {
+    order: 2;
+  }
+}
