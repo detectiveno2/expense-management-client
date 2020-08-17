@@ -1,19 +1,13 @@
 import axiosClient from './axiosClient';
 
 const userApi = {
-	login: (data) => {
+	login: async (data) => {
 		const url = '/auth/login';
-		return axiosClient
-			.post(url, data)
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
+		return await axiosClient.post(url, data);
 	},
-	register: (data) => {
+	register: async (data) => {
 		const url = '/auth/register';
-		return axiosClient
-			.post(url, data)
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
+		return await axiosClient.post(url, data);
 	},
 };
 
