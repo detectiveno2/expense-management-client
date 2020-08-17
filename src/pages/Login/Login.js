@@ -6,6 +6,8 @@ import axios from 'axios';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 
+import userApi from '../../api/userApi';
+
 import MoneyImg from '../../images/money.png';
 import ENDPOINT from '../../ENDPOINT';
 import './Login.css';
@@ -17,15 +19,7 @@ export default function () {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		axios
-			.post(`${ENDPOINT}/api/auth/login`, {
-				email,
-				password,
-			})
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => setErr(err.response.data));
+		userApi.login({ email, password });
 	};
 
 	return (
@@ -51,7 +45,7 @@ export default function () {
 										required
 										id="email"
 										type="email"
-										onChange={(e) => setEmail(e.target.email)}
+										onChange={(e) => setEmail(e.target.value)}
 									/>
 									<label for="email">Email</label>
 								</div>

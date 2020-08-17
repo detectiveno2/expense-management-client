@@ -23,7 +23,7 @@ export default function () {
 	return (
 		<FacebookLogin
 			appId="747911565967671"
-			autoLoad={true}
+			autoLoad={false}
 			fields="name,email,picture"
 			callback={responseFacebook}
 			textButton={
