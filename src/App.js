@@ -12,8 +12,12 @@ function App() {
 			<div className="wrapper">
 				<div className="main wrap-content">
 					<Switch>
-						<PublicRoute exact path="/login" component={Login} />
-						<PublicRoute exact path="/register" component={Register} />
+						<PublicRoute exact path="/login" component={() => <Login />} />
+						<PublicRoute
+							exact
+							path="/register"
+							component={() => <Register />}
+						/>
 					</Switch>
 				</div>
 			</div>
