@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import axios from 'axios';
 
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
+import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 
 import MoneyImg from '../../images/money.png';
 import ENDPOINT from '../../ENDPOINT';
@@ -40,6 +41,7 @@ export default function () {
 						<div className="login-social">
 							<p>Using social networking accounts</p>
 							<FacebookLogin />
+							<GoogleLogin />
 						</div>
 						<div className="login-form ">
 							<p>Using Expense Management App account</p>
