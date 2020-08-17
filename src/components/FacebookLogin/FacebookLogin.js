@@ -5,7 +5,6 @@ import axios from 'axios';
 import userApi from '../../api/userApi';
 
 import { ReactComponent as FacebookIcon } from '../../images/facebook.svg';
-import ENDPOINT from '../../ENDPOINT';
 import './FacebookLogin.css';
 
 export default function () {

@@ -9,7 +9,6 @@ import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 import userApi from '../../api/userApi';
 
 import MoneyImg from '../../images/money.png';
-import ENDPOINT from '../../ENDPOINT';
 
 export default function () {
 	const [email, setEmail] = useState('');

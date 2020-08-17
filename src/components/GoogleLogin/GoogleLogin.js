@@ -5,11 +5,8 @@ import { GoogleLogin } from 'react-google-login';
 import userApi from '../../api/userApi';
 
 import './GoogleLogin.css';
-import ENDPOINT from '../../ENDPOINT';
 
 export default function () {
-	const [err, setErr] = useState(null);
-
 	const responseGoogle = (response) => {
 		userApi.login({
 			userId: response.profileObj.googleId,
