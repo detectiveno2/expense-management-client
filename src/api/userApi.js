@@ -2,7 +2,6 @@ import axiosClient from './axiosClient';
 
 const userApi = {
 	login: (params) => {
-		console.log(process.env.REACT_APP_API_URL);
 		const url = '/auth/login';
 		return axiosClient
 			.post(url, params)
