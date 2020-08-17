@@ -1,17 +1,17 @@
 import axiosClient from './axiosClient';
 
 const userApi = {
-	login: (params) => {
+	login: (data) => {
 		const url = '/auth/login';
 		return axiosClient
-			.post(url, params)
+			.post(url, data)
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
 	},
-	register: (params) => {
+	register: (data) => {
 		const url = '/auth/register';
 		return axiosClient
-			.post(url, params)
+			.post(url, data)
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
 	},
