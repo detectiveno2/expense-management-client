@@ -70,6 +70,9 @@ export default function () {
 									Don’t have an account? <Link to="/register">Register</Link>
 								</p>
 							</form>
+							<div className="login-or d-md-none">
+								<span>OR</span>
+							</div>
 						</div>
 					</div>
 				</div>
