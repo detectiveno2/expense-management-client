@@ -12,9 +12,8 @@
 	min-width: 200px;
 	max-width: 300px;
 	position: relative;
-	left: 53%;
+	left: 50%;
 	transform: translateX(-50%);
-	margin-top: -2rem;
 }
 
 .login .login-header h3 {
