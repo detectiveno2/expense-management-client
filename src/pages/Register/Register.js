@@ -49,6 +49,7 @@ export default function () {
 									<input
 										required
 										id="email"
+										type="email"
 										onChange={(e) => setEmail(e.target.email)}
 									/>
 									<label for="email">Email</label>
@@ -57,7 +58,7 @@ export default function () {
 									<input
 										required
 										id="password"
-										typo="password"
+										type="password"
 										onChange={(e) => setPassword(e.target.value)}
 									/>
 									<label for="password">Password</label>

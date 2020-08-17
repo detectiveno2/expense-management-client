@@ -50,6 +50,7 @@ export default function () {
 									<input
 										required
 										id="email"
+										type="email"
 										onChange={(e) => setEmail(e.target.email)}
 									/>
 									<label for="email">Email</label>
