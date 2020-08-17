@@ -8,7 +8,6 @@ import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 
 import MoneyImg from '../../images/money.png';
 import ENDPOINT from '../../ENDPOINT';
-import './Login.css';
 
 export default function () {
 	const [email, setEmail] = useState('');
@@ -18,7 +17,7 @@ export default function () {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		axios
-			.post(`${ENDPOINT}/api/auth/login`, {
+			.post(`${ENDPOINT}/api/auth/register`, {
 				email,
 				password,
 			})
@@ -36,7 +35,7 @@ export default function () {
 					<h3>Expense Management</h3>
 				</div>
 				<div className="login-body">
-					<h3>Log In</h3>
+					<h3>Register</h3>
 					<div className="login-body-main">
 						<div className="login-social">
 							<p>Using social networking accounts</p>
@@ -58,17 +57,14 @@ export default function () {
 									<input
 										required
 										id="password"
-										type="password"
+										typo="password"
 										onChange={(e) => setPassword(e.target.value)}
 									/>
 									<label for="password">Password</label>
 								</div>
-								<p className="forgot-password">
-									<Link to="/forgot-password">Forgot Password</Link>
-								</p>
-								<button>Login</button>
+								<button className="mt-3">Register</button>
 								<p className="login-form-suggest">
-									Don’t have an account? <Link to="/register">Register</Link>
+									Have an account? <Link to="/login">Login</Link>
 								</p>
 							</form>
 							<div className="login-or d-md-none">
