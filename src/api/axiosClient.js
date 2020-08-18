@@ -7,6 +7,14 @@ const axiosClient = axios.create({
 	},
 });
 
+// Handle token.
+const authToken = localStorage.getItem('authToken');
+if (authToken) {
+	axiosClient.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+} else {
+	axiosClient.defaults.headers.common['Authorization'] = '';
+}
+
 axiosClient.interceptors.request.use(async (config) => {
 	return config;
 });
@@ -19,6 +27,13 @@ axiosClient.interceptors.response.use(
 		return response;
 	},
 	(error) => {
+		// Check if response is unauth or forbidden.
+		const status = error.response.status;
+		if (status === 401 || status === 403) {
+			localStorage.removeItem('authToken');
+			axiosClient.defaults.headers.common['Authorization'] = '';
+		}
+
 		throw error;
 	}
 );
