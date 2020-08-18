@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
+import swal from 'sweetalert';
 
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
@@ -15,18 +16,31 @@ export default function () {
 	const [password, setPassword] = useState('');
 	const [err, setErr] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const [registered, setRegistered] = useState(false);
 
-	const onSubmit = async (e) => {
+	const onSubmit = (e) => {
 		setIsLoading(true);
 		e.preventDefault();
-		try {
-			await userApi.register({ email, password });
-			setIsLoading(false);
-		} catch (err) {
-			setErr(err);
-			setIsLoading(false);
-		}
+
+		const getData = async () => {
+			try {
+				await userApi.register({ email, password });
+				setIsLoading(false);
+				setRegistered(true);
+
+				//alert registered success
+				swal('Success', 'Thank you!', 'success');
+			} catch (err) {
+				setErr(err);
+				setIsLoading(false);
+			}
+		};
+		getData();
 	};
+
+	if (registered) {
+		return <Redirect to="/login" />;
+	}
 
 	return (
 		<div className="login">
