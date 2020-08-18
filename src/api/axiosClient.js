@@ -9,7 +9,11 @@ const axiosClient = axios.create({
 
 // Handle token.
 const authToken = localStorage.getItem('authToken');
-axiosClient.defaults.headers.common['Authorization'] = authToken || '';
+if (authToken) {
+	axiosClient.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+} else {
+	axiosClient.defaults.headers.common['Authorization'] = '';
+}
 
 axiosClient.interceptors.request.use(async (config) => {
 	return config;
