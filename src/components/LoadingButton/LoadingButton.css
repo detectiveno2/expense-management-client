@@ -1,0 +1,16 @@
+.form-btn.hide {
+	pointer-events: none;
+	background: rgb(205, 211, 211);
+}
+
+.form-btn {
+	background: var(--main-green-color);
+	pointer-events: auto;
+	height: 40px;
+}
+
+.form-btn .css-0 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

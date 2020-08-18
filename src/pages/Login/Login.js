@@ -5,18 +5,29 @@ import classNames from 'classnames';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 
-import userApi from '../../api/userApi';
+import LoadingButton from '../../components/LoadingButton/LoadingButton';
 
+import userApi from '../../api/userApi';
 import MoneyImg from '../../images/money.png';
 import './Login.css';
 
 export default function () {
+	const [err, setErr] = useState(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
-		userApi.login({ email, password });
+		setIsLoading(true);
+
+		try {
+			const token = await userApi.login({ email, password });
+			setIsLoading(false);
+		} catch (err) {
+			setErr(err);
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -58,7 +69,15 @@ export default function () {
 								<p className="forgot-password">
 									<Link to="/forgot-password">Forgot Password</Link>
 								</p>
-								<button>Login</button>
+								<LoadingButton
+									textBtn="Login"
+									className={classNames({
+										'form-btn': true,
+										hide: isLoading,
+									})}
+									isLoading={isLoading}
+									onClick={onSubmit}
+								/>
 								<p className="login-form-suggest">
 									Don’t have an account? <Link to="/register">Register</Link>
 								</p>
