@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-const authToken = localStorage.getItem('authToken');
 const axiosClient = axios.create({
 	baseURL: process.env.REACT_APP_API_URL,
 	headers: {
 		'content-type': 'application/json',
-		authorization: authToken || null,
 	},
 });
+
+// Handle token.
+const authToken = localStorage.getItem('authToken');
+axiosClient.defaults.headers.common['Authorization'] = authToken || '';
 
 axiosClient.interceptors.request.use(async (config) => {
 	return config;
@@ -25,7 +27,7 @@ axiosClient.interceptors.response.use(
 		const status = error.response.status;
 		if (status === 401 || status === 403) {
 			localStorage.removeItem('authToken');
-			axiosClient.defaults.headers.common['authorization'] = '';
+			axiosClient.defaults.headers.common['Authorization'] = '';
 		}
 
 		throw error;
