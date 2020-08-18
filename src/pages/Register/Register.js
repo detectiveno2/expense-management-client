@@ -5,17 +5,27 @@ import classNames from 'classnames';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 
-import userApi from '../../api/userApi';
+import LoadingButton from '../../components/LoadingButton/LoadingButton';
 
+import userApi from '../../api/userApi';
 import MoneyImg from '../../images/money.png';
 
 export default function () {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [err, setErr] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
+		setIsLoading(true);
 		e.preventDefault();
-		userApi.register({ email, password });
+		try {
+			await userApi.register({ email, password });
+			setIsLoading(false);
+		} catch (err) {
+			setErr(err);
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -54,7 +64,14 @@ export default function () {
 									/>
 									<label for="password">Password</label>
 								</div>
-								<button className="mt-3">Register</button>
+								<LoadingButton
+									textBtn="Register"
+									className={classNames({
+										'form-btn': true,
+										hide: isLoading,
+									})}
+									isLoading={isLoading}
+								/>
 								<p className="login-form-suggest">
 									Have an account? <Link to="/login">Login</Link>
 								</p>
