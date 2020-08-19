@@ -38,6 +38,11 @@ export default function () {
 		getData();
 	};
 
+	const token = localStorage.getItem('authToken');
+	if (token) {
+		return <Redirect to="/" />;
+	}
+
 	if (registered) {
 		return <Redirect to="/login" />;
 	}

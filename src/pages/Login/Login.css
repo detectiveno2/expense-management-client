@@ -173,6 +173,19 @@
 	transform: translateY(-50%);
 }
 
+.auth-err {
+	text-align: center !important;
+	font-size: 1.125rem;
+	color: var(--main-error-color) !important;
+}
+
+.auth-err svg {
+	position: relative;
+	margin-right: 0.325rem;
+	top: -2px;
+	width: 1.5rem;
+}
+
 @media (max-width: 768px) {
 	.login .login-body-main .login-social {
 		order: 2;

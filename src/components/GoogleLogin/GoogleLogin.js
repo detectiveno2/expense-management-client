@@ -26,7 +26,7 @@ export default function () {
 				localStorage.setItem('authToken', bearerToken);
 				axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 			} catch (error) {
-				// Cu Hieu xu ly UI cua loi o day nka.
+				alert(error);
 			}
 		};
 

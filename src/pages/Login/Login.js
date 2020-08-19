@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
 import axiosClient from '../../api/axiosClient';
@@ -10,6 +10,7 @@ import LoadingButton from '../../components/LoadingButton/LoadingButton';
 
 import userApi from '../../api/userApi';
 import MoneyImg from '../../images/money.png';
+import { ReactComponent as ErrorImg } from '../../images/error.svg';
 import './Login.css';
 
 export default function () {
@@ -32,10 +33,15 @@ export default function () {
 
 			setIsLoading(false);
 		} catch (err) {
-			setErr(err);
+			setErr(err.response.data);
 			setIsLoading(false);
 		}
 	};
+
+	const token = localStorage.getItem('authToken');
+	if (token) {
+		return <Redirect to="/" />;
+	}
 
 	return (
 		<div className="login">
@@ -60,7 +66,10 @@ export default function () {
 										required
 										id="email"
 										type="email"
-										onChange={(e) => setEmail(e.target.value)}
+										onChange={(e) => {
+											setEmail(e.target.value);
+											setErr(null);
+										}}
 									/>
 									<label for="email">Email</label>
 								</div>
@@ -69,13 +78,25 @@ export default function () {
 										required
 										id="password"
 										type="password"
-										onChange={(e) => setPassword(e.target.value)}
+										onChange={(e) => {
+											setPassword(e.target.value);
+											setErr(null);
+										}}
 									/>
 									<label for="password">Password</label>
 								</div>
 								<p className="forgot-password">
 									<Link to="/forgot-password">Forgot Password</Link>
 								</p>
+								{err && (
+									<p className="auth-err">
+										<span>
+											<ErrorImg />
+										</span>
+										{err}
+									</p>
+								)}
+
 								<LoadingButton
 									textBtn="Login"
 									className={classNames({
