@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { GoogleLogin } from 'react-google-login';
+
+import { UserContext } from '../../contexts/UserContext';
 
 import axiosClient from '../../api/axiosClient';
 import userApi from '../../api/userApi';
@@ -8,6 +10,8 @@ import userApi from '../../api/userApi';
 import './GoogleLogin.css';
 
 export default function () {
+	const { setToken } = useContext(UserContext);
+
 	const responseGoogle = (response) => {
 		const userName = response.profileObj.name;
 		const userId = response.profileObj.googleId;
@@ -25,8 +29,9 @@ export default function () {
 				const bearerToken = `Bearer ${token}`;
 				localStorage.setItem('authToken', bearerToken);
 				axiosClient.defaults.headers.common['Authorization'] = bearerToken;
+				setToken(bearerToken);
 			} catch (error) {
-				// Cu Hieu xu ly UI cua loi o day nka.
+				alert(error);
 			}
 		};
 
