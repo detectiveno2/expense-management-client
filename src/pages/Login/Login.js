@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
+
+import { UserContext } from '../../contexts/UserContext';
 
 import axiosClient from '../../api/axiosClient';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
@@ -14,6 +16,8 @@ import { ReactComponent as ErrorImg } from '../../images/error.svg';
 import './Login.css';
 
 export default function () {
+	const { token, setToken } = useContext(UserContext);
+
 	const [err, setErr] = useState(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -31,6 +35,7 @@ export default function () {
 			localStorage.setItem('authToken', bearerToken);
 			axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 
+			setToken(bearerToken);
 			setIsLoading(false);
 		} catch (err) {
 			setErr(err.response.data);
@@ -38,7 +43,6 @@ export default function () {
 		}
 	};
 
-	const token = localStorage.getItem('authToken');
 	if (token) {
 		return <Redirect to="/" />;
 	}

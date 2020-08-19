@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import swal from 'sweetalert';
+
+import { UserContext } from '../../contexts/UserContext';
 
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
@@ -13,6 +15,8 @@ import MoneyImg from '../../images/money.png';
 import { ReactComponent as ErrorImg } from '../../images/error.svg';
 
 export default function () {
+	const { token } = useContext(UserContext);
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [err, setErr] = useState(null);
@@ -39,7 +43,6 @@ export default function () {
 		getData();
 	};
 
-	const token = localStorage.getItem('authToken');
 	if (token) {
 		return <Redirect to="/" />;
 	}
