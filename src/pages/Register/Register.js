@@ -31,7 +31,7 @@ export default function () {
 				//alert registered success
 				swal('Success', 'Thank you!', 'success');
 			} catch (err) {
-				setErr(err);
+				setErr(err.response.data);
 				setIsLoading(false);
 			}
 		};
