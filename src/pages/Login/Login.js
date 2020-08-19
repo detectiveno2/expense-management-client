@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
+import axiosClient from '../../api/axiosClient';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 
@@ -22,7 +23,13 @@ export default function () {
 		setIsLoading(true);
 
 		try {
-			const token = await userApi.login({ email, password });
+			const { token } = await userApi.login({ email, password });
+
+			// Store token into local storage, set default header.
+			const bearerToken = `Bearer ${token}`;
+			localStorage.setItem('authToken', bearerToken);
+			axiosClient.defaults.headers.common['Authorization'] = bearerToken;
+
 			setIsLoading(false);
 		} catch (err) {
 			setErr(err);
