@@ -108,12 +108,14 @@
 }
 
 .login .login-body-main .login-form input:valid,
-.login .login-body-main .login-form input:focus {
+.login .login-body-main .login-form input:focus,
+.login .login-body-main .login-form input.reduced {
 	height: 80%;
 }
 
 .login .login-body-main .login-form input:valid + label,
-.login .login-body-main .login-form input:focus + label {
+.login .login-body-main .login-form input:focus + label,
+.login .login-body-main .login-form input.reduced + label {
 	top: 20%;
 	font-size: 0.825rem;
 	color: #ccc;
