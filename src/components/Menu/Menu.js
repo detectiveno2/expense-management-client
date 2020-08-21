@@ -48,7 +48,7 @@ export default function Menu() {
 		'collapse-show': isShow,
 	});
 	const overlayClass = classNames('menu-wrapper-overlay', {
-		'collapse-show': isShow,
+		'overlay-opacity': isShow,
 	});
 
 	//Check login
