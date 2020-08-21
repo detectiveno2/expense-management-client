@@ -13,10 +13,13 @@ import { ReactComponent as UserIcon } from '../../images/user.svg';
 import { UserContext } from '../../contexts/UserContext';
 
 export default function Menu() {
+	const token = localStorage.getItem('authToken');
+	const user = JSON.parse(localStorage.getItem('user'));
+
 	const [isActive, setIsActive] = useState('transactions');
 	const [isShow, setIsShow] = useState(false);
 
-	const { token, currentUser } = useContext(UserContext);
+	const { currentUser } = useContext(UserContext);
 
 	//toggle active function
 	const toggleActive = (e) => {
@@ -48,7 +51,8 @@ export default function Menu() {
 		'collapse-show': isShow,
 	});
 
-	if (!token || !currentUser) {
+	//Check login
+	if (!token || !user) {
 		return <div></div>;
 	}
 
@@ -72,35 +76,52 @@ export default function Menu() {
 				<div className="menu-item" onClick={collapse}>
 					<MenuIcon className="menu-icon" />
 				</div>
-				<div
+				<Link
+					to="/"
 					id="transactions"
 					className={transactionsItemClass}
 					onClick={toggleActive}
 				>
-					<Link to="/">
+					<div className="pointer-events-none">
 						<WalletIcon />
 						<span>Sổ giao dịch</span>
-					</Link>
-				</div>
-				<div id="report" className={reportItemClass} onClick={toggleActive}>
-					<Link to="/">
+					</div>
+				</Link>
+				<Link
+					to="/report"
+					id="report"
+					className={reportItemClass}
+					onClick={toggleActive}
+				>
+					<div className="pointer-events-none">
 						<ReportIcon />
 						<span>Báo cáo</span>
-					</Link>
-				</div>
+					</div>
+				</Link>
+
 				<hr />
-				<div id="using" className={usingItemClass} onClick={toggleActive}>
-					<Link to="/">
+				<Link
+					to="/using"
+					id="using"
+					className={usingItemClass}
+					onClick={toggleActive}
+				>
+					<div className="pointer-events-none">
 						<QuestionIcon />
 						<span>Cách dùng</span>
-					</Link>
-				</div>
-				<div id="about" className={aboutItemClass} onClick={toggleActive}>
-					<Link to="/">
+					</div>
+				</Link>
+				<Link
+					to="/about-us"
+					id="about"
+					className={aboutItemClass}
+					onClick={toggleActive}
+				>
+					<div className="pointer-events-none">
 						<AboutUsIcon />
 						<span>Chúng tôi</span>
-					</Link>
-				</div>
+					</div>
+				</Link>
 			</div>
 		</div>
 	);
