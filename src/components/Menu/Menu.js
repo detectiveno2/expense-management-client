@@ -16,7 +16,7 @@ export default function Menu() {
 	const [isActive, setIsActive] = useState('transactions');
 	const [isShow, setIsShow] = useState(false);
 
-	const { currentUser } = useContext(UserContext);
+	const { token, currentUser } = useContext(UserContext);
 
 	//toggle active function
 	const toggleActive = (e) => {
@@ -47,6 +47,10 @@ export default function Menu() {
 	const overlayClass = classNames('menu-wrapper-overlay', {
 		'collapse-show': isShow,
 	});
+
+	if (!token || !currentUser) {
+		return <div></div>;
+	}
 
 	return (
 		<div className="Menu">
