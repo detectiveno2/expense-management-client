@@ -42,6 +42,12 @@ export default function Menu() {
 		collapse(e);
 	};
 
+	//handle click menu collapse item
+	const handleClickMenuCollapseItem = (e) => {
+		setIsActive(null);
+		collapse(e);
+	};
+
 	// get className
 	const transactionsItemClass = classNames('menu-item', {
 		'menu-item-active': isActive === 'transactions',
@@ -83,7 +89,11 @@ export default function Menu() {
 					</div>
 				</div>
 				<hr />
-				<Link to="/my-wallet" className="menu-collapse-item" onClick={collapse}>
+				<Link
+					to="/my-wallet"
+					className="menu-collapse-item"
+					onClick={handleClickMenuCollapseItem}
+				>
 					<div className="icon-box">
 						<WalletIcon />
 					</div>
@@ -97,7 +107,7 @@ export default function Menu() {
 				<Link
 					to="/account/password"
 					className="menu-collapse-item"
-					onClick={collapse}
+					onClick={handleClickMenuCollapseItem}
 				>
 					<div className="icon-box">
 						<LockIcon />
@@ -109,7 +119,11 @@ export default function Menu() {
 						</div>
 					</div>
 				</Link>
-				<Link to="/contact" className="menu-collapse-item" onClick={collapse}>
+				<Link
+					to="/contact"
+					className="menu-collapse-item"
+					onClick={handleClickMenuCollapseItem}
+				>
 					<div className="icon-box">
 						<ContactIcon />
 					</div>
