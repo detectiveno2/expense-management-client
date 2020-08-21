@@ -11,6 +11,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 
 import { UserProvider } from './contexts/UserContext';
 
+import 'antd/dist/antd.css';
+
 function App() {
 	return (
 		<UserProvider>

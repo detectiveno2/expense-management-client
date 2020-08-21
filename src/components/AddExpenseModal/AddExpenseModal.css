@@ -1,0 +1,9 @@
+.ant-modal-content .ant-modal-footer button:last-child {
+	background-color: var(--main-dark-color);
+	border-color: var(--main-dark-color);
+}
+
+.ant-modal-content .ant-modal-footer button:first-child:hover {
+	color: var(--main-dark-color);
+	border-color: var(--main-dark-color);
+}
