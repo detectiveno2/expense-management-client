@@ -9,6 +9,10 @@ import { ReactComponent as ReportIcon } from '../../images/report.svg';
 import { ReactComponent as QuestionIcon } from '../../images/question.svg';
 import { ReactComponent as AboutUsIcon } from '../../images/about-us.svg';
 import { ReactComponent as UserIcon } from '../../images/user.svg';
+import { ReactComponent as LogoutIcon } from '../../images/logout.svg';
+import { ReactComponent as LockIcon } from '../../images/lock.svg';
+import { ReactComponent as ContactIcon } from '../../images/contact.svg';
+import { ReactComponent as NextIcon } from '../../images/next.svg';
 
 import { UserContext } from '../../contexts/UserContext';
 
@@ -29,6 +33,13 @@ export default function Menu() {
 	//collapse menu function
 	const collapse = (e) => {
 		setIsShow(!isShow);
+	};
+
+	//logout function
+	const logout = (e) => {
+		localStorage.removeItem('authToken');
+		localStorage.removeItem('user');
+		collapse(e);
 	};
 
 	// get className
@@ -71,6 +82,52 @@ export default function Menu() {
 						</div>
 					</div>
 				</div>
+				<hr />
+				<Link to="/my-wallet" className="menu-collapse-item" onClick={collapse}>
+					<div className="icon-box">
+						<WalletIcon />
+					</div>
+					<div className="content-box">
+						<div className="title">Ví của tôi</div>
+						<div className="next-icon">
+							<NextIcon />
+						</div>
+					</div>
+				</Link>
+				<Link
+					to="/account/password"
+					className="menu-collapse-item"
+					onClick={collapse}
+				>
+					<div className="icon-box">
+						<LockIcon />
+					</div>
+					<div className="content-box">
+						<div className="title">Đổi mật khẩu</div>
+						<div className="next-icon">
+							<NextIcon />
+						</div>
+					</div>
+				</Link>
+				<Link to="/contact" className="menu-collapse-item" onClick={collapse}>
+					<div className="icon-box">
+						<ContactIcon />
+					</div>
+					<div className="content-box">
+						<div className="title">Liên hệ chúng tôi</div>
+						<div className="next-icon">
+							<NextIcon />
+						</div>
+					</div>
+				</Link>
+				<Link to="/login" className="menu-collapse-item" onClick={logout}>
+					<div className="icon-box">
+						<LogoutIcon />
+					</div>
+					<div className="content-box">
+						<div className="title">Đăng xuất</div>
+					</div>
+				</Link>
 			</div>
 			<div className="menu-wrapper">
 				<div className="menu-item" onClick={collapse}>
