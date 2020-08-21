@@ -65,8 +65,8 @@ export default function Menu() {
 				</div>
 			</div>
 			<div className="menu-wrapper">
-				<div className="menu-item">
-					<MenuIcon className="menu-icon" onClick={collapse} />
+				<div className="menu-item" onClick={collapse}>
+					<MenuIcon className="menu-icon" />
 				</div>
 				<div
 					id="transactions"
