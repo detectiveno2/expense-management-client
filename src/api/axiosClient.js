@@ -9,7 +9,8 @@ const axiosClient = axios.create({
 
 // Handle token.
 const authToken = localStorage.getItem('authToken');
-if (authToken) {
+const user = localStorage.getItem('user');
+if (authToken && user) {
 	axiosClient.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 } else {
 	axiosClient.defaults.headers.common['Authorization'] = '';
@@ -31,6 +32,7 @@ axiosClient.interceptors.response.use(
 		const status = error.response.status;
 		if (status === 401 || status === 403) {
 			localStorage.removeItem('authToken');
+			localStorage.removeItem('user');
 			axiosClient.defaults.headers.common['Authorization'] = '';
 		}
 

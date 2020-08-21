@@ -1,0 +1,129 @@
+.Menu {
+	position: fixed;
+	width: 5rem;
+	height: 100vh;
+	background-color: #ffffff;
+	box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.27);
+}
+
+.Menu .menu-item {
+	transition: all 0.2s;
+}
+
+.Menu .menu-item,
+.Menu .menu-item a {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 4.25rem;
+	padding: 0.75rem 0;
+}
+
+.Menu .menu-item a {
+	text-decoration: none;
+	pointer-events: none;
+}
+
+.Menu .menu-item:hover {
+	background-color: #f5f5f5;
+}
+
+.Menu .menu-item svg {
+	width: 1.5rem;
+	height: 1.5rem;
+	fill: #bdbdbd;
+	margin-bottom: 0.25rem;
+	transition: all 0.2s;
+}
+
+.Menu .menu-item .menu-icon {
+	fill: #757575;
+	margin: 0;
+}
+
+.Menu .menu-item span {
+	font-size: 0.75rem;
+	line-height: 0.875rem;
+	color: #bdbdbd;
+	transition: all 0.2s;
+}
+
+.Menu .menu-wrapper hr {
+	margin: 0.5rem 0;
+	border: none;
+	height: 1px;
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
+.Menu .menu-wrapper .menu-item-active svg {
+	fill: var(--main-blue-color) !important;
+}
+
+.Menu .menu-wrapper .menu-item-active span {
+	color: var(--main-blue-color) !important;
+}
+
+.Menu .menu-wrapper-overlay {
+	position: fixed;
+	z-index: 10;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.41);
+	left: -100%;
+	transition: all 0.2s;
+}
+
+.Menu .menu-collapse {
+	position: fixed;
+	height: 100%;
+	width: 22.75rem;
+	background-color: #ffffff;
+	margin-top: 0px;
+	transform: translateX(0px);
+	box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2),
+		0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
+	z-index: 100;
+	left: -100%;
+	transition: all 0.4s;
+}
+
+.Menu .account {
+	padding: 2rem 1.25rem;
+}
+
+.Menu .account .avatar {
+	display: flex;
+	justify-content: center;
+	padding: 0 0.8125rem;
+}
+
+.Menu .account .avatar svg {
+	width: 4.25rem;
+	height: 4.25rem;
+	border: 1px solid #c1c1c1;
+	border-radius: 50%;
+	padding: 0.1875rem;
+}
+
+.Menu .account .info {
+	margin-top: 0.6875rem;
+}
+
+.Menu .account .info .user-name {
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: rgba(0, 0, 0, 0.87);
+	text-align: center;
+}
+
+.Menu .account .info .user-email {
+	font-size: 0.75rem;
+	line-height: 1rem;
+	color: rgba(0, 0, 0, 0.54);
+	text-align: center;
+}
+
+.Menu .collapse-show {
+	left: 0;
+}

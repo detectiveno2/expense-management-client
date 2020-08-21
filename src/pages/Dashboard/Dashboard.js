@@ -1,5 +1,11 @@
 import React from 'react';
 
-export default function () {
-	return <div className="dashboard"></div>;
+import Menu from '../../components/Menu/Menu';
+
+export default function Dashboard() {
+	return (
+		<div className="Dashboard">
+			<Menu />
+		</div>
+	);
 }

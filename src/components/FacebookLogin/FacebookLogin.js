@@ -10,7 +10,7 @@ import { ReactComponent as FacebookIcon } from '../../images/facebook.svg';
 import './FacebookLogin.css';
 
 export default function () {
-	const { setToken } = useContext(UserContext);
+	const { setToken, setCurrentUser } = useContext(UserContext);
 
 	const responseFacebook = async (response) => {
 		const userName = response.name;
@@ -18,7 +18,7 @@ export default function () {
 
 		const postLoginFacebook = async () => {
 			try {
-				const { token } = await userApi.loginWithFacebook({
+				const { token, localUser } = await userApi.loginWithFacebook({
 					userName,
 					userId,
 				});
@@ -26,7 +26,10 @@ export default function () {
 				// Store token into local storage, set default header.
 				const bearerToken = `Bearer ${token}`;
 				localStorage.setItem('authToken', bearerToken);
+				localStorage.setItem('user', JSON.stringify(localUser));
 				axiosClient.defaults.headers.common['Authorization'] = bearerToken;
+
+				setCurrentUser(localUser);
 				setToken(bearerToken);
 			} catch (error) {
 				alert(error);
