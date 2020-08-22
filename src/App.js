@@ -9,6 +9,8 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 
+import Menu from './components/Menu/Menu';
+
 import { UserProvider } from './contexts/UserContext';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
 			<Router>
 				<div className="wrapper">
 					<div className="main wrap-content">
+						<Menu />
 						<Switch>
 							<PrivateRoute exact path="/" component={() => <Dashboard />} />
 							<PublicRoute exact path="/login" component={() => <Login />} />

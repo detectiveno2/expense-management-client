@@ -10,7 +10,7 @@ import userApi from '../../api/userApi';
 import './GoogleLogin.css';
 
 export default function () {
-	const { setToken } = useContext(UserContext);
+	const { setToken, setCurrentUser } = useContext(UserContext);
 
 	const responseGoogle = (response) => {
 		const userName = response.profileObj.name;
@@ -19,7 +19,7 @@ export default function () {
 
 		const postLoginGoogle = async () => {
 			try {
-				const { token } = await userApi.loginWithGoogle({
+				const { token, localUser } = await userApi.loginWithGoogle({
 					userName,
 					userId,
 					email,
@@ -28,7 +28,10 @@ export default function () {
 				// Store token into local storage, set default header.
 				const bearerToken = `Bearer ${token}`;
 				localStorage.setItem('authToken', bearerToken);
+				localStorage.setItem('user', JSON.stringify(localUser));
 				axiosClient.defaults.headers.common['Authorization'] = bearerToken;
+
+				setCurrentUser(localUser);
 				setToken(bearerToken);
 			} catch (error) {
 				alert(error);
