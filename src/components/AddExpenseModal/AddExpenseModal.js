@@ -9,12 +9,14 @@ import './AddExpenseModal.css';
 function AddExpenseModal() {
 	const currentDate = moment();
 
+	// Define state.
 	const [date, setDate] = useState(currentDate);
 	const [wallet, setWallet] = useState(null);
 	const [isIncome, setIsIncome] = useState(false);
 	const [expense, setExpense] = useState('');
 	const [description, setDescription] = useState('');
 
+	// State for UI.
 	const [visible, setVisible] = useState(false);
 	const [loading, setLoading] = useState(false);
 
