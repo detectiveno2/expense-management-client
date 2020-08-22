@@ -1,5 +1,13 @@
 import React from 'react';
 
-export default function Dashboard() {
-	return <div className="Dashboard"></div>;
+import Header from '../../components/Header/Header';
+
+export default function () {
+	return (
+		<div className="Dashboard">
+			<div className="HeaderWrapper">
+				<Header />
+			</div>
+		</div>
+	);
 }
