@@ -16,7 +16,7 @@ import { ReactComponent as ErrorImg } from '../../images/error.svg';
 import './Login.css';
 
 export default function () {
-	const { token, setToken } = useContext(UserContext);
+	const { token, setToken, setCurrentUser } = useContext(UserContext);
 
 	const [err, setErr] = useState(null);
 	const [email, setEmail] = useState('');
@@ -28,13 +28,15 @@ export default function () {
 		setIsLoading(true);
 
 		try {
-			const { token } = await userApi.login({ email, password });
+			const { token, localUser } = await userApi.login({ email, password });
 
 			// Store token into local storage, set default header.
 			const bearerToken = `Bearer ${token}`;
 			localStorage.setItem('authToken', bearerToken);
+			localStorage.setItem('user', JSON.stringify(localUser));
 			axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 
+			setCurrentUser(localUser);
 			setToken(bearerToken);
 			setIsLoading(false);
 		} catch (err) {
