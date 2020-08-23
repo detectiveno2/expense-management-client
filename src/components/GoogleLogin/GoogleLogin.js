@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
 import { GoogleLogin } from 'react-google-login';
 
 import { UserContext } from '../../contexts/UserContext';
