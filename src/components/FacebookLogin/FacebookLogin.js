@@ -41,7 +41,7 @@ export default function () {
 
 	return (
 		<FacebookLogin
-			appId="747911565967671"
+			appId={process.env.REACT_APP_FACEBOOK_ID}
 			autoLoad={false}
 			fields="name,email,picture"
 			callback={responseFacebook}

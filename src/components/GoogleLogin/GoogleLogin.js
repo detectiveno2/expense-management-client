@@ -43,7 +43,7 @@ export default function () {
 	return (
 		<div className="google-login">
 			<GoogleLogin
-				clientId="54610773616-i75blnd0q8cdr6gdcq70o8gg510agl02.apps.googleusercontent.com"
+				clientId={process.env.REACT_APP_GOOGLE_ID}
 				buttonText="Login with Google"
 				onSuccess={responseGoogle}
 				onFailure={responseGoogle}
