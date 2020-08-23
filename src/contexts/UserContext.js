@@ -13,7 +13,11 @@ export const UserProvider = (props) => {
 	const [token, setToken] = useState(null);
 	const [currentUser, setCurrentUser] = useState(user);
 
-	useEffect(() => {}, [token]);
+	useEffect(() => {
+		// Get token.
+		const token = localStorage.getItem('authToken');
+		setToken(token);
+	}, [token]);
 
 	return (
 		<UserContext.Provider

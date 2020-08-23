@@ -24,8 +24,8 @@ export default function () {
 				});
 
 				// Store token into local storage, set default header.
+				localStorage.setItem('authToken', token);
 				const bearerToken = `Bearer ${token}`;
-				localStorage.setItem('authToken', bearerToken);
 				localStorage.setItem('user', JSON.stringify(localUser));
 				axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 
