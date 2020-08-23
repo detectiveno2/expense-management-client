@@ -7,6 +7,7 @@ export const UserProvider = (props) => {
 	try {
 		user = JSON.parse(localStorage.getItem('user'));
 	} catch (err) {
+		localStorage.removeItem('authToken');
 		localStorage.removeItem('user');
 	}
 
