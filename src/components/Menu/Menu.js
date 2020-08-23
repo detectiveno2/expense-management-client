@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import axiosClient from '../../api/axiosClient';
 
 import './Menu.css';
 import { ReactComponent as MenuIcon } from '../../images/menu.svg';
@@ -37,8 +38,13 @@ export default function Menu() {
 
 	//logout function
 	const logout = (e) => {
+		// Remove local storage.
 		localStorage.removeItem('authToken');
 		localStorage.removeItem('user');
+
+		// Set default header.
+		axiosClient.defaults.headers.common['Authorization'] = '';
+
 		collapse(e);
 	};
 

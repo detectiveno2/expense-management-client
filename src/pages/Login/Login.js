@@ -1,16 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { UserContext } from '../../contexts/UserContext';
+import userApi from '../../api/userApi';
 
 import axiosClient from '../../api/axiosClient';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
-
 import LoadingButton from '../../components/LoadingButton/LoadingButton';
 
-import userApi from '../../api/userApi';
 import MoneyImg from '../../images/money.png';
 import { ReactComponent as ErrorImg } from '../../images/error.svg';
 import './Login.css';
@@ -18,10 +17,20 @@ import './Login.css';
 export default function () {
 	const { token, setToken, setCurrentUser } = useContext(UserContext);
 
+	const [auth, setAuth] = useState(false);
 	const [err, setErr] = useState(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		if (token) {
+			setAuth(true);
+			return;
+		}
+
+		setAuth(false);
+	}, [token]);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -31,8 +40,8 @@ export default function () {
 			const { token, localUser } = await userApi.login({ email, password });
 
 			// Store token into local storage, set default header.
+			localStorage.setItem('authToken', token);
 			const bearerToken = `Bearer ${token}`;
-			localStorage.setItem('authToken', bearerToken);
 			localStorage.setItem('user', JSON.stringify(localUser));
 			axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 
@@ -45,11 +54,9 @@ export default function () {
 		}
 	};
 
-	if (token) {
-		return <Redirect to="/" />;
-	}
-
-	return (
+	return auth ? (
+		<Redirect to={{ pathname: '/' }} />
+	) : (
 		<div className="login">
 			<div className="container">
 				<div className="login-header">
@@ -66,7 +73,7 @@ export default function () {
 						</div>
 						<div className="login-form ">
 							<p>Using Expense Management App account</p>
-							<form autocomplete="off" onSubmit={onSubmit}>
+							<form autoComplete="off" onSubmit={onSubmit}>
 								<div className="form-email">
 									<input
 										required
@@ -77,7 +84,7 @@ export default function () {
 											setErr(null);
 										}}
 									/>
-									<label for="email">Email</label>
+									<label htmlFor="email">Email</label>
 								</div>
 								<div className="form-password">
 									<input
@@ -89,7 +96,7 @@ export default function () {
 											setErr(null);
 										}}
 									/>
-									<label for="password">Password</label>
+									<label htmlFor="password">Password</label>
 								</div>
 								<p className="forgot-password">
 									<Link to="/forgot-password">Forgot Password</Link>
