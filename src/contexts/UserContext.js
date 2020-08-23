@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import axiosClient from '../api/axiosClient';
+
 export const UserContext = React.createContext();
 
 export const UserProvider = (props) => {
@@ -9,6 +11,9 @@ export const UserProvider = (props) => {
 	} catch (err) {
 		localStorage.removeItem('authToken');
 		localStorage.removeItem('user');
+
+		// Set default header.
+		axiosClient.defaults.headers.common['Authorization'] = '';
 	}
 
 	const [token, setToken] = useState(null);
