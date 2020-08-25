@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'antd';
 import moment from 'moment';
 import swal from 'sweetalert';
@@ -15,13 +15,29 @@ function AddExpenseModal() {
 	const [isIncome, setIsIncome] = useState(false);
 	const [expense, setExpense] = useState('');
 	const [description, setDescription] = useState('');
+	const [contentBtn, setContentBtn] = useState('');
 
 	// State for UI.
 	const [visible, setVisible] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	// Functions for UI.
+	// Side effects.
+	window.addEventListener('resize', handleContentBtn);
 
+	function handleContentBtn() {
+		if (window.innerWidth <= 575.98) {
+			setContentBtn('+');
+			return;
+		}
+
+		setContentBtn('THÊM GIAO DỊCH');
+	}
+
+	useEffect(() => {
+		handleContentBtn();
+	}, [window.innerWidth]);
+
+	// Functions for UI.
 	const handleOk = async () => {
 		const strError = 'Bạn vui lòng điền đầy đủ ngày/số tiền giao dịch.';
 		setLoading(true);
@@ -83,7 +99,7 @@ function AddExpenseModal() {
 	return (
 		<>
 			<Button type="primary" onClick={showModal}>
-				THÊM GIAO DỊCH
+				{contentBtn}
 			</Button>
 			<Modal
 				title="Thêm giao dịch"

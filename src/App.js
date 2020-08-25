@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import PublicRoute from './routes/PublicRoute';
@@ -12,17 +12,32 @@ import Menu from './components/Menu/Menu';
 
 import { UserProvider } from './contexts/UserContext';
 
+import './App.css';
 import 'antd/dist/antd.css';
 
 function App() {
+	// Define state.
+	const [isShow, setIsShow] = useState(false);
+
+	// Define function.
+	const collapseMenu = (state) => {
+		setIsShow(!isShow);
+	};
+
 	return (
 		<UserProvider>
 			<Router>
 				<div className="wrapper">
 					<div className="main wrap-content">
-						<Menu />
+						<Menu collapseMenu={collapseMenu} isShow={isShow} />
 						<Switch>
-							<PrivateRoute exact path="/" component={() => <Dashboard />} />
+							<PrivateRoute
+								exact
+								path="/"
+								component={() => (
+									<Dashboard collapseMenu={collapseMenu} isShow={isShow} />
+								)}
+							/>
 							<PublicRoute exact path="/login" component={() => <Login />} />
 							<PublicRoute
 								exact

@@ -10,6 +10,10 @@
 	justify-content: space-between;
 }
 
+.Header .burger-btn-container {
+	display: none;
+}
+
 .Header img {
 	width: 40px;
 }
@@ -148,6 +152,33 @@ ul li:first-child button .CalendarIcon span {
 
 	.Header {
 		min-height: 7vh;
+
+		flex-direction: row-reverse;
+	}
+
+	.Header .burger-btn-container {
+		display: block;
+		flex-grow: 1;
+	}
+
+	.Header .burger-btn-container .burger-button {
+		border: none;
+		background-color: #ffffff;
+		min-height: 2rem;
+	}
+
+	.Header .burger-btn-container .burger-button:focus {
+		outline: none;
+	}
+
+	.Header .burger-btn-container .burger-button span {
+		display: block;
+		height: 0.15rem;
+		width: 2rem;
+		margin: 6px 0px;
+		border-radius: 2px;
+
+		background-color: #747474;
 	}
 
 	.Header img {
@@ -158,18 +189,32 @@ ul li:first-child button .CalendarIcon span {
 		min-height: 7vh;
 	}
 
+	.HeaderLeftContent .TitleAmount div:last-child {
+		text-align: center;
+	}
+
+	.HeaderLeftContent .TitleAmount div:first-child::after {
+		display: none;
+	}
+
+	.HeaderRightContent ul {
+		margin: 0 0.75rem;
+	}
+
 	.HeaderRightContent ul li:not(:last-child) button {
 		padding: 0.25rem 0.5rem;
 	}
 
 	.HeaderRightContent ul li:last-child {
-		margin-left: 1rem;
+		display: none;
 	}
 
 	ul li:first-child button .CalendarIcon span {
 		top: 55%;
 	}
+}
 
+@media (max-width: 413.98px) {
 	.HeaderRightContent ul li:nth-child(2) button {
 		display: none;
 	}

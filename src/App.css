@@ -1,0 +1,16 @@
+.main.wrap-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.main.wrap-content > div:last-child {
+	flex-grow: 1;
+}
+
+@media (max-width: 576px) {
+	.main.wrap-content {
+		position: relative;
+		min-height: 100vh;
+	}
+}

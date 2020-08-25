@@ -8,9 +8,15 @@ import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 import TotalIcon from '../../images/total-icon.png';
 import './Header.css';
 
-function Header() {
+function Header(props) {
+	const { isShow, collapseMenu } = props;
+
 	// Get current date.
 	const currentDate = moment().format('DD');
+
+	const handleBurgerClick = () => {
+		collapseMenu(isShow);
+	};
 
 	return (
 		<div className="Header">
@@ -46,6 +52,13 @@ function Header() {
 						</li>
 					</ul>
 				</div>
+			</div>
+			<div className="burger-btn-container">
+				<button className="burger-button" onClick={handleBurgerClick}>
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
 			</div>
 		</div>
 	);
