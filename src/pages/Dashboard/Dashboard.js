@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Header from '../../components/Header/Header';
+import './Dashboard.css';
+
+import Transactions from '../../components/Transactions/Transactions';
 
 export default function () {
 	return (
 		<div className="Dashboard">
-			<div className="HeaderWrapper">
-				<Header />
-			</div>
+			<Transactions />
 		</div>
 	);
 }
