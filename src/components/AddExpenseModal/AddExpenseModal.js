@@ -35,7 +35,7 @@ function AddExpenseModal() {
 
 	useEffect(() => {
 		handleContentBtn();
-	}, [window.innerWidth]);
+	}, []);
 
 	// Functions for UI.
 	const handleOk = async () => {

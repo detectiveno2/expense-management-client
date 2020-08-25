@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import moment from 'moment';
 
 import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
-
+import { UserContext } from '../../contexts/UserContext';
 import { ReactComponent as SearchIcon } from '../../images/search-icon.svg';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 import TotalIcon from '../../images/total-icon.png';
 import './Header.css';
 
 function Header(props) {
-	const { isShow, collapseMenu } = props;
-
+	const { collapseMenu, isShow } = props;
+	const { currentUser } = useContext(UserContext);
 	// Get current date.
 	const currentDate = moment().format('DD');
 
@@ -18,7 +18,7 @@ function Header(props) {
 		collapseMenu(isShow);
 	};
 
-	return (
+	return currentUser ? (
 		<div className="Header">
 			<div className="HeaderLeftWrapper">
 				<div className="HeaderLeftContent">
@@ -61,6 +61,8 @@ function Header(props) {
 				</button>
 			</div>
 		</div>
+	) : (
+		<div></div>
 	);
 }
 

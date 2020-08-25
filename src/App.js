@@ -9,6 +9,7 @@ import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 
 import Menu from './components/Menu/Menu';
+import Header from './components/Header/Header';
 
 import { UserProvider } from './contexts/UserContext';
 
@@ -20,7 +21,7 @@ function App() {
 	const [isShow, setIsShow] = useState(false);
 
 	// Define function.
-	const collapseMenu = (state) => {
+	const collapseMenu = () => {
 		setIsShow(!isShow);
 	};
 
@@ -30,21 +31,18 @@ function App() {
 				<div className="wrapper">
 					<div className="main wrap-content">
 						<Menu collapseMenu={collapseMenu} isShow={isShow} />
-						<Switch>
-							<PrivateRoute
-								exact
-								path="/"
-								component={() => (
-									<Dashboard collapseMenu={collapseMenu} isShow={isShow} />
-								)}
-							/>
-							<PublicRoute exact path="/login" component={() => <Login />} />
-							<PublicRoute
-								exact
-								path="/register"
-								component={() => <Register />}
-							/>
-						</Switch>
+						<div>
+							<Header collapseMenu={collapseMenu} isShow={isShow} />
+							<Switch>
+								<PrivateRoute exact path="/" component={() => <Dashboard />} />
+								<PublicRoute exact path="/login" component={() => <Login />} />
+								<PublicRoute
+									exact
+									path="/register"
+									component={() => <Register />}
+								/>
+							</Switch>
+						</div>
 					</div>
 				</div>
 			</Router>
