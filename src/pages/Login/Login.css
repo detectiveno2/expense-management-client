@@ -37,6 +37,7 @@
 .login .login-body h3 {
 	margin: 1rem 0 2rem;
 	text-align: center;
+	color: var(--main-green-color);
 }
 
 .login .login-body-main {

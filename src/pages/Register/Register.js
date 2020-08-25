@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import swal from 'sweetalert';
@@ -17,11 +17,21 @@ import { ReactComponent as ErrorImg } from '../../images/error.svg';
 export default function () {
 	const { token } = useContext(UserContext);
 
+	const [auth, setAuth] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [err, setErr] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [registered, setRegistered] = useState(false);
+
+	useEffect(() => {
+		if (token) {
+			setAuth(true);
+			return;
+		}
+
+		setAuth(false);
+	}, [token]);
 
 	const onSubmit = (e) => {
 		setIsLoading(true);
@@ -43,15 +53,13 @@ export default function () {
 		getData();
 	};
 
-	if (token) {
-		return <Redirect to="/" />;
-	}
-
 	if (registered) {
 		return <Redirect to="/login" />;
 	}
 
-	return (
+	return auth ? (
+		<Redirect to={{ pathname: '/' }} />
+	) : (
 		<div className="login">
 			<div className="container">
 				<div className="login-header">

@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -9,7 +8,11 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 
+import Menu from './components/Menu/Menu';
+
 import { UserProvider } from './contexts/UserContext';
+
+import 'antd/dist/antd.css';
 
 function App() {
 	return (
@@ -17,6 +20,7 @@ function App() {
 			<Router>
 				<div className="wrapper">
 					<div className="main wrap-content">
+						<Menu />
 						<Switch>
 							<PrivateRoute exact path="/" component={() => <Dashboard />} />
 							<PublicRoute exact path="/login" component={() => <Login />} />

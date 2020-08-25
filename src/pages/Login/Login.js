@@ -1,40 +1,51 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { UserContext } from '../../contexts/UserContext';
+import userApi from '../../api/userApi';
 
 import axiosClient from '../../api/axiosClient';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
-
 import LoadingButton from '../../components/LoadingButton/LoadingButton';
 
-import userApi from '../../api/userApi';
 import MoneyImg from '../../images/money.png';
 import { ReactComponent as ErrorImg } from '../../images/error.svg';
 import './Login.css';
 
 export default function () {
-	const { token, setToken } = useContext(UserContext);
+	const { token, setToken, setCurrentUser } = useContext(UserContext);
 
+	const [auth, setAuth] = useState(false);
 	const [err, setErr] = useState(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		if (token) {
+			setAuth(true);
+			return;
+		}
+
+		setAuth(false);
+	}, [token]);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 
 		try {
-			const { token } = await userApi.login({ email, password });
+			const { token, localUser } = await userApi.login({ email, password });
 
 			// Store token into local storage, set default header.
+			localStorage.setItem('authToken', token);
 			const bearerToken = `Bearer ${token}`;
-			localStorage.setItem('authToken', bearerToken);
+			localStorage.setItem('user', JSON.stringify(localUser));
 			axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 
+			setCurrentUser(localUser);
 			setToken(bearerToken);
 			setIsLoading(false);
 		} catch (err) {
@@ -43,11 +54,9 @@ export default function () {
 		}
 	};
 
-	if (token) {
-		return <Redirect to="/" />;
-	}
-
-	return (
+	return auth ? (
+		<Redirect to={{ pathname: '/' }} />
+	) : (
 		<div className="login">
 			<div className="container">
 				<div className="login-header">

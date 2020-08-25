@@ -1,0 +1,176 @@
+/* Header */
+.Header {
+	min-height: 9vh;
+
+	background-color: #ffffff;
+	padding: 0 1rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.Header img {
+	width: 40px;
+}
+
+/* Header left. */
+.HeaderLeftWrapper {
+	position: relative;
+}
+
+.HeaderLeftContent button {
+	border: none;
+
+	background-color: #ffffff;
+
+	padding: 0px;
+	min-height: 9vh;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.HeaderLeftContent button:focus {
+	outline: none;
+}
+
+.HeaderLeftContent .TitleAmount {
+	margin-left: 0.5rem;
+}
+
+.HeaderLeftContent .TitleAmount div:first-child {
+	font-size: 1rem;
+}
+
+.HeaderLeftContent .TitleAmount div:first-child::after {
+	content: ' \276F';
+	font-weight: 500;
+	display: inline-block;
+	margin-left: 7px;
+
+	transform: rotate(90deg);
+}
+
+.HeaderLeftContent .TitleAmount div:last-child {
+	font-size: 1rem;
+	font-weight: 500;
+	text-align: left;
+}
+
+/* Header right. */
+.HeaderRightContent ul {
+	list-style-type: none;
+
+	padding: 0px;
+	margin: 0px;
+
+	display: flex;
+	align-items: center;
+}
+
+.HeaderRightContent ul svg {
+	vertical-align: sub;
+}
+
+.HeaderRightContent ul li:not(:last-child) button {
+	border: none;
+
+	background-color: #ffffff;
+	display: block;
+	padding: 0.25rem 1rem;
+}
+
+.HeaderRightContent ul li:not(:last-child) button:focus {
+	outline: none;
+}
+
+ul li:not(:last-child) button:hover svg {
+	filter: brightness(0%) contrast(200%) saturate(0%);
+}
+
+ul li:first-child button:hover .CalendarIcon span {
+	color: #000000;
+}
+
+ul li:first-child button .CalendarIcon {
+	position: relative;
+}
+
+ul li:first-child button .CalendarIcon span {
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	transform: translate(-50%, -50%);
+
+	font-size: 0.65rem;
+	color: #757575;
+}
+
+.HeaderRightContent ul li:last-child {
+	margin-left: 1.5rem;
+}
+
+.HeaderRightContent ul li:last-child button {
+	border: none;
+	border-radius: 4px;
+
+	background-color: var(--main-dark-color);
+	/* padding: 0.5rem 1rem; */
+
+	color: #ffffff;
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.HeaderRightContent ul li:last-child button:hover {
+	filter: brightness(116%);
+}
+
+/* .HeaderRightContent ul li:last-child button:focus {
+	outline: none;
+} */
+
+@media (max-width: 991.98px) {
+	.Header {
+		padding: 0 2rem;
+	}
+}
+
+@media (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
+	html {
+		font-size: 14px;
+	}
+
+	.Header {
+		min-height: 7vh;
+	}
+
+	.Header img {
+		width: 32px;
+	}
+
+	.HeaderLeftContent button {
+		min-height: 7vh;
+	}
+
+	.HeaderRightContent ul li:not(:last-child) button {
+		padding: 0.25rem 0.5rem;
+	}
+
+	.HeaderRightContent ul li:last-child {
+		margin-left: 1rem;
+	}
+
+	ul li:first-child button .CalendarIcon span {
+		top: 55%;
+	}
+
+	.HeaderRightContent ul li:nth-child(2) button {
+		display: none;
+	}
+}
