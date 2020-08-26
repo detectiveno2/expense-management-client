@@ -226,6 +226,7 @@
 	.Menu .menu-collapse {
 		top: 0;
 		width: 100vw;
+		box-shadow: none;
 	}
 
 	.Menu .menu-wrapper {

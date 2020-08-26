@@ -171,7 +171,13 @@ ul li:first-child button .CalendarIcon span {
 		outline: none;
 	}
 
-	.Header .burger-btn-container .burger-button span {
+	.Header .burger-btn-container .burger-button svg {
+		width: 2rem;
+		height: 2rem;
+		fill: #747474;
+	}
+
+	/* .Header .burger-btn-container .burger-button span {
 		display: block;
 		height: 0.15rem;
 		width: 2rem;
@@ -179,7 +185,7 @@ ul li:first-child button .CalendarIcon span {
 		border-radius: 2px;
 
 		background-color: #747474;
-	}
+	} */
 
 	.Header img {
 		width: 32px;

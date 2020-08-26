@@ -5,6 +5,7 @@ import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
 import { UserContext } from '../../contexts/UserContext';
 import { ReactComponent as SearchIcon } from '../../images/search-icon.svg';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
+import { ReactComponent as MenuIcon } from '../../images/menu.svg';
 import TotalIcon from '../../images/total-icon.png';
 import './Header.css';
 
@@ -55,9 +56,7 @@ function Header(props) {
 			</div>
 			<div className="burger-btn-container">
 				<button className="burger-button" onClick={handleBurgerClick}>
-					<span></span>
-					<span></span>
-					<span></span>
+					<MenuIcon />
 				</button>
 			</div>
 		</div>
