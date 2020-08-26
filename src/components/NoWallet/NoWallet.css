@@ -1,0 +1,51 @@
+.no-wallet {
+	width: 50%;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	text-align: center;
+}
+
+.no-wallet .no-wallet__title {
+	font-size: 2.5rem;
+	color: #5d5d5d;
+
+	cursor: default;
+}
+
+.no-wallet .no-wallet__add-btn {
+	border: none;
+	border-radius: 4px;
+	background-color: #53d185;
+
+	padding: 0.75rem 2.5rem;
+	margin-top: 1rem;
+
+	color: #ffffff;
+	font-size: 1.25rem;
+
+	transition: all 0.3s ease 0s;
+}
+
+.no-wallet .no-wallet__add-btn:hover {
+	background-color: #21d167;
+}
+
+.no-wallet .no-wallet__add-btn:focus {
+	outline: none;
+}
+
+@media (max-width: 991.98px) {
+	.no-wallet {
+		width: 75%;
+	}
+}
+
+@media (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
+}
