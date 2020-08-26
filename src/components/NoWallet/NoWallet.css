@@ -19,7 +19,7 @@
 .no-wallet .no-wallet__add-btn {
 	border: none;
 	border-radius: 4px;
-	background-color: #53d185;
+	background-color: var(--main-green-color);
 
 	padding: 0.75rem 2.5rem;
 	margin-top: 1rem;
@@ -31,7 +31,7 @@
 }
 
 .no-wallet .no-wallet__add-btn:hover {
-	background-color: #21d167;
+	background-color: var(--main-green-hover-color);
 }
 
 .no-wallet .no-wallet__add-btn:focus {

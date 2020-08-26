@@ -81,11 +81,11 @@
 }
 
 .Menu .menu-wrapper .menu-item-active svg {
-	fill: var(--main-blue-color) !important;
+	fill: var(--main-green-color) !important;
 }
 
 .Menu .menu-wrapper .menu-item-active span {
-	color: var(--main-blue-color) !important;
+	color: var(--main-green-color) !important;
 }
 
 .Menu .menu-wrapper-overlay {
@@ -250,10 +250,10 @@
 		min-width: 3rem;
 		min-height: 3rem;
 		padding: 0 0;
-		background-color: var(--main-dark-color);
+		background-color: var(--main-green-color);
 
 		border-radius: 50%;
-		border-color: var(--main-dark-color);
+		border-color: var(--main-green-color);
 
 		box-shadow: none;
 	}
@@ -282,10 +282,10 @@
 	}
 
 	.Menu .menu-wrapper .menu-item-active svg {
-		fill: var(--main-dark-color) !important;
+		fill: var(--main-green-color) !important;
 	}
 
 	.Menu .menu-wrapper .menu-item-active span {
-		color: var(--main-dark-color) !important;
+		color: var(--main-green-color) !important;
 	}
 }
