@@ -11,28 +11,31 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Menu from './components/Menu/Menu';
 
 import { UserProvider } from './contexts/UserContext';
+import { MenuProvider } from './contexts/MenuContext';
 
 import 'antd/dist/antd.css';
 
 function App() {
 	return (
 		<UserProvider>
-			<Router>
-				<div className="wrapper">
-					<div className="main wrap-content">
-						<Menu />
-						<Switch>
-							<PrivateRoute exact path="/" component={() => <Dashboard />} />
-							<PublicRoute exact path="/login" component={() => <Login />} />
-							<PublicRoute
-								exact
-								path="/register"
-								component={() => <Register />}
-							/>
-						</Switch>
+			<MenuProvider>
+				<Router>
+					<div className="wrapper">
+						<div className="main wrap-content">
+							<Menu />
+							<Switch>
+								<PrivateRoute exact path="/" component={() => <Dashboard />} />
+								<PublicRoute exact path="/login" component={() => <Login />} />
+								<PublicRoute
+									exact
+									path="/register"
+									component={() => <Register />}
+								/>
+							</Switch>
+						</div>
 					</div>
-				</div>
-			</Router>
+				</Router>
+			</MenuProvider>
 		</UserProvider>
 	);
 }
