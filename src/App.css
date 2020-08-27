@@ -11,6 +11,7 @@
 .pages {
 	margin: 3.875rem 0 0 5rem;
 	padding: 1.5rem 1rem;
+	min-height: 90.5vh;
 }
 
 @media (max-width: 576px) {
@@ -20,6 +21,7 @@
 	}
 
 	.pages {
+		min-height: 85vh;
 		margin: 3.5rem 0 0 0;
 	}
 }
