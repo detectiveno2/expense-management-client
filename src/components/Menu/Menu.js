@@ -19,15 +19,17 @@ import { ReactComponent as NextIcon } from '../../images/next.svg';
 import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
 
 import { UserContext } from '../../contexts/UserContext';
+import { MenuContext } from '../../contexts/MenuContext';
 
 export default function Menu(props) {
 	const { collapseMenu, isShow } = props;
 	const token = localStorage.getItem('authToken');
 	const user = JSON.parse(localStorage.getItem('user'));
 
-	const [isActive, setIsActive] = useState('transactions');
+	const [isShow, setIsShow] = useState(false);
 
 	const { currentUser } = useContext(UserContext);
+	const { isActive, setIsActive } = useContext(MenuContext);
 
 	//toggle active function
 	const toggleActive = (e) => {

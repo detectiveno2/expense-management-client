@@ -1,0 +1,15 @@
+.Expense {
+	display: flex;
+	border-top: 1px solid #e0e0e0;
+	padding: 1rem;
+}
+
+.Expense .expense-icon {
+	width: 2.5rem;
+	margin-right: 0.75rem;
+}
+
+.Expense .title {
+	font-size: 0.875rem;
+	font-weight: 500;
+}
