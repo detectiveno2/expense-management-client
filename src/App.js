@@ -7,6 +7,7 @@ import { Menu, Header } from './components/index';
 
 import { UserProvider } from './contexts/UserContext';
 import { WalletProvider } from './contexts/WalletContext';
+import { MenuProvider } from './contexts/MenuContext';
 
 import './App.css';
 import 'antd/dist/antd.css';
@@ -23,37 +24,39 @@ function App() {
 	return (
 		<UserProvider>
 			<WalletProvider>
-				<Router>
-					<div className="wrapper">
-						<div className="main wrap-content">
-							<Menu collapseMenu={collapseMenu} isShow={isShow} />
-							<div>
-								<Header collapseMenu={collapseMenu} isShow={isShow} />
-								<Switch>
-									<PrivateRoute
-										exact
-										path="/"
-										component={() => <Dashboard />}
-									/>
-									<PrivateRoute
-										path="/my-wallet"
-										component={() => <MyWallet />}
-									/>
-									<PublicRoute
-										exact
-										path="/login"
-										component={() => <Login />}
-									/>
-									<PublicRoute
-										exact
-										path="/register"
-										component={() => <Register />}
-									/>
-								</Switch>
+				<MenuProvider>
+					<Router>
+						<div className="wrapper">
+							<div className="main wrap-content">
+								<Menu collapseMenu={collapseMenu} isShow={isShow} />
+								<div>
+									<Header collapseMenu={collapseMenu} isShow={isShow} />
+									<Switch>
+										<PrivateRoute
+											exact
+											path="/"
+											component={() => <Dashboard />}
+										/>
+										<PrivateRoute
+											path="/my-wallet"
+											component={() => <MyWallet />}
+										/>
+										<PublicRoute
+											exact
+											path="/login"
+											component={() => <Login />}
+										/>
+										<PublicRoute
+											exact
+											path="/register"
+											component={() => <Register />}
+										/>
+									</Switch>
+								</div>
 							</div>
 						</div>
-					</div>
-				</Router>
+					</Router>
+				</MenuProvider>
 			</WalletProvider>
 		</UserProvider>
 	);

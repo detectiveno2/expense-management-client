@@ -1,3 +1,12 @@
+.Dashboard {
+	height: 100vh;
+	margin-left: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 2rem 1rem;
+}
+
 .dashboard__no-wallet {
 	min-height: 91vh;
 
