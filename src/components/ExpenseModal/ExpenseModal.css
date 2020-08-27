@@ -59,3 +59,9 @@
 	color: #ffffff;
 	background-color: var(--main-green-color) !important;
 }
+
+@media (min-width: 575.98px) {
+	.ant-modal-content {
+		margin: 4rem 0 0 5rem;
+	}
+}
