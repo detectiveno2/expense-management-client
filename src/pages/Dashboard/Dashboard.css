@@ -14,4 +14,8 @@
 	.Dashboard {
 		margin: 0;
 	}
+
+	.dashboard__no-wallet {
+		height: 79vh;
+	}
 }
