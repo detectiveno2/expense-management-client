@@ -50,7 +50,7 @@
 
 .HeaderLeftContent .TitleAmount div:first-child::after {
 	content: ' \276F';
-	font-weight: 500;
+	font-size: 0.75rem;
 	display: inline-block;
 	margin-left: 7px;
 
