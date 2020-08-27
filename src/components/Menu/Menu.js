@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import axiosClient from '../../api/axiosClient';
 
+import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
+
 import './Menu.css';
 import { ReactComponent as MenuIcon } from '../../images/menu.svg';
 import { ReactComponent as WalletIcon } from '../../images/wallet.svg';
@@ -14,11 +16,13 @@ import { ReactComponent as LogoutIcon } from '../../images/logout.svg';
 import { ReactComponent as LockIcon } from '../../images/lock.svg';
 import { ReactComponent as ContactIcon } from '../../images/contact.svg';
 import { ReactComponent as NextIcon } from '../../images/next.svg';
+import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
 
 import { UserContext } from '../../contexts/UserContext';
 import { MenuContext } from '../../contexts/MenuContext';
 
-export default function Menu() {
+export default function Menu(props) {
+	const { collapseMenu, isShow } = props;
 	const token = localStorage.getItem('authToken');
 	const user = JSON.parse(localStorage.getItem('user'));
 
@@ -34,7 +38,7 @@ export default function Menu() {
 
 	//collapse menu function
 	const collapse = (e) => {
-		setIsShow(!isShow);
+		collapseMenu(isShow);
 	};
 
 	//logout function
@@ -84,6 +88,9 @@ export default function Menu() {
 		<div className="Menu">
 			<div className={overlayClass} onClick={collapse} />
 			<div className={menuCollapseClass}>
+				<button className="close-btn" onClick={collapse}>
+					<CloseIcon />
+				</button>
 				<div className="account">
 					<div className="avatar">
 						<UserIcon />
@@ -176,7 +183,7 @@ export default function Menu() {
 						<span>Báo cáo</span>
 					</div>
 				</Link>
-
+				<AddExpenseModal />
 				<hr />
 				<Link
 					to="/using"

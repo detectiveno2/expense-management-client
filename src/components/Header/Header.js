@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import moment from 'moment';
 
 import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
-
+import { UserContext } from '../../contexts/UserContext';
 import { ReactComponent as SearchIcon } from '../../images/search-icon.svg';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
+import { ReactComponent as MenuIcon } from '../../images/menu.svg';
 import TotalIcon from '../../images/total-icon.png';
 import './Header.css';
 
-function Header() {
+function Header(props) {
+	const { collapseMenu, isShow } = props;
+	const { currentUser } = useContext(UserContext);
 	// Get current date.
 	const currentDate = moment().format('DD');
 
-	return (
+	const handleBurgerClick = () => {
+		collapseMenu(isShow);
+	};
+
+	return currentUser ? (
 		<div className="Header">
 			<div className="HeaderLeftWrapper">
 				<div className="HeaderLeftContent">
@@ -47,7 +54,14 @@ function Header() {
 					</ul>
 				</div>
 			</div>
+			<div className="burger-btn-container">
+				<button className="burger-button" onClick={handleBurgerClick}>
+					<MenuIcon />
+				</button>
+			</div>
 		</div>
+	) : (
+		<div></div>
 	);
 }
 

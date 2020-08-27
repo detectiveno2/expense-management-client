@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './Dashboard.css';
-
 import Transactions from '../../components/Transactions/Transactions';
+
+import './Dashboard.css';
 
 export default function () {
 	return (
