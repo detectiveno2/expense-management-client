@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import axiosClient from '../../api/axiosClient';
@@ -21,15 +21,12 @@ import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
 import { UserContext } from '../../contexts/UserContext';
 import { MenuContext } from '../../contexts/MenuContext';
 
-export default function Menu(props) {
-	const { collapseMenu, isShow } = props;
+export default function Menu() {
 	const token = localStorage.getItem('authToken');
 	const user = JSON.parse(localStorage.getItem('user'));
 
-	const [isShow, setIsShow] = useState(false);
-
 	const { currentUser } = useContext(UserContext);
-	const { isActive, setIsActive } = useContext(MenuContext);
+	const { isActive, setIsActive, isShow, setIsShow } = useContext(MenuContext);
 
 	//toggle active function
 	const toggleActive = (e) => {
@@ -38,7 +35,7 @@ export default function Menu(props) {
 
 	//collapse menu function
 	const collapse = (e) => {
-		collapseMenu(isShow);
+		setIsShow(!isShow);
 	};
 
 	//logout function

@@ -45,7 +45,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--main-blue-color) !important;
+	background-color: var(--main-green-color) !important;
 	border: none !important;
 }
 
@@ -118,7 +118,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #13c2c2;
+	color: var(--main-green-color);
+	transition: all 0.2s;
+}
+
+.transactions-wrapper .total .total-wrapper a:hover {
+	color: var(--main-green-hover-color);
 }
 
 .transactions-wrapper hr {
@@ -127,4 +132,10 @@
 	height: 1.75rem;
 	background-color: #f5f5f5;
 	border: 1px solid #f5f5f5;
+}
+
+@media (max-width: 680px) {
+	.Transactions {
+		width: 90%;
+	}
 }

@@ -1,9 +1,9 @@
 .ant-modal-content .ant-modal-footer button:last-child {
-	background-color: var(--main-dark-color);
-	border-color: var(--main-dark-color);
+	background-color: var(--main-green-color);
+	border-color: var(--main-green-color);
 }
 
 .ant-modal-content .ant-modal-footer button:first-child:hover {
-	color: var(--main-dark-color);
-	border-color: var(--main-dark-color);
+	color: var(--main-green-color);
+	border-color: var(--main-green-color);
 }

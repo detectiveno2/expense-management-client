@@ -1,8 +1,21 @@
 .Dashboard {
-	height: 100vh;
-	margin-left: 5rem;
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
-	padding: 2rem 1rem;
+}
+
+.dashboard__no-wallet {
+	height: 83vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media (max-width: 575.98px) {
+	.Dashboard {
+		margin: 0;
+	}
+
+	.dashboard__no-wallet {
+		height: 79vh;
+	}
 }
