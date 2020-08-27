@@ -2,21 +2,26 @@ import React, { useContext } from 'react';
 import moment from 'moment';
 
 import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
+
 import { UserContext } from '../../contexts/UserContext';
+import { MenuContext } from '../../contexts/MenuContext';
+
 import { ReactComponent as SearchIcon } from '../../images/search-icon.svg';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 import { ReactComponent as MenuIcon } from '../../images/menu.svg';
 import TotalIcon from '../../images/total-icon.png';
+
 import './Header.css';
 
-function Header(props) {
-	const { collapseMenu, isShow } = props;
+function Header() {
 	const { currentUser } = useContext(UserContext);
+	const { isShow, setIsShow } = useContext(MenuContext);
+
 	// Get current date.
 	const currentDate = moment().format('DD');
 
 	const handleBurgerClick = () => {
-		collapseMenu(isShow);
+		setIsShow(!isShow);
 	};
 
 	return currentUser ? (

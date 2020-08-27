@@ -8,9 +8,18 @@
 	flex-grow: 1;
 }
 
+.pages {
+	margin: 3.875rem 0 0 5rem;
+	padding: 1.5rem 1rem;
+}
+
 @media (max-width: 576px) {
 	.main.wrap-content {
 		position: relative;
 		min-height: 100vh;
+	}
+
+	.pages {
+		margin: 3.5rem 0 0 0;
 	}
 }

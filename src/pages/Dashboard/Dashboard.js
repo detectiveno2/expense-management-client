@@ -14,7 +14,7 @@ export default function () {
 	const { wallets } = useContext(WalletContext);
 
 	return (
-		<div className="dashboard">
+		<div className="Dashboard">
 			{wallets.length ? (
 				<Transactions />
 			) : (

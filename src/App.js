@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute } from './routes/index';
@@ -13,14 +13,6 @@ import './App.css';
 import 'antd/dist/antd.css';
 
 function App() {
-	// Define state.
-	const [isShow, setIsShow] = useState(false);
-
-	// Define function.
-	const collapseMenu = () => {
-		setIsShow(!isShow);
-	};
-
 	return (
 		<UserProvider>
 			<WalletProvider>
@@ -28,9 +20,9 @@ function App() {
 					<Router>
 						<div className="wrapper">
 							<div className="main wrap-content">
-								<Menu collapseMenu={collapseMenu} isShow={isShow} />
-								<div>
-									<Header collapseMenu={collapseMenu} isShow={isShow} />
+								<Menu />
+								<Header />
+								<div className="pages">
 									<Switch>
 										<PrivateRoute
 											exact
