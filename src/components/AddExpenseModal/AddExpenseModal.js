@@ -3,7 +3,10 @@ import { Modal, Button } from 'antd';
 import moment from 'moment';
 import swal from 'sweetalert';
 
+import expenseApi from '../../api/expenseApi';
+
 import ExpenseModal from '../ExpenseModal/ExpenseModal';
+
 import './AddExpenseModal.css';
 
 function AddExpenseModal() {
@@ -11,7 +14,7 @@ function AddExpenseModal() {
 
 	// Define state.
 	const [date, setDate] = useState(currentDate);
-	const [wallet, setWallet] = useState(null);
+	const [walletName, setWalletName] = useState(null);
 	const [isIncome, setIsIncome] = useState(false);
 	const [title, setTitle] = useState('');
 	const [expense, setExpense] = useState('');
@@ -40,18 +43,57 @@ function AddExpenseModal() {
 
 	// Functions for UI.
 	const handleOk = async () => {
-		const strError = 'Bạn vui lòng điền đầy đủ ngày/số tiền giao dịch.';
+		const errorStr = 'Bạn vui lòng điền đầy đủ số tiền (ngày, tên) giao dịch.';
 		setLoading(true);
 
 		// Validate on client side.
-		if (!date || !expense) {
+		if (!date || !expense || !title) {
 			swal({
-				text: strError,
+				text: errorStr,
 				title: 'Lỗi!',
 				icon: 'warning',
 			});
 			setLoading(false);
+			return;
 		}
+
+		// Call API.
+		const data = {
+			date,
+			walletName,
+			isIncome,
+			title: title.trim(),
+			expense: parseInt(expense),
+			description: description.trim(),
+		};
+
+		const addExpenseApi = async () => {
+			try {
+				const addedExpense = await expenseApi.add(data);
+				const successStr = 'Bạn đã thêm giao dịch thành công!';
+				swal({
+					text: successStr,
+					title: 'Xong!',
+					icon: 'success',
+					button: 'Tiếp tục',
+				});
+				setTitle('');
+				setExpense('');
+				setDescription('');
+				setLoading(false);
+			} catch (error) {
+				const errorStr = error.response.data;
+
+				swal({
+					text: errorStr,
+					title: 'Lỗi!',
+					icon: 'warning',
+				});
+				setLoading(false);
+			}
+		};
+
+		addExpenseApi();
 	};
 
 	// Helper functions.
@@ -60,9 +102,9 @@ function AddExpenseModal() {
 		setDate(date);
 	};
 
-	const changeWalletSelect = (wallet) => {
-		console.log(`selected ${wallet}`);
-		setWallet(wallet);
+	const changeWalletSelect = (walletName) => {
+		console.log(`selected ${walletName}`);
+		setWalletName(walletName);
 	};
 
 	const changeTypeSelect = (type) => {
@@ -100,6 +142,10 @@ function AddExpenseModal() {
 
 	const handleCancel = () => {
 		setVisible(false);
+		setTitle('');
+		setDescription('');
+		setExpense('');
+		setLoading(false);
 	};
 
 	return (
