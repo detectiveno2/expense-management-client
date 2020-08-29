@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute } from './routes/index';
 import { Login, Register, Dashboard, MyWallet } from './pages/index';
-import { Menu, Header } from './components/index';
+import { Menu, Header, ChangePassword } from './components/index';
 
 import { UserProvider } from './contexts/UserContext';
 import { WalletProvider } from './contexts/WalletContext';
@@ -32,6 +32,10 @@ function App() {
 										<PrivateRoute
 											path="/my-wallet"
 											component={() => <MyWallet />}
+										/>
+										<PrivateRoute
+											path="/account/password"
+											component={() => <ChangePassword />}
 										/>
 										<PublicRoute
 											exact

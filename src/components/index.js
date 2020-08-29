@@ -7,3 +7,4 @@ export { default as ListWallets } from './ListWallets/ListWallets';
 export { default as LoadingButton } from './LoadingButton/LoadingButton';
 export { default as Menu } from './Menu/Menu';
 export { default as NoWallet } from './NoWallet/NoWallet';
+export { default as ChangePassword } from './ChangePassword/ChangePassword';

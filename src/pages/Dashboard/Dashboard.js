@@ -15,7 +15,7 @@ export default function () {
 
 	return (
 		<div className="Dashboard">
-			{wallets.length ? (
+			{!wallets.length ? (
 				<Transactions />
 			) : (
 				<div className="dashboard__no-wallet">
