@@ -13,6 +13,7 @@ function AddExpenseModal() {
 	const [date, setDate] = useState(currentDate);
 	const [wallet, setWallet] = useState(null);
 	const [isIncome, setIsIncome] = useState(false);
+	const [title, setTitle] = useState('');
 	const [expense, setExpense] = useState('');
 	const [description, setDescription] = useState('');
 	const [contentBtn, setContentBtn] = useState('');
@@ -70,6 +71,11 @@ function AddExpenseModal() {
 		setIsIncome(isIncome);
 	};
 
+	const handleChangeTitle = (event) => {
+		const newTitle = event.target.value;
+		setTitle(newTitle);
+	};
+
 	const changeExpenseSelect = (event) => {
 		if (event.target.value === '') {
 			setExpense('');
@@ -84,8 +90,8 @@ function AddExpenseModal() {
 	};
 
 	const handleChangeDescription = (event) => {
-		const description = event.target.value;
-		setDescription(description);
+		const newDescription = event.target.value;
+		setDescription(newDescription);
 	};
 
 	const showModal = () => {
@@ -122,8 +128,10 @@ function AddExpenseModal() {
 				<ExpenseModal
 					expense={expense}
 					description={description}
+					title={title}
 					changeDateSelect={changeDateSelect}
 					changeWalletSelect={changeWalletSelect}
+					handleChangeTitle={handleChangeTitle}
 					changeExpenseSelect={changeExpenseSelect}
 					changeTypeSelect={changeTypeSelect}
 					handleChangeDescription={handleChangeDescription}

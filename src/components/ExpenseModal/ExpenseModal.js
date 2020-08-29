@@ -11,9 +11,11 @@ function ExpenseModal(props) {
 	const {
 		expense,
 		description,
+		title,
 		changeDateSelect,
 		changeWalletSelect,
 		changeTypeSelect,
+		handleChangeTitle,
 		changeExpenseSelect,
 		handleChangeDescription,
 	} = props;
@@ -41,6 +43,13 @@ function ExpenseModal(props) {
 					<Option value="true">Khoản thu</Option>
 				</Select>
 			</div>
+			<Input
+				type="text"
+				placeholder="Tên giao dịch"
+				value={title}
+				onChange={handleChangeTitle}
+				required
+			/>
 			<Input
 				type="text"
 				pattern="[0-9]*"
