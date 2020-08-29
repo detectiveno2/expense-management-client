@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import { Input } from 'antd';
 import swal from 'sweetalert';
 
+import axiosClient from '../../api/axiosClient';
 import authApi from '../../api/authApi';
 
 import './ChangePassword.css';
 
 const handleChange = (set) => (event) => {
 	set(event.target.value);
+};
+
+const setNewToken = (token) => {
+	localStorage.setItem('authToken', token);
+	const bearerToken = `Bearer ${token}`;
+	axiosClient.defaults.headers.common['Authorization'] = bearerToken;
 };
 
 function ChangePassword() {
@@ -18,8 +25,10 @@ function ChangePassword() {
 	const changePasswordApi = async () => {
 		const data = { currentPassword, newPassword };
 		try {
-			const responseData = await authApi.changePassword(data);
-			console.log(responseData);
+			const { newToken } = await authApi.changePassword(data);
+
+			setNewToken(newToken);
+
 			swal({
 				text: 'Đổi mật khẩu thành công',
 				title: 'OK!',
@@ -30,7 +39,17 @@ function ChangePassword() {
 			setNewPassword('');
 			setReNewPassword('');
 		} catch (error) {
-			console.log(error.response);
+			if (error.response.status === 400) {
+				swal({
+					text: 'Mật khẩu hiện tại không đúng',
+					title: 'Opps!',
+					icon: 'warning',
+					button: 'Quay lại',
+				});
+				setCurrentPassword('');
+				setNewPassword('');
+				setReNewPassword('');
+			}
 		}
 	};
 
