@@ -5,7 +5,7 @@ import walletApi from '../api/walletApi';
 export const WalletContext = React.createContext();
 
 export const WalletProvider = (props) => {
-	const [wallets, setWallets] = useState([]);
+	const [wallets, setWallets] = useState(null);
 
 	useEffect(() => {
 		const getWalletsUser = async () => {
