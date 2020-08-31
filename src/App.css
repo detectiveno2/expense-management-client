@@ -12,6 +12,7 @@
 	margin: 3.875rem 0 0 5rem;
 	padding: 1.5rem 1rem;
 	min-height: 90.5vh;
+	overflow: hidden;
 }
 
 @media (max-width: 576px) {
