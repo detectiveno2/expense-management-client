@@ -21,11 +21,12 @@ export default function AboutUs() {
 					2020, dùng để quản lí chi tiêu của bản thân và từ đó giúp chúng ta có
 					thể chi tiêu một cách hợp lí và khoa học hơn.
 				</div>
-				<div className="dir">
+				<a href="#members" className="dir">
 					<p>Kéo xuống để xem tiếp</p>
 					<NextIcon />
-				</div>
+				</a>
 			</div>
+			<div id="members"></div>
 			<hr />
 			<div className="main-content">
 				<h3 className="title">Giới thiệu một chút về thành viên</h3>
@@ -59,7 +60,7 @@ export default function AboutUs() {
 					nhận. Vjp
 				</div>
 			</div>
-			<div className="member" data-aos="fade-up">
+			<div className="member" data-aos="fade-right">
 				<div className="avatar">
 					<img src={trung} alt="trung" />
 				</div>
