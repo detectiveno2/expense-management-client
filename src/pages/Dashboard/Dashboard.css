@@ -3,6 +3,17 @@
 	justify-content: center;
 }
 
+.dashboard__loading {
+	height: 70vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dashboard__loading .dashboard__loading-animation {
+	width: 85px !important;
+}
+
 .dashboard__no-wallet {
 	height: 83vh;
 	display: flex;
@@ -13,6 +24,10 @@
 @media (max-width: 575.98px) {
 	.Dashboard {
 		margin: 0;
+	}
+
+	.dashboard__loading .dashboard__loading-animation {
+		width: 64px !important;
 	}
 
 	.dashboard__no-wallet {
