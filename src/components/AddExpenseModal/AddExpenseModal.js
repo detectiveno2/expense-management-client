@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, Button } from 'antd';
 import moment from 'moment';
 import swal from 'sweetalert';
+import ClipLoader from 'react-spinners/ClipLoader';
+
+import { WalletContext } from '../../contexts/WalletContext';
+
+import expenseApi from '../../api/expenseApi';
 
 import ExpenseModal from '../ExpenseModal/ExpenseModal';
+
 import './AddExpenseModal.css';
 
 function AddExpenseModal() {
+	const { wallets } = useContext(WalletContext);
 	const currentDate = moment();
 
 	// Define state.
 	const [date, setDate] = useState(currentDate);
-	const [wallet, setWallet] = useState(null);
+	const [walletName, setWalletName] = useState(null);
 	const [isIncome, setIsIncome] = useState(false);
+	const [title, setTitle] = useState('');
 	const [expense, setExpense] = useState('');
 	const [description, setDescription] = useState('');
 	const [contentBtn, setContentBtn] = useState('');
@@ -33,24 +41,71 @@ function AddExpenseModal() {
 		setContentBtn('THÊM GIAO DỊCH');
 	}
 
+	// Handle content button
 	useEffect(() => {
 		handleContentBtn();
 	}, []);
 
-	// Functions for UI.
-	const handleOk = async () => {
-		const strError = 'Bạn vui lòng điền đầy đủ ngày/số tiền giao dịch.';
-		setLoading(true);
+	// Handle value walletName
+	useEffect(() => {
+		if (wallets) {
+			setWalletName(wallets[0].walletName);
+		}
+	}, [wallets]);
 
-		// Validate on client side.
-		if (!date || !expense) {
+	const addExpenseApi = async () => {
+		const data = {
+			date,
+			walletName,
+			isIncome,
+			title: title.trim(),
+			expense: parseInt(expense),
+			description: description.trim(),
+		};
+
+		try {
+			const addedExpense = await expenseApi.add(data);
+			const successStr = 'Bạn đã thêm giao dịch thành công!';
 			swal({
-				text: strError,
+				text: successStr,
+				title: 'Xong!',
+				icon: 'success',
+				button: 'Tiếp tục',
+			});
+			setTitle('');
+			setExpense('');
+			setDescription('');
+			setLoading(false);
+		} catch (error) {
+			const errorStr = error.response.data;
+
+			swal({
+				text: errorStr,
 				title: 'Lỗi!',
 				icon: 'warning',
 			});
 			setLoading(false);
 		}
+	};
+
+	// Functions for UI.
+	const handleOk = async () => {
+		const errorStr = 'Vui lòng điền đầy đủ số tiền (ngày, tên) giao dịch.';
+		setLoading(true);
+
+		// Validate on client side.
+		if (!date || !expense || !title) {
+			swal({
+				text: errorStr,
+				title: 'Lỗi!',
+				icon: 'warning',
+			});
+			setLoading(false);
+			return;
+		}
+
+		// Call API
+		addExpenseApi();
 	};
 
 	// Helper functions.
@@ -59,15 +114,20 @@ function AddExpenseModal() {
 		setDate(date);
 	};
 
-	const changeWalletSelect = (wallet) => {
-		console.log(`selected ${wallet}`);
-		setWallet(wallet);
+	const changeWalletSelect = (walletName) => {
+		console.log(`selected ${walletName}`);
+		setWalletName(walletName);
 	};
 
 	const changeTypeSelect = (type) => {
 		const isIncome = type || false;
 		console.log(isIncome);
 		setIsIncome(isIncome);
+	};
+
+	const handleChangeTitle = (event) => {
+		const newTitle = event.target.value;
+		setTitle(newTitle);
 	};
 
 	const changeExpenseSelect = (event) => {
@@ -84,8 +144,8 @@ function AddExpenseModal() {
 	};
 
 	const handleChangeDescription = (event) => {
-		const description = event.target.value;
-		setDescription(description);
+		const newDescription = event.target.value;
+		setDescription(newDescription);
 	};
 
 	const showModal = () => {
@@ -94,12 +154,23 @@ function AddExpenseModal() {
 
 	const handleCancel = () => {
 		setVisible(false);
+		setTitle('');
+		setDescription('');
+		setExpense('');
+		setLoading(false);
 	};
 
 	return (
 		<>
-			<Button type="primary" onClick={showModal}>
-				{contentBtn}
+			<Button
+				type="primary"
+				onClick={showModal}
+				disabled={!wallets && true}
+				style={{
+					cursor: !wallets ? 'default' : 'pointer',
+				}}
+			>
+				{wallets ? contentBtn : <ClipLoader size="15px" color="#ffffff" />}
 			</Button>
 			<Modal
 				title="Thêm giao dịch"
@@ -122,8 +193,10 @@ function AddExpenseModal() {
 				<ExpenseModal
 					expense={expense}
 					description={description}
+					title={title}
 					changeDateSelect={changeDateSelect}
 					changeWalletSelect={changeWalletSelect}
+					handleChangeTitle={handleChangeTitle}
 					changeExpenseSelect={changeExpenseSelect}
 					changeTypeSelect={changeTypeSelect}
 					handleChangeDescription={handleChangeDescription}
