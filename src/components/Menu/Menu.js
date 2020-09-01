@@ -70,7 +70,7 @@ export default function Menu() {
 		'menu-item-active': isActive === 'using',
 	});
 	const aboutItemClass = classNames('menu-item', {
-		'menu-item-active': isActive === 'about',
+		'menu-item-active': isActive === 'about-us',
 	});
 	const menuCollapseClass = classNames('menu-collapse', {
 		'collapse-show': isShow,
@@ -198,7 +198,7 @@ export default function Menu() {
 				</Link>
 				<Link
 					to="/about-us"
-					id="about"
+					id="about-us"
 					className={aboutItemClass}
 					onClick={toggleActive}
 				>
