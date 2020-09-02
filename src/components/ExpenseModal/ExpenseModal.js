@@ -46,9 +46,9 @@ function ExpenseModal(props) {
 						</Option>
 					))}
 				</Select>
-				<Select defaultValue="false" onChange={changeTypeSelect}>
-					<Option value="false">Khoản chi</Option>
-					<Option value="true">Khoản thu</Option>
+				<Select defaultValue={false} onChange={changeTypeSelect}>
+					<Option value={false}>Khoản chi</Option>
+					<Option value={true}>Khoản thu</Option>
 				</Select>
 			</div>
 			<Input
