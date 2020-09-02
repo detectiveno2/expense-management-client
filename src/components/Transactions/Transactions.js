@@ -11,7 +11,7 @@ import { ReactComponent as NextIcon } from '../../images/next.svg';
 import { MenuContext } from '../../contexts/MenuContext';
 import { WalletContext } from '../../contexts/WalletContext';
 
-import Expenses from '../Expenses/Expenses';
+import Transaction from '../Transaction/Transaction';
 
 export default function Transactions() {
 	const [subtract, setSubtract] = useState(0);
@@ -72,19 +72,11 @@ export default function Transactions() {
 						</Link>
 					</div>
 				</div>
-				{currentWallets.forEach((wallet) => {
-					console.log(wallet);
-					wallet.transactions.forEach((transaction) => {
-						transaction.expenses.map((expense) => (
-							<Expenses
-								date={transaction.date}
-								expenses={transaction.expenses}
-								key={transaction._id}
-							/>
-						));
-					});
+				{currentWallets.map((wallet) => {
+					return (
+						<Transaction transactions={wallet.transactions} key={wallet._id} />
+					);
 				})}
-				{/* <Expenses /> */}
 			</div>
 		</div>
 	);
