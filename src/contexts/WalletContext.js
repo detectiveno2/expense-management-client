@@ -4,15 +4,27 @@ import walletApi from '../api/walletApi';
 
 export const WalletContext = React.createContext();
 
+const calculateTotal = (wallets) => {
+	const total = wallets.reduce(
+		(currentTotal, wallet) => currentTotal + wallet.accountBalance,
+		0
+	);
+
+	return total;
+};
+
 export const WalletProvider = (props) => {
 	const [wallets, setWallets] = useState(null);
+	const [total, setTotal] = useState(0);
 
 	useEffect(() => {
 		const getWalletsUser = async () => {
 			try {
 				const gotWallets = await walletApi.get();
-				console.log(gotWallets);
+				const total = calculateTotal(gotWallets);
+
 				setWallets(gotWallets);
+				setTotal(total);
 			} catch (error) {
 				console.log(error);
 			}
@@ -25,6 +37,7 @@ export const WalletProvider = (props) => {
 		<WalletContext.Provider
 			value={{
 				wallets,
+				total,
 			}}
 		>
 			{props.children}
