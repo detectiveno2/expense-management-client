@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute } from './routes/index';
-import { Login, Register, Dashboard, MyWallet } from './pages/index';
+import { Login, Register, Dashboard, MyWallet, AboutUs } from './pages/index';
 import { Menu, Header, ChangePassword } from './components/index';
 
 import { UserProvider } from './contexts/UserContext';
@@ -28,6 +28,11 @@ function App() {
 											exact
 											path="/"
 											component={() => <Dashboard />}
+										/>
+										<PrivateRoute
+											exact
+											path="/about-us"
+											component={() => <AboutUs />}
 										/>
 										<PrivateRoute
 											path="/my-wallet"

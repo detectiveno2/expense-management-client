@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import ReactLoading from 'react-loading';
 
 import { NoWallet } from '../../components/index';
 
@@ -15,7 +16,19 @@ export default function () {
 
 	return (
 		<div className="Dashboard">
+<<<<<<< HEAD
 			{!wallets.length ? (
+=======
+			{!wallets ? (
+				<div className="dashboard__loading">
+					<ReactLoading
+						type="spin"
+						color="#6de283"
+						className="dashboard__loading-animation"
+					/>
+				</div>
+			) : wallets.length > 0 ? (
+>>>>>>> master
 				<Transactions />
 			) : (
 				<div className="dashboard__no-wallet">

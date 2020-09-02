@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { DatePicker, Space, Select, Input } from 'antd';
 import moment from 'moment';
+
+import { WalletContext } from '../../contexts/WalletContext';
 
 import './ExpenseModal.css';
 
 function ExpenseModal(props) {
 	// Get current date.
 	const currentDate = moment();
+	const { wallets } = useContext(WalletContext);
 
 	const {
 		expense,
@@ -33,10 +36,15 @@ function ExpenseModal(props) {
 						format="DD/MM/YYYY"
 					/>
 				</Space>
-				<Select defaultValue="lucy" onChange={changeWalletSelect}>
-					<Option value="jack">Vi den</Option>
-					<Option value="lucy">Vi do</Option>
-					<Option value="Yiminghe">Vi xanh</Option>
+				<Select
+					defaultValue={wallets[0].walletName}
+					onChange={changeWalletSelect}
+				>
+					{wallets.map((wallet) => (
+						<Option key={wallet._id} value={wallet.walletName}>
+							{wallet.walletName}
+						</Option>
+					))}
 				</Select>
 				<Select defaultValue="false" onChange={changeTypeSelect}>
 					<Option value="false">Khoản chi</Option>
@@ -46,6 +54,7 @@ function ExpenseModal(props) {
 			<Input
 				type="text"
 				placeholder="Tên giao dịch"
+				maxLength="24"
 				value={title}
 				onChange={handleChangeTitle}
 				required
@@ -62,6 +71,7 @@ function ExpenseModal(props) {
 			<Input
 				type="text"
 				placeholder="Ghi chú"
+				maxLength="51"
 				value={description}
 				onChange={handleChangeDescription}
 			/>

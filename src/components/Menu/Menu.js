@@ -25,7 +25,7 @@ export default function Menu() {
 	const token = localStorage.getItem('authToken');
 	const user = JSON.parse(localStorage.getItem('user'));
 
-	const { currentUser } = useContext(UserContext);
+	const { currentUser, setToken, setCurrentUser } = useContext(UserContext);
 	const { isActive, setIsActive, isShow, setIsShow } = useContext(MenuContext);
 
 	//toggle active function
@@ -43,6 +43,9 @@ export default function Menu() {
 		// Remove local storage.
 		localStorage.removeItem('authToken');
 		localStorage.removeItem('user');
+
+		setToken(null);
+		setCurrentUser(null);
 
 		// Set default header.
 		axiosClient.defaults.headers.common['Authorization'] = '';
@@ -67,7 +70,7 @@ export default function Menu() {
 		'menu-item-active': isActive === 'using',
 	});
 	const aboutItemClass = classNames('menu-item', {
-		'menu-item-active': isActive === 'about',
+		'menu-item-active': isActive === 'about-us',
 	});
 	const menuCollapseClass = classNames('menu-collapse', {
 		'collapse-show': isShow,
@@ -195,7 +198,7 @@ export default function Menu() {
 				</Link>
 				<Link
 					to="/about-us"
-					id="about"
+					id="about-us"
 					className={aboutItemClass}
 					onClick={toggleActive}
 				>

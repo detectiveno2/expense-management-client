@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Modal, Button } from 'antd';
 import moment from 'moment';
 import swal from 'sweetalert';
+import ClipLoader from 'react-spinners/ClipLoader';
+
+import { WalletContext } from '../../contexts/WalletContext';
 
 import expenseApi from '../../api/expenseApi';
 
@@ -10,6 +13,7 @@ import ExpenseModal from '../ExpenseModal/ExpenseModal';
 import './AddExpenseModal.css';
 
 function AddExpenseModal() {
+	const { wallets } = useContext(WalletContext);
 	const currentDate = moment();
 
 	// Define state.
@@ -37,13 +41,56 @@ function AddExpenseModal() {
 		setContentBtn('THÊM GIAO DỊCH');
 	}
 
+	// Handle content button
 	useEffect(() => {
 		handleContentBtn();
 	}, []);
 
+	// Handle value walletName
+	useEffect(() => {
+		if (wallets) {
+			setWalletName(wallets[0].walletName);
+		}
+	}, [wallets]);
+
+	const addExpenseApi = async () => {
+		const data = {
+			date,
+			walletName,
+			isIncome,
+			title: title.trim(),
+			expense: parseInt(expense),
+			description: description.trim(),
+		};
+
+		try {
+			const addedExpense = await expenseApi.add(data);
+			const successStr = 'Bạn đã thêm giao dịch thành công!';
+			swal({
+				text: successStr,
+				title: 'Xong!',
+				icon: 'success',
+				button: 'Tiếp tục',
+			});
+			setTitle('');
+			setExpense('');
+			setDescription('');
+			setLoading(false);
+		} catch (error) {
+			const errorStr = error.response.data;
+
+			swal({
+				text: errorStr,
+				title: 'Lỗi!',
+				icon: 'warning',
+			});
+			setLoading(false);
+		}
+	};
+
 	// Functions for UI.
 	const handleOk = async () => {
-		const errorStr = 'Bạn vui lòng điền đầy đủ số tiền (ngày, tên) giao dịch.';
+		const errorStr = 'Vui lòng điền đầy đủ số tiền (ngày, tên) giao dịch.';
 		setLoading(true);
 
 		// Validate on client side.
@@ -57,42 +104,7 @@ function AddExpenseModal() {
 			return;
 		}
 
-		// Call API.
-		const data = {
-			date,
-			walletName,
-			isIncome,
-			title: title.trim(),
-			expense: parseInt(expense),
-			description: description.trim(),
-		};
-
-		const addExpenseApi = async () => {
-			try {
-				const addedExpense = await expenseApi.add(data);
-				const successStr = 'Bạn đã thêm giao dịch thành công!';
-				swal({
-					text: successStr,
-					title: 'Xong!',
-					icon: 'success',
-					button: 'Tiếp tục',
-				});
-				setTitle('');
-				setExpense('');
-				setDescription('');
-				setLoading(false);
-			} catch (error) {
-				const errorStr = error.response.data;
-
-				swal({
-					text: errorStr,
-					title: 'Lỗi!',
-					icon: 'warning',
-				});
-				setLoading(false);
-			}
-		};
-
+		// Call API
 		addExpenseApi();
 	};
 
@@ -150,8 +162,15 @@ function AddExpenseModal() {
 
 	return (
 		<>
-			<Button type="primary" onClick={showModal}>
-				{contentBtn}
+			<Button
+				type="primary"
+				onClick={showModal}
+				disabled={!wallets && true}
+				style={{
+					cursor: !wallets ? 'default' : 'pointer',
+				}}
+			>
+				{wallets ? contentBtn : <ClipLoader size="15px" color="#ffffff" />}
 			</Button>
 			<Modal
 				title="Thêm giao dịch"
