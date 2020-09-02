@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from 'antd';
 import swal from 'sweetalert';
 
+import SyncLoader from 'react-spinners/SyncLoader';
 import axiosClient from '../../api/axiosClient';
 import authApi from '../../api/authApi';
 
@@ -21,6 +22,7 @@ function ChangePassword() {
 	const [currentPassword, setCurrentPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 	const [reNewPassword, setReNewPassword] = useState('');
+	const [btnLoading, setBtnLoading] = useState(false);
 
 	const changePasswordApi = async () => {
 		const data = { currentPassword, newPassword };
@@ -38,6 +40,7 @@ function ChangePassword() {
 			setCurrentPassword('');
 			setNewPassword('');
 			setReNewPassword('');
+			setBtnLoading(false);
 		} catch (error) {
 			if (error.response.status === 400) {
 				swal({
@@ -49,12 +52,23 @@ function ChangePassword() {
 				setCurrentPassword('');
 				setNewPassword('');
 				setReNewPassword('');
+				setBtnLoading(false);
 			}
 		}
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		if (!currentPassword || !newPassword || !reNewPassword) {
+			swal({
+				text: 'Vui lòng điền đầy đủ các trường này.',
+				title: 'Opps!',
+				icon: 'warning',
+				button: 'Quay lại',
+			});
+			return;
+		}
 
 		// Validation in client side
 		if (newPassword !== reNewPassword) {
@@ -83,7 +97,9 @@ function ChangePassword() {
 			return;
 		}
 
-		changePasswordApi();
+		setBtnLoading(true);
+		setTimeout(changePasswordApi, 3000);
+		// changePasswordApi();
 	};
 
 	return (
@@ -120,8 +136,16 @@ function ChangePassword() {
 						value={reNewPassword}
 						onChange={handleChange(setReNewPassword)}
 					/>
-					<button className="change-password__submit-btn" type="submit">
-						Đổi mật khẩu
+					<button
+						className="change-password__submit-btn"
+						type="submit"
+						disabled={btnLoading ? true : false}
+					>
+						{btnLoading ? (
+							<SyncLoader color="#f4f4f4" size="10px" />
+						) : (
+							'Đổi mật khẩu'
+						)}
 					</button>
 				</form>
 			</div>

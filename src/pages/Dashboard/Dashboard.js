@@ -16,9 +16,6 @@ export default function () {
 
 	return (
 		<div className="Dashboard">
-<<<<<<< HEAD
-			{!wallets.length ? (
-=======
 			{!wallets ? (
 				<div className="dashboard__loading">
 					<ReactLoading
@@ -28,7 +25,6 @@ export default function () {
 					/>
 				</div>
 			) : wallets.length > 0 ? (
->>>>>>> master
 				<Transactions />
 			) : (
 				<div className="dashboard__no-wallet">
