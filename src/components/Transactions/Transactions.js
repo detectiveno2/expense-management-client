@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
@@ -15,12 +15,16 @@ import Transaction from '../Transaction/Transaction';
 
 export default function Transactions() {
 	const [subtract, setSubtract] = useState(0);
+	const [total, setTotal] = useState(0);
+	const [inflow, setInflow] = useState(0);
+	const [outflow, setOutflow] = useState(0);
 
 	const { setIsActive } = useContext(MenuContext);
-	const { currentWallets, total, inflow, outflow } = useContext(WalletContext);
+	const { currentWallet, getExpenseOfMonth } = useContext(WalletContext);
 
 	const startOfMonth = moment().subtract(subtract, 'month').startOf('month');
 	const endOfMonth = moment().subtract(subtract, 'month').endOf('month');
+
 	const getLastMonth = (e) => {
 		setSubtract(subtract + 1);
 	};
@@ -29,7 +33,12 @@ export default function Transactions() {
 		setSubtract(subtract - 1);
 	};
 
-	console.log(currentWallets);
+	useEffect(() => {
+		const { inflow, outflow, total } = getExpenseOfMonth();
+		setTotal(total);
+		setInflow(inflow);
+		setOutflow(outflow);
+	}, []);
 
 	return (
 		<div className="Transactions">
@@ -72,11 +81,7 @@ export default function Transactions() {
 						</Link>
 					</div>
 				</div>
-				{currentWallets.map((wallet) => {
-					return (
-						<Transaction transactions={wallet.transactions} key={wallet._id} />
-					);
-				})}
+				<Transaction transactions={currentWallet.transactions} />
 			</div>
 		</div>
 	);

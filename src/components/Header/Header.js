@@ -17,7 +17,9 @@ import './Header.css';
 function Header() {
 	const { currentUser } = useContext(UserContext);
 	const { isShow, setIsShow } = useContext(MenuContext);
-	const { total, currentWallets, wallets } = useContext(WalletContext);
+	const { getExpenseOfMonth, currentWallet, wallets } = useContext(
+		WalletContext
+	);
 
 	// Get current date.
 	const currentDate = moment().format('DD');
@@ -33,12 +35,8 @@ function Header() {
 					<button>
 						<img src={TotalIcon} alt="total" />
 						<div className="TitleAmount">
-							<div>
-								{currentWallets.length > 1
-									? 'Tổng cộng'
-									: currentWallets[0].walletName}
-							</div>
-							<div>{total.toLocaleString()}</div>
+							<div>{currentWallet && currentWallet.walletName}</div>
+							{/* <div>{total.toLocaleString()}</div> */}
 						</div>
 					</button>
 				</div>

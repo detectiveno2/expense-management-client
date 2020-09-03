@@ -5,32 +5,25 @@ import walletApi from '../api/walletApi';
 
 export const WalletContext = React.createContext();
 
-const calculateFlow = (currentWallets) => {
+const calculateFlow = (transactions) => {
 	let inflow = 0;
 	let outflow = 0;
-
-	currentWallets.forEach((wallet) => {
-		wallet.transactions.forEach((transaction) => {
-			transaction.expenses.forEach((expense) => {
-				if (expense.isIncome) {
-					inflow += expense.expense;
-				}
-				if (!expense.isIncome) {
-					outflow += expense.expense;
-				}
-			});
+	transactions.forEach((transaction) => {
+		transaction.expenses.forEach((expense) => {
+			if (expense.isIncome) {
+				inflow += expense.expense;
+			}
+			if (!expense.isIncome) {
+				outflow += expense.expense;
+			}
 		});
 	});
-
-	return [inflow, outflow];
+	return { inflow, outflow };
 };
 
 export const WalletProvider = (props) => {
 	const [wallets, setWallets] = useState(null);
-	const [total, setTotal] = useState(0);
 	const [currentWallet, setCurrentWallet] = useState(null);
-	const [inflow, setInflow] = useState(0);
-	const [outflow, setOutflow] = useState(0);
 
 	useEffect(() => {
 		const getWalletsUser = async () => {
@@ -38,7 +31,6 @@ export const WalletProvider = (props) => {
 				const { wallets: gotWallets, virtualWallet } = await walletApi.get();
 				setWallets(gotWallets);
 				setCurrentWallet(virtualWallet);
-				setTotal(virtualWallet.accountBalance);
 			} catch (error) {
 				console.log(error);
 			}
@@ -46,24 +38,6 @@ export const WalletProvider = (props) => {
 
 		getWalletsUser();
 	}, []);
-
-	// // Set total
-	// useEffect(() => {
-	// 	if (wallets) {
-	// 		const total = calculateTotal(wallets);
-	// 		setTotal(total);
-	// 	}
-	// }, [wallets]);
-
-	// calculate inflow, outflow wallets
-	useEffect(() => {
-		if (!currentWallets) return;
-
-		const [inflow, outflow] = calculateFlow(currentWallets);
-		// console.log(inflow, outflow);
-		setInflow(inflow);
-		setOutflow(outflow);
-	}, [currentWallets, wallets]);
 
 	const updateWallet = (updatedWallet) => {
 		const newWallets = [...wallets];
@@ -74,14 +48,40 @@ export const WalletProvider = (props) => {
 		setWallets(newWallets);
 	};
 
+	const getExpenseOfMonth = (date) => {
+		if (currentWallet) {
+			if (!date) {
+				let total = currentWallet.accountBalance;
+				const { inflow, outflow } = calculateFlow(currentWallet.transactions);
+				return { total, inflow, outflow };
+			} else {
+				let total = 0;
+
+				const transactionsOfMonth = currentWallet.transactions.filter(
+					(transaction) => {
+						return (
+							moment(transaction.date).format('MM/YYYY') ===
+							moment(date).format('MM/YYYY')
+						);
+					}
+				);
+
+				const { inflow, outflow } = calculateFlow(transactionsOfMonth);
+				total = inflow + outflow;
+
+				return { total, inflow, outflow };
+			}
+		}
+	};
+
+	getExpenseOfMonth('2020-09-02T13:04:27.071Z');
+
 	return (
 		<WalletContext.Provider
 			value={{
 				wallets,
-				total,
 				currentWallet,
-				inflow,
-				outflow,
+				getExpenseOfMonth,
 				updateWallet,
 			}}
 		>
