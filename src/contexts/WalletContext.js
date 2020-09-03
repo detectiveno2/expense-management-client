@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 
 import walletApi from '../api/walletApi';
 
@@ -44,7 +45,7 @@ export const WalletProvider = (props) => {
 		const getWalletsUser = async () => {
 			try {
 				const gotWallets = await walletApi.get();
-
+				console.log(gotWallets);
 				setWallets(gotWallets);
 				setCurrentWallets(gotWallets);
 			} catch (error) {
@@ -71,7 +72,16 @@ export const WalletProvider = (props) => {
 		// console.log(inflow, outflow);
 		setInflow(inflow);
 		setOutflow(outflow);
-	}, [currentWallets]);
+	}, [currentWallets, wallets]);
+
+	const updateWallet = (updatedWallet) => {
+		const newWallets = [...wallets];
+		const walletIndex = newWallets.findIndex(
+			(wallet) => wallet.walletName === updatedWallet.walletName
+		);
+		newWallets.splice(walletIndex, 1, updatedWallet);
+		setWallets(newWallets);
+	};
 
 	return (
 		<WalletContext.Provider
@@ -81,6 +91,7 @@ export const WalletProvider = (props) => {
 				currentWallets,
 				inflow,
 				outflow,
+				updateWallet,
 			}}
 		>
 			{props.children}

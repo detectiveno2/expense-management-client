@@ -13,7 +13,7 @@ import ExpenseModal from '../ExpenseModal/ExpenseModal';
 import './AddExpenseModal.css';
 
 function AddExpenseModal() {
-	const { wallets } = useContext(WalletContext);
+	const { wallets, updateWallet } = useContext(WalletContext);
 	const currentDate = moment();
 
 	// Define state.
@@ -64,7 +64,8 @@ function AddExpenseModal() {
 		};
 
 		try {
-			const addedExpense = await expenseApi.add(data);
+			const wallet = await expenseApi.add(data);
+			updateWallet(wallet);
 			const successStr = 'Bạn đã thêm giao dịch thành công!';
 			swal({
 				text: successStr,
