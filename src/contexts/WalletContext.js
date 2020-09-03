@@ -43,10 +43,9 @@ export const WalletProvider = (props) => {
 	useEffect(() => {
 		const getWalletsUser = async () => {
 			try {
-				const gotWallets = await walletApi.get();
-
+				const { wallets: gotWallets, virtualWallet } = await walletApi.get();
 				setWallets(gotWallets);
-				setCurrentWallets(gotWallets);
+				setCurrentWallets(virtualWallet);
 			} catch (error) {
 				console.log(error);
 			}
