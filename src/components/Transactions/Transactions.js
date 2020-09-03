@@ -28,37 +28,39 @@ export default function Transactions() {
 	const getLastMonth = (e) => {
 		setSubtract((subtract) => subtract + 1);
 
-		const { inflow, outflow, total } = getExpenseOfMonth(
-			startOfMonth.toISOString()
-		);
-		setTotal(total);
-		setInflow(inflow);
-		setOutflow(outflow);
+		// const { inflow, outflow, total } = getExpenseOfMonth(
+		// 	startOfMonth.toISOString()
+		// );
+		// setTotal(total);
+		// setInflow(inflow);
+		// setOutflow(outflow);
 	};
 
 	const getNextMonth = (e) => {
 		setSubtract((subtract) => subtract - 1);
 
+		// const { inflow, outflow, total } = getExpenseOfMonth(
+		// 	startOfMonth.toISOString()
+		// );
+		// setTotal(total);
+		// setInflow(inflow);
+		// setOutflow(outflow);
+	};
+
+	useEffect(() => {
 		const { inflow, outflow, total } = getExpenseOfMonth(
 			startOfMonth.toISOString()
 		);
 		setTotal(total);
 		setInflow(inflow);
 		setOutflow(outflow);
-	};
-
-	useEffect(() => {
-		const { inflow, outflow, total } = getExpenseOfMonth();
-		setTotal(total);
-		setInflow(inflow);
-		setOutflow(outflow);
-	}, [total, inflow, outflow]);
+	}, [subtract]);
 
 	console.log({
 		subtract,
-		inflow,
-		outflow,
-		total,
+		// inflow,
+		// outflow,
+		// total,
 		startOfMonth: startOfMonth.format('MM/YYYY'),
 	});
 
