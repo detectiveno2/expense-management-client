@@ -1,12 +1,26 @@
 .Expense {
 	display: flex;
+	align-items: center;
 	border-top: 1px solid #e0e0e0;
-	padding: 1rem;
+	padding: 0.5rem 1rem;
 }
 
 .Expense .expense-icon {
 	width: 2.5rem;
 	margin-right: 0.75rem;
+}
+
+.Expense .expense-icon svg {
+	width: 2rem;
+	height: 2rem;
+}
+
+.Expense .expense-icon .inflowIcon {
+	fill: var(--main-green-hover-color);
+}
+
+.Expense .expense-icon .outflowIcon {
+	fill: var(--main-error-color);
 }
 
 .Expense .title {

@@ -9,23 +9,18 @@ import { ReactComponent as BackIcon } from '../../images/back.svg';
 import { ReactComponent as NextIcon } from '../../images/next.svg';
 
 import { MenuContext } from '../../contexts/MenuContext';
+import { WalletContext } from '../../contexts/WalletContext';
 
-import Expenses from '../Expenses/Expenses';
+import Transaction from '../Transaction/Transaction';
 
 export default function Transactions() {
 	const [subtract, setSubtract] = useState(0);
 
 	const { setIsActive } = useContext(MenuContext);
+	const { currentWallets, total, inflow, outflow } = useContext(WalletContext);
 
-	const startOfMonth = moment()
-		.subtract(subtract, 'month')
-		.startOf('month')
-		.format('DD/MM/YYYY');
-	const endOfMonth = moment()
-		.subtract(subtract, 'month')
-		.endOf('month')
-		.format('DD/MM/YYYY');
-
+	const startOfMonth = moment().subtract(subtract, 'month').startOf('month');
+	const endOfMonth = moment().subtract(subtract, 'month').endOf('month');
 	const getLastMonth = (e) => {
 		setSubtract(subtract + 1);
 	};
@@ -33,6 +28,8 @@ export default function Transactions() {
 	const getNextMonth = (e) => {
 		setSubtract(subtract - 1);
 	};
+
+	console.log(currentWallets);
 
 	return (
 		<div className="Transactions">
@@ -45,7 +42,9 @@ export default function Transactions() {
 							</Button>
 						</div>
 						<div className="date">
-							{`${startOfMonth} - ${endOfMonth}`}
+							{`${startOfMonth.format('DD/MM/YYYY')} - ${endOfMonth.format(
+								'DD/MM/YYYY'
+							)}`}
 							{subtract === 0 && <span>(Tháng này)</span>}
 						</div>
 						<div className="top-bar-btn" onClick={getNextMonth}>
@@ -59,21 +58,25 @@ export default function Transactions() {
 					<div className="total-wrapper">
 						<div className="inflow">
 							<div>Dòng tiền vào</div>
-							<span>{`+${(500000).toLocaleString()} đ`}</span>
+							<span>{`+${inflow.toLocaleString()} đ`}</span>
 						</div>
 						<div className="outflow">
 							<div>Dòng tiền ra</div>
-							<span>{`-${(200000).toLocaleString()} đ`}</span>
+							<span>{`${outflow.toLocaleString()} đ`}</span>
 						</div>
 						<div className="result">
-							<span>{`${(500000 - 200000).toLocaleString()} đ`}</span>
+							<span>{`${total.toLocaleString()} đ`}</span>
 						</div>
 						<Link to="/report" onClick={() => setIsActive('report')}>
 							Xem báo cáo cụ thể
 						</Link>
 					</div>
 				</div>
-				<Expenses />
+				{currentWallets.map((wallet) => {
+					return (
+						<Transaction transactions={wallet.transactions} key={wallet._id} />
+					);
+				})}
 			</div>
 		</div>
 	);
