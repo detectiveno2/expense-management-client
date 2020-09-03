@@ -11,12 +11,22 @@ function ListWallets({ showList, setShowList }) {
 	const {
 		wallets,
 		currentWallet,
+		setCurrentWallet,
 		virtualWallet,
-		changeCurrentWallet,
 	} = useContext(WalletContext);
 
 	const handleBtnClick = (walletName) => (event) => {
-		changeCurrentWallet(walletName);
+		if (walletName === virtualWallet.walletName) {
+			setCurrentWallet(virtualWallet);
+			setShowList(!showList);
+			return;
+		}
+
+		const walletMatched = wallets.find(
+			(wallet) => wallet.walletName === walletName
+		);
+
+		setCurrentWallet(walletMatched);
 		setShowList(!showList);
 	};
 

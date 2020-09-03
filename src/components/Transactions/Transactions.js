@@ -45,8 +45,6 @@ export default function Transactions() {
 		setTransactionsOfMonth(transactionsOfMonth);
 	}, [subtract, currentWallet]);
 
-	console.log({ currentWallet });
-
 	return (
 		<div className="Transactions">
 			<div className="transactions-wrapper">
