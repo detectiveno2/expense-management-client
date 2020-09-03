@@ -66,6 +66,7 @@ export default function Expenses({ date, expenses }) {
 						expense={expense.expense}
 						title={expense.title}
 						isIncome={expense.isIncome}
+						description={expense.description}
 						key={expense._id}
 					/>
 				);

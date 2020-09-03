@@ -23,7 +23,17 @@
 	fill: var(--main-error-color);
 }
 
-.Expense .title {
+.Expense .expense-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.Expense .expense-title .title {
 	font-size: 0.875rem;
 	font-weight: 500;
+}
+
+.Expense .expense-title .description {
+	font-size: 0.75rem;
 }
