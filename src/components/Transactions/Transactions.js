@@ -36,7 +36,8 @@ export default function Transactions() {
 
 	useEffect(() => {
 		const { inflow, outflow, total, transactionsOfMonth } = getExpenseOfMonth(
-			startOfMonth.toISOString()
+			startOfMonth.toISOString(),
+			currentWallet
 		);
 		setTotal(total);
 		setInflow(inflow);
