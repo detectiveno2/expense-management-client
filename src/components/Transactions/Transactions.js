@@ -18,6 +18,7 @@ export default function Transactions() {
 	const [total, setTotal] = useState(0);
 	const [inflow, setInflow] = useState(0);
 	const [outflow, setOutflow] = useState(0);
+	const [transactionsOfMonth, setTransactionsOfMonth] = useState([]);
 
 	const { setIsActive } = useContext(MenuContext);
 	const { currentWallet, getExpenseOfMonth } = useContext(WalletContext);
@@ -27,42 +28,21 @@ export default function Transactions() {
 
 	const getLastMonth = (e) => {
 		setSubtract((subtract) => subtract + 1);
-
-		// const { inflow, outflow, total } = getExpenseOfMonth(
-		// 	startOfMonth.toISOString()
-		// );
-		// setTotal(total);
-		// setInflow(inflow);
-		// setOutflow(outflow);
 	};
 
 	const getNextMonth = (e) => {
 		setSubtract((subtract) => subtract - 1);
-
-		// const { inflow, outflow, total } = getExpenseOfMonth(
-		// 	startOfMonth.toISOString()
-		// );
-		// setTotal(total);
-		// setInflow(inflow);
-		// setOutflow(outflow);
 	};
 
 	useEffect(() => {
-		const { inflow, outflow, total } = getExpenseOfMonth(
+		const { inflow, outflow, total, transactionsOfMonth } = getExpenseOfMonth(
 			startOfMonth.toISOString()
 		);
 		setTotal(total);
 		setInflow(inflow);
 		setOutflow(outflow);
+		setTransactionsOfMonth(transactionsOfMonth);
 	}, [subtract]);
-
-	console.log({
-		subtract,
-		// inflow,
-		// outflow,
-		// total,
-		startOfMonth: startOfMonth.format('MM/YYYY'),
-	});
 
 	return (
 		<div className="Transactions">
@@ -105,7 +85,7 @@ export default function Transactions() {
 						</Link>
 					</div>
 				</div>
-				<Transaction transactions={currentWallet.transactions} />
+				<Transaction transactions={transactionsOfMonth} />
 			</div>
 		</div>
 	);

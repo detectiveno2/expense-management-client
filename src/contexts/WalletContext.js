@@ -49,30 +49,21 @@ export const WalletProvider = (props) => {
 	};
 
 	const getExpenseOfMonth = (date) => {
-		console.log(date);
-
 		if (currentWallet) {
-			if (!date) {
-				let total = currentWallet.accountBalance;
-				const { inflow, outflow } = calculateFlow(currentWallet.transactions);
-				return { total, inflow, outflow };
-			} else {
-				let total = 0;
+			let total = 0;
+			const transactionsOfMonth = currentWallet.transactions.filter(
+				(transaction) => {
+					return (
+						moment(transaction.date).format('MM/YYYY') ===
+						moment(date).format('MM/YYYY')
+					);
+				}
+			);
 
-				const transactionsOfMonth = currentWallet.transactions.filter(
-					(transaction) => {
-						return (
-							moment(transaction.date).format('MM/YYYY') ===
-							moment(date).format('MM/YYYY')
-						);
-					}
-				);
+			const { inflow, outflow } = calculateFlow(transactionsOfMonth);
+			total = inflow + outflow;
 
-				const { inflow, outflow } = calculateFlow(transactionsOfMonth);
-				total = inflow + outflow;
-
-				return { total, inflow, outflow };
-			}
+			return { total, inflow, outflow, transactionsOfMonth };
 		}
 	};
 
