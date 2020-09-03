@@ -49,6 +49,8 @@ export const WalletProvider = (props) => {
 	};
 
 	const getExpenseOfMonth = (date) => {
+		console.log(date);
+
 		if (currentWallet) {
 			if (!date) {
 				let total = currentWallet.accountBalance;
@@ -73,8 +75,6 @@ export const WalletProvider = (props) => {
 			}
 		}
 	};
-
-	getExpenseOfMonth('2020-09-02T13:04:27.071Z');
 
 	return (
 		<WalletContext.Provider

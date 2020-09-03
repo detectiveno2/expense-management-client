@@ -26,11 +26,25 @@ export default function Transactions() {
 	const endOfMonth = moment().subtract(subtract, 'month').endOf('month');
 
 	const getLastMonth = (e) => {
-		setSubtract(subtract + 1);
+		setSubtract((subtract) => subtract + 1);
+
+		const { inflow, outflow, total } = getExpenseOfMonth(
+			startOfMonth.toISOString()
+		);
+		setTotal(total);
+		setInflow(inflow);
+		setOutflow(outflow);
 	};
 
 	const getNextMonth = (e) => {
-		setSubtract(subtract - 1);
+		setSubtract((subtract) => subtract - 1);
+
+		const { inflow, outflow, total } = getExpenseOfMonth(
+			startOfMonth.toISOString()
+		);
+		setTotal(total);
+		setInflow(inflow);
+		setOutflow(outflow);
 	};
 
 	useEffect(() => {
@@ -38,7 +52,15 @@ export default function Transactions() {
 		setTotal(total);
 		setInflow(inflow);
 		setOutflow(outflow);
-	}, []);
+	}, [total, inflow, outflow]);
+
+	console.log({
+		subtract,
+		inflow,
+		outflow,
+		total,
+		startOfMonth: startOfMonth.format('MM/YYYY'),
+	});
 
 	return (
 		<div className="Transactions">
