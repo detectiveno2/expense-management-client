@@ -43,7 +43,7 @@ export default function Transactions() {
 		setInflow(inflow);
 		setOutflow(outflow);
 		setTransactionsOfMonth(transactionsOfMonth);
-	}, [subtract]);
+	}, [subtract, currentWallet]);
 
 	return (
 		<div className="Transactions">
