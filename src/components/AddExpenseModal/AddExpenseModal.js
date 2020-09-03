@@ -13,7 +13,12 @@ import ExpenseModal from '../ExpenseModal/ExpenseModal';
 import './AddExpenseModal.css';
 
 function AddExpenseModal() {
-	const { wallets, updateWallet } = useContext(WalletContext);
+	const {
+		wallets,
+		updateWallet,
+		setVirtualWallet,
+		changeCurrentWallet,
+	} = useContext(WalletContext);
 	const currentDate = moment();
 
 	// Define state.
@@ -64,8 +69,12 @@ function AddExpenseModal() {
 		};
 
 		try {
-			const wallet = await expenseApi.add(data);
-			updateWallet(wallet);
+			const { newData, virtualWallet } = await expenseApi.add(data);
+
+			updateWallet(newData);
+			setVirtualWallet(virtualWallet);
+			changeCurrentWallet(newData.walletName);
+
 			const successStr = 'Bạn đã thêm giao dịch thành công!';
 			swal({
 				text: successStr,
