@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 
 import walletApi from '../api/walletApi';
 
 export const WalletContext = React.createContext();
-
-const calculateTotal = (wallets) => {
-	const total = wallets.reduce(
-		(currentTotal, wallet) => currentTotal + wallet.accountBalance,
-		0
-	);
-
-	return total;
-};
 
 const calculateFlow = (currentWallets) => {
 	let inflow = 0;
@@ -36,7 +28,7 @@ const calculateFlow = (currentWallets) => {
 export const WalletProvider = (props) => {
 	const [wallets, setWallets] = useState(null);
 	const [total, setTotal] = useState(0);
-	const [currentWallets, setCurrentWallets] = useState(null);
+	const [currentWallet, setCurrentWallet] = useState(null);
 	const [inflow, setInflow] = useState(0);
 	const [outflow, setOutflow] = useState(0);
 
@@ -45,7 +37,8 @@ export const WalletProvider = (props) => {
 			try {
 				const { wallets: gotWallets, virtualWallet } = await walletApi.get();
 				setWallets(gotWallets);
-				setCurrentWallets(virtualWallet);
+				setCurrentWallet(virtualWallet);
+				setTotal(virtualWallet.accountBalance);
 			} catch (error) {
 				console.log(error);
 			}
@@ -54,13 +47,13 @@ export const WalletProvider = (props) => {
 		getWalletsUser();
 	}, []);
 
-	// Set total
-	useEffect(() => {
-		if (wallets) {
-			const total = calculateTotal(wallets);
-			setTotal(total);
-		}
-	}, [wallets]);
+	// // Set total
+	// useEffect(() => {
+	// 	if (wallets) {
+	// 		const total = calculateTotal(wallets);
+	// 		setTotal(total);
+	// 	}
+	// }, [wallets]);
 
 	// calculate inflow, outflow wallets
 	useEffect(() => {
@@ -70,16 +63,26 @@ export const WalletProvider = (props) => {
 		// console.log(inflow, outflow);
 		setInflow(inflow);
 		setOutflow(outflow);
-	}, [currentWallets]);
+	}, [currentWallets, wallets]);
+
+	const updateWallet = (updatedWallet) => {
+		const newWallets = [...wallets];
+		const walletIndex = newWallets.findIndex(
+			(wallet) => wallet.walletName === updatedWallet.walletName
+		);
+		newWallets.splice(walletIndex, 1, updatedWallet);
+		setWallets(newWallets);
+	};
 
 	return (
 		<WalletContext.Provider
 			value={{
 				wallets,
 				total,
-				currentWallets,
+				currentWallet,
 				inflow,
 				outflow,
+				updateWallet,
 			}}
 		>
 			{props.children}
