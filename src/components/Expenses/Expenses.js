@@ -43,6 +43,8 @@ const getTotal = (expenses) => {
 export default function Expenses({ date, expenses }) {
 	const total = getTotal(expenses);
 
+	const reverseExpenses = JSON.parse(JSON.stringify(expenses)).reverse();
+
 	return (
 		<div className="Expenses">
 			<div className="expenses-item">
@@ -60,7 +62,7 @@ export default function Expenses({ date, expenses }) {
 					<div className="total-expense">{`${total.toLocaleString()} đ`}</div>
 				</div>
 			</div>
-			{expenses.map((expense) => {
+			{reverseExpenses.map((expense) => {
 				return (
 					<Expense
 						expense={expense.expense}

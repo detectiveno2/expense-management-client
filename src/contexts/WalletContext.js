@@ -24,7 +24,7 @@ const calculateFlow = (transactions) => {
 export const WalletProvider = (props) => {
 	const [wallets, setWallets] = useState(null);
 	const [currentWallet, setCurrentWallet] = useState(null);
-	const [virtualWallet, setVirtualWallet] = useState(null);
+	// const [virtualWallet, setVirtualWallet] = useState(null);
 
 	useEffect(() => {
 		const getWalletsUser = async () => {
@@ -32,7 +32,7 @@ export const WalletProvider = (props) => {
 				const { wallets: gotWallets, virtualWallet } = await walletApi.get();
 				setWallets(gotWallets);
 				setCurrentWallet(virtualWallet);
-				setVirtualWallet(virtualWallet);
+				// setVirtualWallet(virtualWallet);
 			} catch (error) {
 				console.log(error);
 			}
@@ -67,17 +67,17 @@ export const WalletProvider = (props) => {
 		return { total, inflow, outflow, transactionsOfMonth };
 	};
 
-	const changeCurrentWallet = (walletName) => {
-		if (walletName === virtualWallet.walletName) {
-			setCurrentWallet(virtualWallet);
-			return;
-		}
+	// const changeCurrentWallet = (walletName) => {
+	// 	if (walletName === virtualWallet.walletName) {
+	// 		setCurrentWallet(virtualWallet);
+	// 		return;
+	// 	}
 
-		const selectedWallet = wallets.find(
-			(wallet) => wallet.walletName === walletName
-		);
-		setCurrentWallet(selectedWallet);
-	};
+	// 	const selectedWallet = wallets.find(
+	// 		(wallet) => wallet.walletName === walletName
+	// 	);
+	// 	setCurrentWallet(selectedWallet);
+	// };
 
 	return (
 		<WalletContext.Provider
@@ -86,9 +86,10 @@ export const WalletProvider = (props) => {
 				currentWallet,
 				getExpenseOfMonth,
 				updateWallet,
-				virtualWallet,
-				setVirtualWallet,
-				changeCurrentWallet,
+				setCurrentWallet,
+				// virtualWallet,
+				// setVirtualWallet,
+				// changeCurrentWallet,
 			}}
 		>
 			{props.children}
