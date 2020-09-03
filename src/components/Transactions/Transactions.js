@@ -82,7 +82,7 @@ export default function Transactions() {
 							<span>{`${total.toLocaleString()} đ`}</span>
 						</div>
 						<Link
-							to={`/report/date=${startOfMonth.toISOString()}`}
+							to={`/report?date=${startOfMonth.toISOString()}`}
 							onClick={() => setIsActive('report')}
 						>
 							Xem báo cáo cụ thể
