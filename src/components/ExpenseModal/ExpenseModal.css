@@ -39,23 +39,29 @@
 .ant-select-focused.ant-select-single:not(.ant-select-customize-input)
 	.ant-select-selector,
 .ant-input:focus {
-	border-color: var(--main-dark-color) !important;
+	border-color: var(--main-green-color) !important;
 	box-shadow: none !important;
 }
 
 .ant-picker-panel-container a.ant-picker-today-btn,
 .ant-picker-header-view button:hover {
-	color: var(--main-dark-color) !important;
+	color: var(--main-green-color) !important;
 }
 
 .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before,
 .ant-input:hover {
-	border: 1px solid var(--main-dark-color) !important;
+	border: 1px solid var(--main-green-color) !important;
 }
 
 .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
 .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
 .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
 	color: #ffffff;
-	background-color: var(--main-dark-color) !important;
+	background-color: var(--main-green-color) !important;
+}
+
+@media (min-width: 575.98px) {
+	.ant-modal-content {
+		margin: 4rem 0 0 5rem;
+	}
 }
