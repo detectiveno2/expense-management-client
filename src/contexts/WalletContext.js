@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import moment from 'moment';
 
 import walletApi from '../api/walletApi';
+import { UserContext } from './UserContext';
 
 export const WalletContext = React.createContext();
 
@@ -22,6 +23,8 @@ const calculateFlow = (transactions) => {
 };
 
 export const WalletProvider = (props) => {
+	const { token, currentUser } = useContext(UserContext);
+
 	const [wallets, setWallets] = useState(null);
 	const [currentWallet, setCurrentWallet] = useState(null);
 	const [virtualWallet, setVirtualWallet] = useState(null);
@@ -39,7 +42,7 @@ export const WalletProvider = (props) => {
 		};
 
 		getWalletsUser();
-	}, []);
+	}, [token, currentUser]);
 
 	const updateWallet = (updatedWallet) => {
 		const newWallets = [...wallets];
@@ -67,6 +70,12 @@ export const WalletProvider = (props) => {
 		return { total, inflow, outflow, transactionsOfMonth };
 	};
 
+	const onLogout = () => {
+		setWallets(null);
+		setCurrentWallet(null);
+		setVirtualWallet(null);
+	};
+
 	return (
 		<WalletContext.Provider
 			value={{
@@ -77,6 +86,7 @@ export const WalletProvider = (props) => {
 				setCurrentWallet,
 				virtualWallet,
 				setVirtualWallet,
+				onLogout,
 			}}
 		>
 			{props.children}
