@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import axiosClient from '../../api/axiosClient';
+
+import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
 
 import './Menu.css';
 import { ReactComponent as MenuIcon } from '../../images/menu.svg';
@@ -14,17 +16,17 @@ import { ReactComponent as LogoutIcon } from '../../images/logout.svg';
 import { ReactComponent as LockIcon } from '../../images/lock.svg';
 import { ReactComponent as ContactIcon } from '../../images/contact.svg';
 import { ReactComponent as NextIcon } from '../../images/next.svg';
+import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
 
 import { UserContext } from '../../contexts/UserContext';
+import { MenuContext } from '../../contexts/MenuContext';
 
 export default function Menu() {
 	const token = localStorage.getItem('authToken');
 	const user = JSON.parse(localStorage.getItem('user'));
 
-	const [isActive, setIsActive] = useState('transactions');
-	const [isShow, setIsShow] = useState(false);
-
-	const { currentUser } = useContext(UserContext);
+	const { currentUser, setToken, setCurrentUser } = useContext(UserContext);
+	const { isActive, setIsActive, isShow, setIsShow } = useContext(MenuContext);
 
 	//toggle active function
 	const toggleActive = (e) => {
@@ -41,6 +43,9 @@ export default function Menu() {
 		// Remove local storage.
 		localStorage.removeItem('authToken');
 		localStorage.removeItem('user');
+
+		setToken(null);
+		setCurrentUser(null);
 
 		// Set default header.
 		axiosClient.defaults.headers.common['Authorization'] = '';
@@ -65,7 +70,7 @@ export default function Menu() {
 		'menu-item-active': isActive === 'using',
 	});
 	const aboutItemClass = classNames('menu-item', {
-		'menu-item-active': isActive === 'about',
+		'menu-item-active': isActive === 'about-us',
 	});
 	const menuCollapseClass = classNames('menu-collapse', {
 		'collapse-show': isShow,
@@ -83,6 +88,9 @@ export default function Menu() {
 		<div className="Menu">
 			<div className={overlayClass} onClick={collapse} />
 			<div className={menuCollapseClass}>
+				<button className="close-btn" onClick={collapse}>
+					<CloseIcon />
+				</button>
 				<div className="account">
 					<div className="avatar">
 						<UserIcon />
@@ -175,7 +183,7 @@ export default function Menu() {
 						<span>Báo cáo</span>
 					</div>
 				</Link>
-
+				<AddExpenseModal />
 				<hr />
 				<Link
 					to="/using"
@@ -190,7 +198,7 @@ export default function Menu() {
 				</Link>
 				<Link
 					to="/about-us"
-					id="about"
+					id="about-us"
 					className={aboutItemClass}
 					onClick={toggleActive}
 				>

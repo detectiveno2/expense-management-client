@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { UserContext } from '../../contexts/UserContext';
+import axiosClient from '../../api/axiosClient';
 import userApi from '../../api/userApi';
 
-import axiosClient from '../../api/axiosClient';
 import FacebookLogin from '../../components/FacebookLogin/FacebookLogin';
 import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
 import LoadingButton from '../../components/LoadingButton/LoadingButton';
+
+import { UserContext } from '../../contexts/UserContext';
 
 import MoneyImg from '../../images/money.png';
 import { ReactComponent as ErrorImg } from '../../images/error.svg';

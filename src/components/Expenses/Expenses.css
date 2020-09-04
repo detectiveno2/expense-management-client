@@ -1,0 +1,35 @@
+.Expenses .expenses-item .expenses-item-top {
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	height: 3.75rem;
+}
+
+.Expenses .expenses-item .expenses-item-top .date-expense {
+	display: flex;
+}
+
+.expenses-item .expenses-item-top .date-expense .date-left-bar {
+	width: 2.5rem;
+	font-size: 2rem;
+	margin-right: 0.75rem;
+}
+
+.expenses-item .expenses-item-top .date-expense .date-right-bar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 0.75rem;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.expenses-item .expenses-item-top .date-expense .date-right-bar .day {
+	font-weight: 500;
+}
+
+.expenses-item .expenses-item-top .total-expense {
+	margin-left: auto;
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+}

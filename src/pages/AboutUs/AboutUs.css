@@ -1,0 +1,151 @@
+.AboutUs {
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.AboutUs .about-us-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 79vh;
+}
+
+.AboutUs .about-us-title h1 {
+	color: var(--main-blue-color);
+	font-size: 2.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.AboutUs .about-us-title div {
+	width: 80%;
+	text-align: center;
+	font-size: 1.25rem;
+}
+
+.AboutUs .about-us-title .dir {
+	margin-top: 5rem;
+	color: var(--main-pink-color);
+	text-decoration: none;
+	text-align: center;
+	font-size: 1.25rem;
+	position: relative;
+	animation-name: scroll-btn;
+	animation-duration: 2.5s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes scroll-btn {
+	0% {
+		top: 0;
+	}
+
+	50% {
+		top: 1.5rem;
+	}
+
+	100% {
+		top: 0;
+	}
+}
+
+.AboutUs .about-us-title .dir svg {
+	width: 1.5rem;
+	height: 1.5rem;
+	transform: rotate(90deg);
+	fill: var(--main-pink-color);
+}
+
+.AboutUs hr {
+	width: 30%;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.AboutUs .main-content {
+	display: flex;
+	justify-content: center;
+	margin-top: 3rem;
+}
+
+.AboutUs .main-content .title {
+	color: var(--main-blue-color);
+	margin-bottom: 5rem;
+}
+
+.AboutUs .member {
+	display: flex;
+	justify-content: center;
+	padding: 0.5rem 1rem;
+	margin-bottom: 8rem;
+	min-width: 25rem;
+}
+
+.AboutUs #members {
+	height: 4.5rem;
+}
+
+.AboutUs .member .avatar {
+	margin-right: 2rem;
+}
+
+.AboutUs .member .avatar img {
+	width: 23rem;
+}
+
+.AboutUs .member .introduction {
+	font-size: 1.25rem;
+}
+
+.AboutUs .member .introduction span {
+	color: var(--main-pink-color);
+}
+
+.AboutUs .member-swap .avatar {
+	order: 1;
+	margin: 0 0 0 2rem;
+}
+
+@media (max-width: 991.98px) {
+	.AboutUs .member {
+		flex-wrap: wrap;
+	}
+
+	.AboutUs .member .avatar {
+		margin: 0 0 2rem 0;
+	}
+
+	.AboutUs .member .avatar img {
+		width: 30rem;
+	}
+
+	.AboutUs .member .introduction {
+		text-align: justify;
+	}
+
+	.AboutUs .member-swap .avatar {
+		order: 0;
+	}
+}
+
+@media (max-width: 679.98px) {
+	.AboutUs .member .avatar img {
+		width: 25rem;
+	}
+
+	.AboutUs .member .introduction {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.AboutUs .member .avatar img {
+		width: 26rem;
+	}
+
+	.AboutUs .member .introduction {
+		font-size: 1.25rem;
+	}
+}
+
+html {
+	scroll-behavior: smooth;
+}
