@@ -47,11 +47,11 @@ function AddExpenseModal() {
 	}, []);
 
 	// Handle value walletName
-	// useEffect(() => {
-	// 	if (wallets) {
-	// 		setWalletName(wallets[0].walletName);
-	// 	}
-	// }, [wallets]);
+	useEffect(() => {
+		if (wallets) {
+			setWalletName(wallets[0].walletName);
+		}
+	}, [wallets]);
 
 	const addExpenseApi = async () => {
 		const data = {
