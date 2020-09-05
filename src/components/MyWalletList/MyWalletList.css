@@ -1,0 +1,201 @@
+.my-wallet-list {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	height: 100%;
+	width: 35rem;
+	overflow: hidden;
+
+	border-radius: 4px;
+
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(196, 196, 196, 1);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(196, 196, 196, 1);
+	box-shadow: 0px 0px 5px 0px rgba(196, 196, 196, 1);
+}
+
+.my-wallet-list .my-wl__container {
+	transition: transform 0.4s ease 0s;
+}
+
+.my-wallet-list.my-wallet-list--active .my-wl__container {
+	transform: translateX(-50%);
+}
+
+.my-wallet-list .my-wl__container {
+	display: flex;
+	width: 70rem;
+	height: 100%;
+}
+
+.my-wallet-list .my-wl__container .my-wl__left {
+	display: flex;
+	flex-direction: column;
+
+	width: 35rem;
+	height: 100%;
+
+	background-color: #ffffff;
+}
+
+.my-wallet-list .my-wl__container .my-wl__left .my-wl__title {
+	text-align: center;
+	font-size: 0.9rem;
+	color: #ffffff;
+	padding: 0.5rem 0rem;
+
+	background-color: var(--main-green-color);
+}
+
+.my-wallet-list .my-wl__container .my-wl__left .my-wl__list {
+	flex-grow: 1;
+}
+
+.my-wl__left .my-wl__list .my-wl__item {
+	border: none;
+	border-bottom: 1px solid #e0e0e0;
+	background-color: #ffffff;
+
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0rem;
+
+	transition: all 0.3s ease 0s;
+}
+
+.my-wl__left .my-wl__list .my-wl__item:focus {
+	outline: none;
+}
+
+.my-wl__left .my-wl__list .my-wl__item:hover {
+	background-color: #f1f1f1;
+}
+
+.my-wl__left .my-wl__list .my-wl__item .my-wl__img-icon {
+	width: 3rem;
+	margin: 1rem;
+}
+
+.my-wl__left .my-wl__list .my-wl__item .my-wl__title-wl .my-wl__name-wl {
+	text-align: left;
+	font-weight: 500;
+}
+
+.my-wl__left .my-wl__list .my-wl__item .my-wl__title-wl .my-wl__balance-wl {
+	font-size: 0.9rem;
+	color: #888888;
+}
+
+.my-wl__left .my-wl__footer .my-wl__add-btn {
+	border: none;
+	border-radius: 4px;
+	background-color: var(--main-green-color);
+	display: block;
+	margin: 1rem auto;
+	padding: 0.3rem 3rem;
+	color: #ffffff;
+}
+
+.my-wl__left .my-wl__footer .my-wl__add-btn:hover {
+	background-color: var(--main-green-hover-color);
+}
+
+.my-wl__left .my-wl__footer .my-wl__add-btn:focus {
+	outline: none;
+}
+
+.my-wallet-list .my-wl__container .my-wl__right {
+	display: flex;
+	flex-direction: column;
+	width: 35rem;
+	height: 100%;
+
+	background-color: #ffffff;
+}
+
+.my-wl__right .my-wl-r__header {
+	padding: 1rem 0.5rem;
+	background-color: var(--main-green-color);
+}
+
+.my-wl__right .my-wl-r__header .my-wl-r__back-btn {
+	width: 2rem;
+	height: 2rem;
+
+	cursor: pointer;
+}
+
+.my-wl__right .my-wl-r__main {
+	flex-grow: 1;
+	display: flex;
+}
+
+.my-wl__right .my-wl-r__main .my-wl-r__wl-avt {
+	flex-grow: 1;
+}
+
+.my-wl__right .my-wl-r__main .my-wl-r__wl-avt .my-wl-r__wl-avt-img {
+	display: block;
+	width: 60%;
+	margin: 2rem auto;
+}
+
+.my-wl__right .my-wl-r__main .my-wl-r__wl-inf {
+	flex-grow: 2;
+}
+
+.my-wl__right .my-wl-r__main .my-wl-r__wl-inf .my-wl-r__table {
+	margin-top: 2rem;
+}
+
+.my-wl__right .my-wl-r__main .my-wl-r__wl-inf .my-wl-r__table .my-wl-r__t-row {
+	line-height: 2rem;
+}
+
+.my-wl__right
+	.my-wl-r__main
+	.my-wl-r__wl-inf
+	.my-wl-r__table
+	.my-wl-r__t-row
+	.my-wl-r__t-data:first-child {
+	font-weight: 500;
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn {
+	display: block;
+	width: 100%;
+	padding: 0.5rem;
+
+	border: none;
+	border-top: 1px solid #e0e0e0;
+	background-color: #ffffff;
+
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn:focus {
+	outline: none;
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--green {
+	color: var(--main-green-color);
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--green:hover {
+	background-color: var(--main-green-color);
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--red {
+	color: var(--main-error-color);
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--red:hover {
+	background-color: var(--main-error-color);
+}
+
+.my-wl__right .my-wl-r__footer .my-wl-r__btn:hover {
+	color: #ffffff;
+}
