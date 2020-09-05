@@ -1,58 +1,49 @@
-import React, { useMemo } from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React, { useContext } from 'react';
+import { Bar } from 'react-chartjs-2';
+
+import { WalletContext } from '../../contexts/WalletContext';
+import './Report.css';
 
 export default function () {
+	const { wallets } = useContext(WalletContext);
+
+	const dataChart = [65, 59, 80, 81, -40];
+	const setColor = (data) =>
+		data < 0 ? 'rgba(255, 99, 132, 0.6)' : 'rgba(54, 162, 235, 0.6)';
+
 	const data = {
-		labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		labels: ['January', 'February', 'March', 'April', 'May'],
 		datasets: [
 			{
-				label: '# of Votes',
-				data: [12, 19, 3, 5, 2, 3],
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)',
-				],
-				borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)',
-				],
-				borderWidth: 1,
+				label: ['adu'],
+				backgroundColor: dataChart.map(setColor),
+				borderColor: dataChart.map(setColor),
+				data: dataChart,
 			},
 		],
 	};
 
-	// const axes = useMemo(
-	// 	() => [
-	// 		{ primary: true, type: 'linear', position: 'bottom' },
-	// 		{ type: 'linear', position: 'left' },
-	// 	],
-	// 	[]
-	// );
-
-	// const lineChart = (
-	// 	// A react-chart hyper-responsively and continuously fills the available
-	// 	// space of its parent element automatically
-	// 	<div
-	// 		style={{
-	// 			width: '400px',
-	// 			height: '300px',
-	// 		}}
-	// 	>
-	// 		<Chart data={data} axes={axes} tooltip />
-	// 	</div>
-	// );
+	const options = {
+		responsive: true,
+		scales: {
+			yAxes: [
+				{
+					ticks: {
+						suggestedMin: -60,
+						suggestedMax: 60,
+					},
+				},
+			],
+		},
+		tooltips: {
+			intersect: false,
+		},
+	};
 
 	return (
-		<div>
-			<Doughnut data={data} />
+		<div className="Report">
+			<div></div>
+			<Bar data={data} options={options} />
 		</div>
 	);
 }
