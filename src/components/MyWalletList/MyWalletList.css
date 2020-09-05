@@ -199,3 +199,34 @@
 .my-wl__right .my-wl-r__footer .my-wl-r__btn:hover {
 	color: #ffffff;
 }
+
+@media (max-width: 767.98px) {
+	.my-wallet-list {
+		width: 25rem;
+	}
+
+	.my-wallet-list .my-wl__container {
+		width: 50rem;
+	}
+
+	.my-wallet-list .my-wl__container .my-wl__left {
+		width: 25rem;
+	}
+
+	.my-wallet-list .my-wl__container .my-wl__right {
+		width: 25rem;
+	}
+
+	.my-wl__right .my-wl-r__main {
+		flex-direction: column;
+	}
+
+	.my-wl__right .my-wl-r__main .my-wl-r__wl-avt .my-wl-r__wl-avt-img {
+		width: 35%;
+		margin: 1rem auto;
+	}
+
+	.my-wl__right .my-wl-r__main .my-wl-r__wl-inf .my-wl-r__table {
+		margin: auto;
+	}
+}
