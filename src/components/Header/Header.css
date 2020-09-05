@@ -24,6 +24,10 @@
 	position: relative;
 }
 
+.HeaderLeftContent {
+	position: relative;
+}
+
 .HeaderLeftContent button {
 	border: none;
 

@@ -20,6 +20,7 @@ import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
 
 import { UserContext } from '../../contexts/UserContext';
 import { MenuContext } from '../../contexts/MenuContext';
+import { WalletContext } from '../../contexts/WalletContext';
 
 export default function Menu() {
 	const token = localStorage.getItem('authToken');
@@ -27,6 +28,7 @@ export default function Menu() {
 
 	const { currentUser, setToken, setCurrentUser } = useContext(UserContext);
 	const { isActive, setIsActive, isShow, setIsShow } = useContext(MenuContext);
+	const { onLogout } = useContext(WalletContext);
 
 	//toggle active function
 	const toggleActive = (e) => {
@@ -46,6 +48,7 @@ export default function Menu() {
 
 		setToken(null);
 		setCurrentUser(null);
+		onLogout(null);
 
 		// Set default header.
 		axiosClient.defaults.headers.common['Authorization'] = '';
