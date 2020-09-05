@@ -230,3 +230,9 @@
 		margin: auto;
 	}
 }
+
+@media (max-width: 575.98px) {
+	.my-wl__right .my-wl-r__main .my-wl-r__wl-avt .my-wl-r__wl-avt-img {
+		margin: 2rem auto;
+	}
+}
