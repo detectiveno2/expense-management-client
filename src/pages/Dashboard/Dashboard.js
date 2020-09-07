@@ -12,11 +12,11 @@ import Transactions from '../../components/Transactions/Transactions';
 import './Dashboard.css';
 
 export default function () {
-	const { wallets } = useContext(WalletContext);
+	const { wallets, currentWallet } = useContext(WalletContext);
 
 	return (
 		<div className="Dashboard">
-			{!wallets ? (
+			{!wallets || !currentWallet ? (
 				<div className="dashboard__loading">
 					<ReactLoading
 						type="spin"
