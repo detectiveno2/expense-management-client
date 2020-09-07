@@ -85,10 +85,9 @@
 
 .HeaderRightContent ul li:not(:last-child) button {
 	border: none;
-
 	background-color: #ffffff;
 	display: block;
-	padding: 0.25rem 1rem;
+	padding: 0.25rem 0.5rem;
 }
 
 .HeaderRightContent ul li:not(:last-child) button:focus {
@@ -118,7 +117,7 @@ ul li:first-child button .CalendarIcon span {
 }
 
 .HeaderRightContent ul li:last-child {
-	margin-left: 1.5rem;
+	margin-left: 0.5rem;
 }
 
 .HeaderRightContent ul li:last-child button {

@@ -1,0 +1,10 @@
+.pages div.report {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.pages .chart {
+	min-width: 500px;
+	max-width: 998px;
+	margin: 0 auto;
+}

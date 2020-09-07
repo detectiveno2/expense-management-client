@@ -3,6 +3,7 @@ import { Select } from 'antd';
 
 import { WalletContext } from '../../contexts/WalletContext';
 
+import './Report.css';
 import LoadingPage from '../Loading/Loading';
 import Report from '../../components/Chart/Chart';
 const { Option } = Select;
@@ -29,7 +30,7 @@ export default function () {
 	};
 
 	return (
-		<div>
+		<div className="report">
 			<span className="mr-1">Chọn ví</span>
 			<Select
 				defaultValue={walletNames.length > 0 && walletNames[0]}
