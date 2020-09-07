@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import moment from 'moment';
 
 import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
+import ListWallets from '../ListWallets/ListWallets';
 
 import { UserContext } from '../../contexts/UserContext';
 import { MenuContext } from '../../contexts/MenuContext';
@@ -10,14 +11,17 @@ import { WalletContext } from '../../contexts/WalletContext';
 import { ReactComponent as SearchIcon } from '../../images/search-icon.svg';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 import { ReactComponent as MenuIcon } from '../../images/menu.svg';
+import WalletIcon from '../../images/wallet-icon.png';
 import TotalIcon from '../../images/total-icon.png';
 
 import './Header.css';
 
 function Header() {
+	const [showList, setShowList] = useState(false);
+
 	const { currentUser } = useContext(UserContext);
 	const { isShow, setIsShow } = useContext(MenuContext);
-	const { total } = useContext(WalletContext);
+	const { currentWallet, virtualWallet } = useContext(WalletContext);
 
 	// Get current date.
 	const currentDate = moment().format('DD');
@@ -26,17 +30,32 @@ function Header() {
 		setIsShow(!isShow);
 	};
 
+	const handleShowListClick = () => {
+		setShowList(!showList);
+	};
+
 	return currentUser ? (
 		<div className="Header">
 			<div className="HeaderLeftWrapper">
 				<div className="HeaderLeftContent">
-					<button>
-						<img src={TotalIcon} alt="total" />
+					<button onClick={handleShowListClick}>
+						{!currentWallet || !virtualWallet ? (
+							<img src={TotalIcon} alt="total" />
+						) : currentWallet.walletName === virtualWallet.walletName ? (
+							<img src={TotalIcon} alt="total" />
+						) : (
+							<img src={WalletIcon} alt="wallet" />
+						)}
 						<div className="TitleAmount">
-							<div>Tổng cộng</div>
-							<div>{total.toLocaleString()}</div>
+							<div>{currentWallet && currentWallet.walletName}</div>
+							<div>
+								{currentWallet && currentWallet.accountBalance.toLocaleString()}
+							</div>
 						</div>
 					</button>
+					{showList && (
+						<ListWallets showList={showList} setShowList={setShowList} />
+					)}
 				</div>
 			</div>
 			<div className="HeaderRightWrapper">
