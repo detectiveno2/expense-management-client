@@ -1,7 +1,8 @@
 .Expense {
 	display: flex;
+	align-items: center;
 	border-top: 1px solid #e0e0e0;
-	padding: 1rem;
+	padding: 0.5rem 1rem;
 }
 
 .Expense .expense-icon {
@@ -9,7 +10,31 @@
 	margin-right: 0.75rem;
 }
 
-.Expense .title {
+.Expense .expense-icon svg {
+	width: 2rem;
+	height: 2rem;
+}
+
+.Expense .expense-icon .inflowIcon {
+	fill: var(--main-green-hover-color);
+}
+
+.Expense .expense-icon .outflowIcon {
+	fill: var(--main-error-color);
+}
+
+.Expense .expense-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.Expense .expense-title .title {
 	font-size: 0.875rem;
 	font-weight: 500;
+}
+
+.Expense .expense-title .description {
+	font-size: 0.75rem;
+	color: rgba(0, 0, 0, 0.54);
 }
