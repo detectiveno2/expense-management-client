@@ -21,7 +21,7 @@ export default function () {
 		walletNames = wallets.map((item) => item.walletName);
 	}
 
-	getExpenseOfMonth('2020-09-07T00:47:15.289Z', 'July');
+	getExpenseOfMonth('2020-09-07T00:47:15.289Z', null, 'July');
 
 	// onchange select wallet
 	const onChange = (value) => {
