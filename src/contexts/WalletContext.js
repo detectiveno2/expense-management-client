@@ -57,16 +57,16 @@ export const WalletProvider = (props) => {
 		setWallets(newWallets);
 	};
 
-	const getExpenseOfMonth = (date, currentWallet) => {
+	const getExpenseOfMonth = (date, walletName) => {
+		const wallet = wallets.find((wallet) => wallet.walletName === walletName);
+
 		let total = 0;
-		const transactionsOfMonth = currentWallet.transactions.filter(
-			(transaction) => {
-				return (
-					moment(transaction.date).format('MM/YYYY') ===
-					moment(date).format('MM/YYYY')
-				);
-			}
-		);
+		const transactionsOfMonth = wallet.transactions.filter((transaction) => {
+			return (
+				moment(transaction.date).format('MM/YYYY') ===
+				moment(date).format('MM/YYYY')
+			);
+		});
 
 		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
 		total = inflow + outflow;

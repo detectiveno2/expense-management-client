@@ -8,7 +8,7 @@ import Report from '../../components/Chart/Chart';
 const { Option } = Select;
 
 export default function () {
-	const { wallets, isLoaded } = useContext(WalletContext);
+	const { wallets, isLoaded, getExpenseOfMonth } = useContext(WalletContext);
 
 	if (!isLoaded) {
 		return <LoadingPage />;
@@ -16,9 +16,12 @@ export default function () {
 
 	// get wallet name
 	let walletNames;
-	if (wallets && wallets.wallets.length > 0) {
-		walletNames = wallets.wallets.map((item) => item.walletName);
+
+	if (wallets && wallets.length > 0) {
+		walletNames = wallets.map((item) => item.walletName);
 	}
+
+	getExpenseOfMonth('2020-09-07T00:47:15.289Z', 'July');
 
 	// onchange select wallet
 	const onChange = (value) => {
@@ -29,7 +32,7 @@ export default function () {
 		<div>
 			<span className="mr-1">Chọn ví</span>
 			<Select
-				defaultValue={walletNames[0]}
+				defaultValue={walletNames.length > 0 && walletNames[0]}
 				className="mb-5 ml-2"
 				showSearch
 				style={{ width: 200 }}
