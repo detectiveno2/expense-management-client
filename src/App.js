@@ -11,7 +11,7 @@ import { MenuProvider } from './contexts/MenuContext';
 
 import './App.css';
 import 'antd/dist/antd.css';
-import Report from './components/Report/Report';
+import Report from './pages/Report/Report';
 
 function App() {
 	return (

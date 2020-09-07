@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 import { WalletContext } from '../../contexts/WalletContext';
-import './Report.css';
+import './Chart.css';
 
 export default function () {
-	const { wallets } = useContext(WalletContext);
+	const { wallets, isLoaded } = useContext(WalletContext);
 
 	const dataChart = [65, 59, 80, 81, -40];
 	const setColor = (data) =>
@@ -15,7 +15,6 @@ export default function () {
 		labels: ['January', 'February', 'March', 'April', 'May'],
 		datasets: [
 			{
-				label: ['adu'],
 				backgroundColor: dataChart.map(setColor),
 				borderColor: dataChart.map(setColor),
 				data: dataChart,
@@ -23,7 +22,11 @@ export default function () {
 		],
 	};
 
+	// option for chartjs
 	const options = {
+		legend: {
+			display: false,
+		},
 		responsive: true,
 		scales: {
 			yAxes: [
@@ -42,7 +45,6 @@ export default function () {
 
 	return (
 		<div className="Report">
-			<div></div>
 			<Bar data={data} options={options} />
 		</div>
 	);
