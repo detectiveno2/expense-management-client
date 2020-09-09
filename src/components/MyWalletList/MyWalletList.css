@@ -86,6 +86,7 @@
 .my-wl__left .my-wl__list .my-wl__item .my-wl__title-wl .my-wl__balance-wl {
 	font-size: 0.9rem;
 	color: #888888;
+	text-align: left;
 }
 
 .my-wl__left .my-wl__footer .my-wl__add-btn {
