@@ -49,7 +49,13 @@ export const WalletProvider = (props) => {
 		const walletIndex = newWallets.findIndex(
 			(wallet) => wallet.walletName === updatedWallet.walletName
 		);
-		newWallets.splice(walletIndex, 1, updatedWallet);
+
+		if (walletIndex === -1) {
+			newWallets.push(updatedWallet);
+		} else {
+			newWallets.splice(walletIndex, 1, updatedWallet);
+		}
+
 		setWallets(newWallets);
 	};
 

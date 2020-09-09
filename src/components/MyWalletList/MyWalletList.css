@@ -201,6 +201,19 @@
 	color: #ffffff;
 }
 
+.my-wl__loading {
+	height: 100%;
+	position: relative;
+}
+
+.my-wl__loading .my-wl__loading-animation {
+	margin: auto;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 @media (max-width: 767.98px) {
 	.my-wallet-list {
 		width: 25rem;

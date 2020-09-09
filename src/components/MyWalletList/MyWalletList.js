@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
+import ReactLoading from 'react-loading';
 
 import { WalletContext } from '../../contexts/WalletContext';
 import { UserContext } from '../../contexts/UserContext';
+import AddWalletBtn from '../AddWalletBtn/AddWalletBtn';
 
 import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
 import WalletIcon from '../../images/wallet-icon.png';
@@ -29,7 +31,7 @@ function MyWalletList() {
 		setListActive(false);
 	};
 
-	return (
+	return wallets ? (
 		<div className={walletListCls}>
 			<div className="my-wl__container">
 				<div className="my-wl__left">
@@ -57,7 +59,7 @@ function MyWalletList() {
 							))}
 					</div>
 					<div className="my-wl__footer">
-						<button className="my-wl__add-btn">THÊM VÍ</button>
+						<AddWalletBtn className="my-wl__add-btn" />
 					</div>
 				</div>
 				<div className="my-wl__right">
@@ -113,6 +115,14 @@ function MyWalletList() {
 					</div>
 				</div>
 			</div>
+		</div>
+	) : (
+		<div className="my-wl__loading">
+			<ReactLoading
+				type="spin"
+				color="#6de283"
+				className="my-wl__loading-animation"
+			/>
 		</div>
 	);
 }
