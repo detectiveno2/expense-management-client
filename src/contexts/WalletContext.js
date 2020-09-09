@@ -86,6 +86,7 @@ export const WalletProvider = (props) => {
 		<WalletContext.Provider
 			value={{
 				wallets,
+				setWallets,
 				currentWallet,
 				getExpenseOfMonth,
 				updateWallet,

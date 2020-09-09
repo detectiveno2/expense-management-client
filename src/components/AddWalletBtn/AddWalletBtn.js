@@ -6,7 +6,9 @@ import { WalletContext } from '../../contexts/WalletContext';
 import walletApi from '../../api/walletApi';
 
 function AddWalletBtn({ className }) {
-	const { updateWallet, setVirtualWallet } = useContext(WalletContext);
+	const { updateWallet, setVirtualWallet, setCurrentWallet } = useContext(
+		WalletContext
+	);
 
 	const [loading, setLoading] = useState(false);
 	const [visible, setVisible] = useState(false);
@@ -19,6 +21,7 @@ function AddWalletBtn({ className }) {
 			const { wallet, virtualWallet } = await walletApi.add(data);
 			updateWallet(wallet);
 			setVirtualWallet(virtualWallet);
+			setCurrentWallet(virtualWallet);
 			swal({
 				text: 'Bạn đã tạo ví thành công.',
 				title: 'Xong!',
@@ -26,6 +29,8 @@ function AddWalletBtn({ className }) {
 				button: 'Tiếp tục',
 			});
 			setLoading(false);
+			setWalletName('');
+			setVisible(false);
 		} catch (error) {
 			swal({
 				text: 'Bạn đã tạo ví này rồi.',
@@ -128,6 +133,7 @@ function AddWalletBtn({ className }) {
 					maxLength="23"
 					value={accountBalance}
 					onChange={handleAccountBalance}
+					autoComplete="off"
 					required
 				/>
 			</Modal>

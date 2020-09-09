@@ -191,6 +191,7 @@
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--red {
 	color: var(--main-error-color);
+	height: auto;
 }
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--red:hover {
