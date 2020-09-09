@@ -183,6 +183,7 @@
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--green {
 	color: var(--main-green-color);
+	height: auto;
 }
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--green:hover {

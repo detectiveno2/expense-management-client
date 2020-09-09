@@ -10,6 +10,7 @@ import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
 import WalletIcon from '../../images/wallet-icon.png';
 import './MyWalletList.css';
 import DeleteWalletBtn from '../DeleteWalletBtn/DeleteWalletBtn';
+import UpdateWalletBtn from '../UpdateWalletBtn/UpdateWalletBtn';
 
 function MyWalletList() {
 	const [selectedWallet, setSelectedWallet] = useState(null);
@@ -106,9 +107,11 @@ function MyWalletList() {
 						</div>
 					</div>
 					<div className="my-wl-r__footer">
-						<button className="my-wl-r__btn my-wl-r__btn--green">
-							ĐỔI TÊN
-						</button>
+						<UpdateWalletBtn
+							className="my-wl-r__btn my-wl-r__btn--green"
+							walletName={selectedWallet && selectedWallet.walletName}
+							backToList={handleBackClick}
+						/>
 						<button className="my-wl-r__btn my-wl-r__btn--green">
 							ĐIỀU CHỈNH SỐ DƯ
 						</button>
