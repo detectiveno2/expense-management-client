@@ -11,3 +11,4 @@ export { default as ChangePassword } from './ChangePassword/ChangePassword';
 export { default as MyWalletList } from './MyWalletList/MyWalletList';
 export { default as DeleteWalletBtn } from './DeleteWalletBtn/DeleteWalletBtn';
 export { default as ModifyBalanceBtn } from './ModifyBalanceBtn/ModifyBalanceBtn';
+export { default as UpdateWalletBtn } from './UpdateWalletBtn/UpdateWalletBtn';

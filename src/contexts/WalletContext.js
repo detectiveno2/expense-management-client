@@ -47,7 +47,7 @@ export const WalletProvider = (props) => {
 	const updateWallet = (updatedWallet) => {
 		const newWallets = [...wallets];
 		const walletIndex = newWallets.findIndex(
-			(wallet) => wallet.walletName === updatedWallet.walletName
+			(wallet) => wallet._id === updatedWallet._id
 		);
 
 		if (walletIndex === -1) {
