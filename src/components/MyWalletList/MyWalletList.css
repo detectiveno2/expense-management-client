@@ -167,6 +167,8 @@
 .my-wl__right .my-wl-r__footer .my-wl-r__btn {
 	display: block;
 	width: 100%;
+	height: auto;
+	font-size: 1rem;
 	padding: 0.5rem;
 
 	border: none;

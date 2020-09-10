@@ -60,7 +60,6 @@ export const WalletProvider = (props) => {
 	};
 
 	const getExpenseOfMonth = (date, currentWallet) => {
-		let total = 0;
 		const transactionsOfMonth = currentWallet.transactions.filter(
 			(transaction) => {
 				return (
@@ -69,11 +68,26 @@ export const WalletProvider = (props) => {
 				);
 			}
 		);
+		//deep clone
+		const cloneTrans = JSON.parse(JSON.stringify(transactionsOfMonth));
+
+		cloneTrans.forEach((transaction) => {
+			transaction.expenses = transaction.expenses.filter((expense) => {
+				return expense.isShowReport !== false;
+			});
+		});
+
+		const transactionsOfMonthReport = cloneTrans;
 
 		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
-		total = inflow + outflow;
-
-		return { total, inflow, outflow, transactionsOfMonth };
+		const total = currentWallet.accountBalance;
+		return {
+			total,
+			inflow,
+			outflow,
+			transactionsOfMonth,
+			transactionsOfMonthReport,
+		};
 	};
 
 	const onLogout = () => {

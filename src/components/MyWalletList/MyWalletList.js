@@ -9,7 +9,7 @@ import AddWalletBtn from '../AddWalletBtn/AddWalletBtn';
 import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
 import WalletIcon from '../../images/wallet-icon.png';
 import './MyWalletList.css';
-import DeleteWalletBtn from '../DeleteWalletBtn/DeleteWalletBtn';
+import { DeleteWalletBtn, ModifyBalanceBtn } from '../index';
 
 function MyWalletList() {
 	const [selectedWallet, setSelectedWallet] = useState(null);
@@ -109,9 +109,13 @@ function MyWalletList() {
 						<button className="my-wl-r__btn my-wl-r__btn--green">
 							ĐỔI TÊN
 						</button>
-						<button className="my-wl-r__btn my-wl-r__btn--green">
-							ĐIỀU CHỈNH SỐ DƯ
-						</button>
+						<ModifyBalanceBtn
+							className="my-wl-r__btn my-wl-r__btn--green"
+							walletName={selectedWallet && selectedWallet.walletName}
+							accountBalance={selectedWallet && selectedWallet.accountBalance}
+							setSelectedWallet={setSelectedWallet}
+							backToList={handleBackClick}
+						/>
 						<DeleteWalletBtn
 							className="my-wl-r__btn my-wl-r__btn--red"
 							walletId={selectedWallet && selectedWallet._id}
