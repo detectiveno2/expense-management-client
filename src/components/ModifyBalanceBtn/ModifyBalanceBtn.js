@@ -13,6 +13,7 @@ function ModifyBalanceBtn({
 	walletName,
 	accountBalance,
 	setSelectedWallet,
+	backToList,
 }) {
 	const { updateWallet, setVirtualWallet } = useContext(WalletContext);
 
@@ -73,6 +74,7 @@ function ModifyBalanceBtn({
 			setIsChecked(false);
 			setLoading(false);
 			setVisible(false);
+			backToList();
 		} catch (error) {
 			const errorStr = error.response.data;
 
