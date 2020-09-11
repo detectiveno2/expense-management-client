@@ -15,7 +15,9 @@ function ModifyBalanceBtn({
 	setSelectedWallet,
 	backToList,
 }) {
-	const { updateWallet, setVirtualWallet } = useContext(WalletContext);
+	const { updateWallet, setVirtualWallet, setCurrentWallet } = useContext(
+		WalletContext
+	);
 
 	const [loading, setLoading] = useState(false);
 	const [visible, setVisible] = useState(false);
@@ -60,6 +62,7 @@ function ModifyBalanceBtn({
 			const { newData, virtualWallet } = await walletApi.modifyBalance(data);
 			updateWallet(newData);
 			setSelectedWallet(newData);
+			setCurrentWallet(virtualWallet);
 			setVirtualWallet(virtualWallet);
 
 			const successStr = 'Đã điều chỉnh số dư thành công';
