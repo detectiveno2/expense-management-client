@@ -1,0 +1,99 @@
+.transaction-detail {
+	width: 58%;
+	height: 15rem;
+	margin-left: 1rem;
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0 3px 24px 0 rgba(0, 0, 0, 0.12);
+	animation: transactionDetail 0.4s;
+	position: sticky;
+	top: 5rem;
+	left: 40%;
+}
+
+@keyframes transactionDetail {
+	from {
+		opacity: 0;
+		width: 40%;
+	}
+	to {
+		opacity: 1;
+		width: 58%;
+	}
+}
+
+.transaction-detail__header {
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	padding: 0.5rem 2rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.transaction-detail__title {
+	flex-grow: 1;
+	margin-left: 3rem;
+	font-size: 1.25rem;
+	font-weight: 500;
+}
+
+.transaction-detail__back-btn {
+	width: 1rem;
+	height: 1rem;
+	fill: rgba(0, 0, 0, 0.87);
+	cursor: pointer;
+	margin-left: 1rem;
+}
+.transaction-detail-content {
+	display: flex;
+	padding: 1.5rem 2rem;
+}
+
+.transaction-detail-content__flow-icon {
+	width: 3.5rem;
+	height: 3.5rem;
+}
+
+.transaction-detail-content__flow-icon--inflowIcon {
+	fill: var(--main-green-hover-color);
+}
+
+.transaction-detail-content__flow-icon--outflowIcon {
+	fill: var(--main-error-color);
+}
+
+.transaction-detail-content__wrapper {
+	margin-left: 1.5rem;
+}
+
+.transaction-detail-content__title {
+	font-size: 1.5rem;
+}
+
+.transaction-detail-content__description {
+	font-size: 0.875rem;
+}
+
+.transaction-detail-date {
+	font-size: 0.75rem;
+	color: rgba(0, 0, 0, 0.54);
+	padding-bottom: 0.5rem;
+}
+
+.transaction-detail-content__text {
+	padding-right: 2.5rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.transaction-detail-content__expense {
+	font-size: 2.125rem;
+	padding-bottom: 1rem;
+}
+
+.transaction-detail-content__expense--inflow {
+	color: #e51c23;
+}
+
+.transaction-detail-content__expense--outflow {
+	color: #039be5;
+}

@@ -12,3 +12,5 @@ export { default as MyWalletList } from './MyWalletList/MyWalletList';
 export { default as DeleteWalletBtn } from './DeleteWalletBtn/DeleteWalletBtn';
 export { default as ModifyBalanceBtn } from './ModifyBalanceBtn/ModifyBalanceBtn';
 export { default as UpdateWalletBtn } from './UpdateWalletBtn/UpdateWalletBtn';
+export { default as Transaction } from './Transaction/Transaction';
+export { default as TransactionDetail } from './TransactionDetail/TransactionDetail';

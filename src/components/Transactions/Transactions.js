@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import classNames from 'classnames';
 
 import './Transactions.css';
 
@@ -10,18 +11,19 @@ import { ReactComponent as NextIcon } from '../../images/next.svg';
 
 import { MenuContext } from '../../contexts/MenuContext';
 import { WalletContext } from '../../contexts/WalletContext';
+import { ExpenseContext } from '../../contexts/ExpenseContext';
 
-import Transaction from '../Transaction/Transaction';
+import { Transaction, TransactionDetail } from '../index';
 
 export default function Transactions() {
 	const [subtract, setSubtract] = useState(0);
-	const [total, setTotal] = useState(0);
 	const [inflow, setInflow] = useState(0);
 	const [outflow, setOutflow] = useState(0);
 	const [transactionsOfMonth, setTransactionsOfMonth] = useState([]);
 
 	const { setIsActive } = useContext(MenuContext);
 	const { currentWallet, getExpenseOfMonth } = useContext(WalletContext);
+	const { isShow } = useContext(ExpenseContext);
 
 	const startOfMonth = moment().subtract(subtract, 'month').startOf('month');
 	const endOfMonth = moment().subtract(subtract, 'month').endOf('month');
@@ -35,11 +37,10 @@ export default function Transactions() {
 	};
 
 	useEffect(() => {
-		const { inflow, outflow, total, transactionsOfMonth } = getExpenseOfMonth(
+		const { inflow, outflow, transactionsOfMonth } = getExpenseOfMonth(
 			startOfMonth.toISOString(),
 			currentWallet
 		);
-		setTotal(total);
 		setInflow(inflow);
 		setOutflow(outflow);
 		setTransactionsOfMonth(transactionsOfMonth);
@@ -47,7 +48,12 @@ export default function Transactions() {
 
 	return (
 		<div className="Transactions">
-			<div className="transactions-wrapper">
+			<div
+				className={classNames({
+					'transactions-wrapper': true,
+					left: isShow,
+				})}
+			>
 				<div className="top-bar">
 					<div className="top-bar-wrapper">
 						<div className="top-bar-btn" onClick={getLastMonth}>
@@ -91,6 +97,7 @@ export default function Transactions() {
 				</div>
 				<Transaction transactions={transactionsOfMonth} />
 			</div>
+			{isShow && <TransactionDetail />}
 		</div>
 	);
 }

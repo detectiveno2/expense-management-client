@@ -54,6 +54,7 @@ function ModifyBalanceBtn({
 			walletName,
 			isIncome,
 			title: 'Điều chỉnh số dư',
+			description: '',
 			expense: calExpense,
 			isShowReport: isChecked,
 		};
