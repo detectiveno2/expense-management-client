@@ -79,7 +79,7 @@ export default function Transactions() {
 							<span>{`${outflow.toLocaleString()} đ`}</span>
 						</div>
 						<div className="result">
-							<span>{`${total.toLocaleString()} đ`}</span>
+							<span>{`${(inflow + outflow).toLocaleString()} đ`}</span>
 						</div>
 						<Link
 							to={`/report?date=${startOfMonth.toISOString()}`}

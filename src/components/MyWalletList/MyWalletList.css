@@ -167,6 +167,8 @@
 .my-wl__right .my-wl-r__footer .my-wl-r__btn {
 	display: block;
 	width: 100%;
+	height: auto;
+	font-size: 1rem;
 	padding: 0.5rem;
 
 	border: none;
@@ -183,6 +185,7 @@
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--green {
 	color: var(--main-green-color);
+	height: auto;
 }
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--green:hover {
@@ -191,6 +194,7 @@
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--red {
 	color: var(--main-error-color);
+	height: auto;
 }
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn.my-wl-r__btn--red:hover {
@@ -199,6 +203,19 @@
 
 .my-wl__right .my-wl-r__footer .my-wl-r__btn:hover {
 	color: #ffffff;
+}
+
+.my-wl__loading {
+	height: 100%;
+	position: relative;
+}
+
+.my-wl__loading .my-wl__loading-animation {
+	margin: auto;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 @media (max-width: 767.98px) {

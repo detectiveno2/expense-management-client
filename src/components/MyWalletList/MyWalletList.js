@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
+import ReactLoading from 'react-loading';
 
 import { WalletContext } from '../../contexts/WalletContext';
 import { UserContext } from '../../contexts/UserContext';
+import AddWalletBtn from '../AddWalletBtn/AddWalletBtn';
 
 import { ReactComponent as BackIcon } from '../../images/back-icon.svg';
 import WalletIcon from '../../images/wallet-icon.png';
 import './MyWalletList.css';
+import { DeleteWalletBtn, ModifyBalanceBtn, UpdateWalletBtn } from '../index';
 
 function MyWalletList() {
 	const [selectedWallet, setSelectedWallet] = useState(null);
@@ -29,7 +32,7 @@ function MyWalletList() {
 		setListActive(false);
 	};
 
-	return (
+	return wallets ? (
 		<div className={walletListCls}>
 			<div className="my-wl__container">
 				<div className="my-wl__left">
@@ -50,14 +53,14 @@ function MyWalletList() {
 									<div className="my-wl__title-wl">
 										<div className="my-wl__name-wl">{wallet.walletName}</div>
 										<div className="my-wl__balance-wl">
-											{wallet.accountBalance}
+											{wallet.accountBalance.toLocaleString()}
 										</div>
 									</div>
 								</button>
 							))}
 					</div>
 					<div className="my-wl__footer">
-						<button className="my-wl__add-btn">THÊM VÍ</button>
+						<AddWalletBtn className="my-wl__add-btn" />
 					</div>
 				</div>
 				<div className="my-wl__right">
@@ -103,16 +106,34 @@ function MyWalletList() {
 						</div>
 					</div>
 					<div className="my-wl-r__footer">
-						<button className="my-wl-r__btn my-wl-r__btn--green">
-							ĐỔI TÊN
-						</button>
-						<button className="my-wl-r__btn my-wl-r__btn--green">
-							ĐIỀU CHỈNH SỐ DƯ
-						</button>
-						<button className="my-wl-r__btn my-wl-r__btn--red">XÓA</button>
+						<UpdateWalletBtn
+							className="my-wl-r__btn my-wl-r__btn--green"
+							walletName={selectedWallet && selectedWallet.walletName}
+							backToList={handleBackClick}
+						/>
+						<ModifyBalanceBtn
+							className="my-wl-r__btn my-wl-r__btn--green"
+							walletName={selectedWallet && selectedWallet.walletName}
+							accountBalance={selectedWallet && selectedWallet.accountBalance}
+							setSelectedWallet={setSelectedWallet}
+							backToList={handleBackClick}
+						/>
+						<DeleteWalletBtn
+							className="my-wl-r__btn my-wl-r__btn--red"
+							walletId={selectedWallet && selectedWallet._id}
+							backToList={handleBackClick}
+						/>
 					</div>
 				</div>
 			</div>
+		</div>
+	) : (
+		<div className="my-wl__loading">
+			<ReactLoading
+				type="spin"
+				color="#6de283"
+				className="my-wl__loading-animation"
+			/>
 		</div>
 	);
 }
