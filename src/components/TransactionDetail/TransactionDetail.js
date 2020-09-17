@@ -26,7 +26,6 @@ function TransactionDetail() {
 	const handleClickCloseBtn = () => {
 		setIsShow(false);
 	};
-
 	return (
 		<div
 			className={classNames({

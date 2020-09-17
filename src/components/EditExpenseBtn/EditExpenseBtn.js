@@ -21,7 +21,6 @@ function EditExpenseBtn() {
 		description: defaultDescription,
 		setIsShow,
 	} = useContext(ExpenseContext);
-
 	const { updateWallet, setCurrentWallet, setVirtualWallet } = useContext(
 		WalletContext
 	);
@@ -30,7 +29,7 @@ function EditExpenseBtn() {
 	const [date, setDate] = useState(defaultDate);
 	const [isIncome, setIsIncome] = useState(defaultIsIncome);
 	const [title, setTitle] = useState(defaultTitle);
-	const [expense, setExpense] = useState(defaultExpense);
+	const [expense, setExpense] = useState(Math.abs(defaultExpense));
 	const [description, setDescription] = useState(defaultDescription);
 
 	// State for UI.
