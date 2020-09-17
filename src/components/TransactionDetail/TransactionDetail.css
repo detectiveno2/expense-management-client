@@ -60,7 +60,7 @@
 }
 
 .transaction-detail__btn-wrapper--small button:nth-child(2) {
-	background: var(--main-green2-color) !important;
+	background: var(--main-green-color) !important;
 	color: #fff !important;
 	margin-left: 0.5rem;
 }
@@ -70,7 +70,7 @@
 }
 
 .transaction-detail__btn-wrapper--small button:nth-child(2):hover {
-	background: var(--main-green-color) !important;
+	background: var(--main-green-hover-color) !important;
 }
 
 .transaction-detail-content__flow-icon {
