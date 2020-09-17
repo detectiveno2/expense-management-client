@@ -1,0 +1,17 @@
+/* .e-e-btn__submit-btn {
+	background-color: var(--main-error-color) !important;
+	border: 1px solid var(--main-error-color) !important;
+} */
+
+.e-e-btn {
+	color: var(--main-green-color) !important;
+	background-color: #ffffff !important;
+	border: 1px solid #ffffff !important;
+	box-shadow: none !important;
+	border-radius: 4px !important;
+}
+
+.e-e-btn:hover {
+	color: #ffffff !important;
+	background-color: var(--main-green-color) !important ;
+}

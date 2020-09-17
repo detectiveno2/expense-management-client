@@ -5,6 +5,7 @@ export const ExpenseContext = React.createContext();
 export const ExpenseProvider = (props) => {
 	const [isShow, setIsShow] = useState(false);
 	const [date, setDate] = useState('');
+	const [expenseId, setExpenseId] = useState('');
 	const [expense, setExpense] = useState('');
 	const [title, setTitle] = useState('');
 	const [isIncome, setIsIncome] = useState(null);
@@ -15,6 +16,8 @@ export const ExpenseProvider = (props) => {
 			value={{
 				date,
 				setDate,
+				expenseId,
+				setExpenseId,
 				expense,
 				setExpense,
 				title,

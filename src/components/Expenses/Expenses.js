@@ -65,6 +65,7 @@ export default function Expenses({ date, expenses }) {
 				return (
 					<Expense
 						date={date}
+						expenseId={expense._id}
 						expense={expense.expense}
 						title={expense.title}
 						isIncome={expense.isIncome}

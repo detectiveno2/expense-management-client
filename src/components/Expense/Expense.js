@@ -9,12 +9,14 @@ import { ExpenseContext } from '../../contexts/ExpenseContext';
 export default function Expense({
 	date,
 	expense,
+	expenseId,
 	title,
 	isIncome,
 	description,
 }) {
 	const {
 		setDate,
+		setExpenseId,
 		setExpense,
 		setTitle,
 		setIsIncome,
@@ -24,6 +26,7 @@ export default function Expense({
 
 	const handleClick = () => {
 		setDate(date);
+		setExpenseId(expenseId);
 		setExpense(expense);
 		setTitle(title);
 		setIsIncome(isIncome);

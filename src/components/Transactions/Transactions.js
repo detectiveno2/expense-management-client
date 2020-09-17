@@ -52,6 +52,7 @@ export default function Transactions() {
 				className={classNames({
 					'transactions-wrapper': true,
 					left: isShow,
+					'display-lg': isShow,
 				})}
 			>
 				<div className="top-bar">

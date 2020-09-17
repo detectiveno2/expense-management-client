@@ -1,0 +1,17 @@
+.d-e-btn__submit-btn {
+	background-color: var(--main-error-color) !important;
+	border: 1px solid var(--main-error-color) !important;
+}
+
+.d-e-btn {
+	color: var(--main-error-color) !important;
+	background-color: #ffffff !important;
+	border: 1px solid #ffffff !important;
+	box-shadow: none !important;
+	border-radius: 4px !important;
+}
+
+.d-e-btn:hover {
+	color: #ffffff !important;
+	background-color: var(--main-error-color) !important ;
+}

@@ -8,31 +8,42 @@ import { ReactComponent as OutflowIcon } from '../../images/outflow.svg';
 import { ReactComponent as CloseIcon } from '../../images/close-icon.svg';
 import { ExpenseContext } from '../../contexts/ExpenseContext';
 
+import DeleteExpenseBtn from '../DeleteExpenseBtn/DeleteExpenseBtn';
+import EditExpenseBtn from '../EditExpenseBtn/EditExpenseBtn';
+
 function TransactionDetail() {
 	const {
 		date,
+		expenseId,
 		expense,
 		title,
 		isIncome,
 		description,
-		isShow,
 		setIsShow,
+		isShow,
 	} = useContext(ExpenseContext);
 
 	const handleClickCloseBtn = () => {
 		setIsShow(false);
 	};
-	console.log({ date, expense, title, isIncome, description, isShow });
+
 	return (
-		<div className="transaction-detail">
+		<div
+			className={classNames({
+				'transaction-detail': true,
+				'display-lg': isShow,
+			})}
+		>
 			<div className="transaction-detail__header">
 				<CloseIcon
 					className="transaction-detail__back-btn"
 					onClick={handleClickCloseBtn}
 				/>
 				<div className="transaction-detail__title">Chi tiết giao dịch</div>
-				<button>XÓA</button>
-				<button>SỬA</button>
+				<div className="transaction-detail__btn-wrapper transaction-detail__btn-wrapper--large d-lg-flex d-none">
+					<DeleteExpenseBtn expenseId={expenseId} />
+					<EditExpenseBtn expenseId={expenseId} />
+				</div>
 			</div>
 			<div className="transaction-detail-content">
 				{isIncome ? (
@@ -58,6 +69,10 @@ function TransactionDetail() {
 						<div className="transaction-detail-content__expense transaction-detail-content__expense--inflow">{`${expense.toLocaleString()} đ`}</div>
 					)}
 				</div>
+			</div>
+			<div className="transaction-detail__btn-wrapper transaction-detail__btn-wrapper--small float-right d-lg-none d-flex">
+				<DeleteExpenseBtn expenseId={expenseId} />
+				<EditExpenseBtn expenseId={expenseId} />
 			</div>
 		</div>
 	);

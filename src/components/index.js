@@ -14,3 +14,4 @@ export { default as ModifyBalanceBtn } from './ModifyBalanceBtn/ModifyBalanceBtn
 export { default as UpdateWalletBtn } from './UpdateWalletBtn/UpdateWalletBtn';
 export { default as Transaction } from './Transaction/Transaction';
 export { default as TransactionDetail } from './TransactionDetail/TransactionDetail';
+export { default as DeleteExpenseBtn } from './DeleteExpenseBtn/DeleteExpenseBtn';
