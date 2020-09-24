@@ -4,7 +4,6 @@ import moment from 'moment';
 import Swiper from 'react-id-swiper';
 
 import { WalletContext } from '../../contexts/WalletContext';
-import { SwiperContext } from '../../contexts/SwiperContext';
 
 import SwiperConfig from '../../components/Swiper/Swiper';
 import LoadingPage from '../Loading/Loading';
@@ -16,11 +15,10 @@ const { Option } = Select;
 
 export default function () {
 	const { wallets, isLoaded, getExpenseOfMonth } = useContext(WalletContext);
-	const { monthActive, setMonthActive } = useContext(SwiperContext);
 
 	const [loaded, setLoaded] = useState(false);
 	const [months, setMonths] = useState([]);
-	// const [monthActive, setMonthActive] = useState(new Date());
+	const [monthActive, setMonthActive] = useState(new Date());
 
 	// add monthActive when slide next transition start
 	const addMonths = (date, month) => {
