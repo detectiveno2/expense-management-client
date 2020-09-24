@@ -76,8 +76,6 @@ export const WalletProvider = (props) => {
 		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
 		total = inflow + outflow;
 
-		console.log({ total, inflow, outflow, transactionsOfMonth });
-
 		return { total, inflow, outflow, transactionsOfMonth };
 	};
 
