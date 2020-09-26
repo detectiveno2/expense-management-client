@@ -40,7 +40,7 @@
 
 .transaction-detail-content {
 	display: flex;
-	padding: 1.5rem 2rem 0;
+	padding: 1.5rem 2rem;
 }
 
 .transaction-detail__btn-wrapper--small {

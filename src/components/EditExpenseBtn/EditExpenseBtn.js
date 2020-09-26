@@ -63,8 +63,10 @@ function EditExpenseBtn() {
 			return;
 		}
 		try {
-			const { newData, virtualWallet } = await expenseApi.updateExpense(data);
-			updateWallet(newData);
+			const { updatedWallet, virtualWallet } = await expenseApi.updateExpense(
+				data
+			);
+			updateWallet(updatedWallet);
 			setVirtualWallet(virtualWallet);
 			setCurrentWallet(virtualWallet);
 
@@ -177,7 +179,7 @@ function EditExpenseBtn() {
 						onClick={handleOk}
 						className="e-e-btn__submit-btn "
 					>
-						Thêm
+						Sửa
 					</Button>,
 				]}
 			>

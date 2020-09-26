@@ -9,15 +9,20 @@ import './DeleteExpenseBtn.css';
 import swal from 'sweetalert';
 
 function DeleteExpenseBtn({ expenseId }) {
-	const { setVirtualWallet, setCurrentWallet } = useContext(WalletContext);
+	const { setVirtualWallet, setCurrentWallet, updateWallet } = useContext(
+		WalletContext
+	);
 	const { setIsShow } = useContext(ExpenseContext);
 	const [loading, setLoading] = useState(false);
 	const [visible, setVisible] = useState(false);
 
 	const deleteExpense = async (expenseId) => {
 		try {
-			const { virtualWallet } = await expenseApi.deleteExpense(expenseId);
+			const { updatedWallet, virtualWallet } = await expenseApi.deleteExpense(
+				expenseId
+			);
 			setVirtualWallet(virtualWallet);
+			updateWallet(updatedWallet);
 			setCurrentWallet(virtualWallet);
 		} catch (error) {
 			swal({
