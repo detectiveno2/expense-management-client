@@ -165,3 +165,12 @@
 		width: 100%;
 	}
 }
+
+@media (max-width: 576px) {
+	.Transactions .transactions-wrapper {
+		margin-bottom: 3rem;
+	}
+	.transactions-wrapper .top-bar {
+		top: 3.5rem;
+	}
+}
