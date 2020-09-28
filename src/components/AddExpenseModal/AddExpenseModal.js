@@ -57,7 +57,7 @@ function AddExpenseModal() {
 		if (wallets && wallets.length > 0) {
 			setWalletName(wallets[0].walletName);
 		}
-	}, [wallets]);
+	}, []);
 
 	const addExpenseApi = async () => {
 		const data = {

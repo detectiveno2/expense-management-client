@@ -47,14 +47,19 @@ export const WalletProvider = (props) => {
 	const updateWallet = (updatedWallet) => {
 		const newWallets = [...wallets];
 		const walletIndex = newWallets.findIndex(
-			(wallet) => wallet.walletName === updatedWallet.walletName
+			(wallet) => wallet._id === updatedWallet._id
 		);
-		newWallets.splice(walletIndex, 1, updatedWallet);
+
+		if (walletIndex === -1) {
+			newWallets.push(updatedWallet);
+		} else {
+			newWallets.splice(walletIndex, 1, updatedWallet);
+		}
+
 		setWallets(newWallets);
 	};
 
 	const getExpenseOfMonth = (date, currentWallet) => {
-		let total = 0;
 		const transactionsOfMonth = currentWallet.transactions.filter(
 			(transaction) => {
 				return (
@@ -63,11 +68,26 @@ export const WalletProvider = (props) => {
 				);
 			}
 		);
+		//deep clone
+		const cloneTrans = JSON.parse(JSON.stringify(transactionsOfMonth));
+
+		cloneTrans.forEach((transaction) => {
+			transaction.expenses = transaction.expenses.filter((expense) => {
+				return expense.isShowReport !== false;
+			});
+		});
+
+		const transactionsOfMonthReport = cloneTrans;
 
 		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
-		total = inflow + outflow;
-
-		return { total, inflow, outflow, transactionsOfMonth };
+		const total = currentWallet.accountBalance;
+		return {
+			total,
+			inflow,
+			outflow,
+			transactionsOfMonth,
+			transactionsOfMonthReport,
+		};
 	};
 
 	const onLogout = () => {
@@ -80,6 +100,7 @@ export const WalletProvider = (props) => {
 		<WalletContext.Provider
 			value={{
 				wallets,
+				setWallets,
 				currentWallet,
 				getExpenseOfMonth,
 				updateWallet,
