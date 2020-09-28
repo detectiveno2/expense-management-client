@@ -1,0 +1,4 @@
+.d-wl-btn__submit-btn {
+	background-color: var(--main-error-color) !important;
+	border: 1px solid var(--main-error-color) !important;
+}

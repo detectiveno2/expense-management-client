@@ -18,6 +18,10 @@ body,
 	color: rgba(0, 0, 0, 0.87);
 }
 
+button:focus {
+	outline: none !important;
+}
+
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -51,32 +51,47 @@ export const WalletProvider = (props) => {
 	const updateWallet = (updatedWallet) => {
 		const newWallets = [...wallets];
 		const walletIndex = newWallets.findIndex(
-			(wallet) => wallet.walletName === updatedWallet.walletName
+			(wallet) => wallet._id === updatedWallet._id
 		);
-		newWallets.splice(walletIndex, 1, updatedWallet);
+
+		if (walletIndex === -1) {
+			newWallets.push(updatedWallet);
+		} else {
+			newWallets.splice(walletIndex, 1, updatedWallet);
+		}
+
 		setWallets(newWallets);
 	};
 
-	const getExpenseOfMonth = (date, currentWallet, walletName) => {
-		let wallet;
-		if (walletName) {
-			wallet = wallets.find((wallet) => wallet.walletName === walletName);
-		} else {
-			wallet = currentWallet;
-		}
+	const getExpenseOfMonth = (date, currentWallet) => {
+		const transactionsOfMonth = currentWallet.transactions.filter(
+			(transaction) => {
+				return (
+					moment(transaction.date).format('MM/YYYY') ===
+					moment(date).format('MM/YYYY')
+				);
+			}
+		);
+		//deep clone
+		const cloneTrans = JSON.parse(JSON.stringify(transactionsOfMonth));
 
-		let total = 0;
-		const transactionsOfMonth = wallet.transactions.filter((transaction) => {
-			return (
-				moment(transaction.date).format('MM/YYYY') ===
-				moment(date).format('MM/YYYY')
-			);
+		cloneTrans.forEach((transaction) => {
+			transaction.expenses = transaction.expenses.filter((expense) => {
+				return expense.isShowReport !== false;
+			});
 		});
 
-		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
-		total = inflow + outflow;
+		const transactionsOfMonthReport = cloneTrans;
 
-		return { total, inflow, outflow, transactionsOfMonth };
+		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
+		const total = currentWallet.accountBalance;
+		return {
+			total,
+			inflow,
+			outflow,
+			transactionsOfMonth,
+			transactionsOfMonthReport,
+		};
 	};
 
 	const onLogout = () => {
@@ -89,6 +104,7 @@ export const WalletProvider = (props) => {
 			value={{
 				wallets,
 				isLoaded,
+				setWallets,
 				currentWallet,
 				getExpenseOfMonth,
 				updateWallet,
