@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import moment from 'moment';
+import { useLocation } from 'react-router-dom';
 
 import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
 import ListWallets from '../ListWallets/ListWallets';
+import SelectMonthReport from '../SelectMonthReport/SelectMonthReport';
 
 import { UserContext } from '../../contexts/UserContext';
 import { MenuContext } from '../../contexts/MenuContext';
@@ -25,6 +27,9 @@ function Header() {
 
 	// Get current date.
 	const currentDate = moment().format('DD');
+
+	// Get location
+	let location = useLocation().pathname.slice(1);
 
 	const handleBurgerClick = () => {
 		setIsShow(!isShow);
