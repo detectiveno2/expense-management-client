@@ -3,6 +3,12 @@
 	align-items: center;
 	border-top: 1px solid #e0e0e0;
 	padding: 0.5rem 1rem;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.Expense:hover {
+	background-color: #eff9f1;
 }
 
 .Expense .expense-icon {

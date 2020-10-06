@@ -1,0 +1,157 @@
+.transaction-detail {
+	width: 58%;
+	margin-left: 1rem;
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0 3px 24px 0 rgba(0, 0, 0, 0.12);
+	animation: transactionDetail 0.4s;
+	position: sticky;
+	top: 5rem;
+	left: 40%;
+	align-self: flex-start;
+}
+
+.transaction-detail__header {
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	padding: 0.5rem 2rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.transaction-detail__title {
+	flex-grow: 1;
+	margin-left: 3rem;
+	font-size: 1.25rem;
+	font-weight: 500;
+	flex-shrink: 0;
+	position: relative;
+	top: -2px;
+}
+
+.transaction-detail__back-btn {
+	width: 16px;
+	height: 16px;
+	fill: rgba(0, 0, 0, 0.87);
+	cursor: pointer;
+	margin-left: 1rem;
+	flex-shrink: 0;
+}
+
+.transaction-detail-content {
+	display: flex;
+	padding: 1.5rem 2rem;
+}
+
+.transaction-detail__btn-wrapper--small {
+	padding: 1.5rem 2rem;
+}
+
+.transaction-detail__btn-wrapper--small button {
+	padding: 0.75rem 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.transaction-detail__btn-wrapper--small button:nth-child(1) {
+	background: var(--main-red-color) !important;
+	color: #fff !important;
+}
+
+.transaction-detail__btn-wrapper--small button:nth-child(2) {
+	background: var(--main-green-color) !important;
+	color: #fff !important;
+	margin-left: 0.5rem;
+}
+
+.transaction-detail__btn-wrapper--small button:nth-child(1):hover {
+	background: var(--main-error-color) !important;
+}
+
+.transaction-detail__btn-wrapper--small button:nth-child(2):hover {
+	background: var(--main-green-hover-color) !important;
+}
+
+.transaction-detail-content__flow-icon {
+	width: 3.5rem;
+	height: 3.5rem;
+}
+
+.transaction-detail-content__flow-icon--inflowIcon {
+	fill: var(--main-green-hover-color);
+}
+
+.transaction-detail-content__flow-icon--outflowIcon {
+	fill: var(--main-error-color);
+}
+
+.transaction-detail-content__wrapper {
+	margin-left: 1.5rem;
+}
+
+.transaction-detail-content__title {
+	font-size: 1.5rem;
+}
+
+.transaction-detail-content__description {
+	font-size: 0.875rem;
+}
+
+.transaction-detail-date {
+	font-size: 0.75rem;
+	color: rgba(0, 0, 0, 0.54);
+	padding-bottom: 0.5rem;
+}
+
+.transaction-detail-content__text {
+	padding-right: 2.5rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.transaction-detail-content__expense {
+	font-size: 2.125rem;
+}
+
+.transaction-detail-content__expense--inflow {
+	color: #e51c23;
+}
+
+.transaction-detail-content__expense--outflow {
+	color: #039be5;
+}
+
+@keyframes transactionDetail {
+	from {
+		opacity: 0;
+		width: 40%;
+	}
+	to {
+		opacity: 1;
+		width: 58%;
+	}
+}
+
+@keyframes transactionDetail2 {
+	from {
+		opacity: 0;
+		width: 60%;
+	}
+	to {
+		opacity: 1;
+		width: 100%;
+	}
+}
+
+@media (min-width: 575.98px) {
+	.swal-modal {
+		margin: 4rem 0 0 5rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.transaction-detail {
+		width: 100%;
+		animation: transactionDetail2 0.3s;
+	}
+}

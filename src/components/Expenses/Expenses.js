@@ -42,7 +42,6 @@ const getTotal = (expenses) => {
 
 export default function Expenses({ date, expenses }) {
 	const total = getTotal(expenses);
-
 	const reverseExpenses = JSON.parse(JSON.stringify(expenses)).reverse();
 
 	return (
@@ -65,6 +64,8 @@ export default function Expenses({ date, expenses }) {
 			{reverseExpenses.map((expense) => {
 				return (
 					<Expense
+						date={date}
+						expenseId={expense._id}
 						expense={expense.expense}
 						title={expense.title}
 						isIncome={expense.isIncome}
