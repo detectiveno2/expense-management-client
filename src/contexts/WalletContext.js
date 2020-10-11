@@ -85,6 +85,7 @@ export const WalletProvider = (props) => {
 
 		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
 		const total = currentWallet.accountBalance;
+
 		return {
 			total,
 			inflow,
@@ -93,6 +94,35 @@ export const WalletProvider = (props) => {
 			transactionsOfMonthReport,
 		};
 	};
+
+	const getExpenseOfDayInMonth = (month, currentWallet) => {
+		const transactionsOfMonth = currentWallet.transactions.filter(
+			(transaction) => {
+				return (
+					moment(transaction.date).format('MM/YYYY') ===
+					moment(month).format('MM/YYYY')
+				);
+			}
+		);
+
+		// get all transactions in month
+		const result = transactionsOfMonth.map((transactionInDay) => {
+			return {
+				date: moment(transactionInDay.date).format('YYYY/MM/DD'),
+				expense: transactionInDay.expenses.reduce((a, b) => a + b.expense, 0),
+			};
+		});
+		return result;
+	};
+
+	const getAllExpense = (currentWallet) => {
+		return currentWallet.transactions.map(transaction => {
+			return {
+				date: moment(transaction.date).format('YYYY/MM/DD'),
+				expense: transaction.expenses.reduce((a, b) => a + b.expense, 0),
+			}
+		})
+	}
 
 	const onLogout = () => {
 		setWallets(null);
@@ -112,6 +142,8 @@ export const WalletProvider = (props) => {
 				virtualWallet,
 				setVirtualWallet,
 				onLogout,
+				getExpenseOfDayInMonth,
+				getAllExpense
 			}}
 		>
 			{props.children}

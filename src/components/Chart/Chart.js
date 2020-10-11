@@ -1,51 +1,43 @@
-import React, { useContext } from 'react';
-import { Bar } from 'react-chartjs-2';
+import React, { useMemo } from 'react';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import ReactTooltip from 'react-tooltip';
 
-import { WalletContext } from '../../contexts/WalletContext';
 import './Chart.css';
 
-export default function () {
-	const { wallets } = useContext(WalletContext);
-
-	const dataChart = [65, 59, 80, 81, -40];
-	const setColor = (data) =>
-		data < 0 ? 'rgba(255, 99, 132, 0.6)' : 'rgba(54, 162, 235, 0.6)';
-
-	const data = {
-		labels: ['January', 'February', 'March', 'April', 'May'],
-		datasets: [
-			{
-				backgroundColor: dataChart.map(setColor),
-				borderColor: dataChart.map(setColor),
-				data: dataChart,
-			},
-		],
-	};
-
-	// option for chartjs
-	const options = {
-		legend: {
-			display: false,
-		},
-		responsive: true,
-		scales: {
-			yAxes: [
-				{
-					ticks: {
-						suggestedMin: -60,
-						suggestedMax: 60,
-					},
-				},
-			],
-		},
-		tooltips: {
-			intersect: false,
-		},
-	};
-
+export default function ({ data }) {
 	return (
-		<div className="chart">
-			<Bar data={data} options={options} />
+		<div>
+			<CalendarHeatmap
+				tooltipDataAttrs={(value) => {
+					return {
+						'data-tip': `${value.date} - Chi phí: ${value.expense}`,
+					};
+				}}
+				startDate={new Date(data[0].date)}
+				endDate={new Date(data[data.length - 1].date)}
+				values={data}
+				classForValue={(val) => {
+					const value = val.expense;
+					return value === 0
+						? 'color-empty'
+						: 0 < value && value < 200000
+						? 'color-green-1'
+						: 200000 <= value && value < 500000
+						? 'color-green-2'
+						: 500000 <= value && value < 1000000
+						? 'color-green-3'
+						: value >= 1000000
+						? 'color-green-4'
+						: 0 > value && value > -200000
+						? 'color-red-1'
+						: -200000 >= value && value > -500000
+						? 'color-red-2'
+						: -500000 >= value && value > -1000000
+						? 'color-red-3'
+						: 'color-red-4';
+				}}
+			/>
+			<ReactTooltip className="calendar-tooltip" />
 		</div>
 	);
 }

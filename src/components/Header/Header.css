@@ -159,7 +159,6 @@ ul li:first-child button .CalendarIcon span {
 
 	.Header .burger-btn-container {
 		display: block;
-		flex-grow: 1;
 	}
 
 	.Header .burger-btn-container .burger-button {
