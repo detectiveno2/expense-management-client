@@ -5,6 +5,8 @@ import AppWrapper from './AppWrapper';
 import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'swiper/swiper-bundle.css';
+import 'react-calendar-heatmap/dist/styles.css';
 
 ReactDOM.render(
 	<React.Fragment>

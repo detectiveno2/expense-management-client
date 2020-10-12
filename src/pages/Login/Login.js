@@ -77,6 +77,9 @@ export default function () {
 							<form autoComplete="off" onSubmit={onSubmit}>
 								<div className="form-email">
 									<input
+										className={classNames({
+											reduced: email.length > 0,
+										})}
 										required
 										id="email"
 										type="email"

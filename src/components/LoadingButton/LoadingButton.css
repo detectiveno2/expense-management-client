@@ -7,6 +7,11 @@
 	background: var(--main-green-color);
 	pointer-events: auto;
 	height: 40px;
+	transition: 0.2s;
+}
+
+.form-btn:hover {
+	background: var(--main-hover-green-color);
 }
 
 .form-btn .css-0 {

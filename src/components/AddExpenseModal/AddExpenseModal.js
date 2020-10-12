@@ -52,7 +52,6 @@ function AddExpenseModal() {
 		handleContentBtn();
 	}, []);
 
-	// Handle value walletName
 	useEffect(() => {
 		if (wallets && wallets.length > 0) {
 			setWalletName(wallets[0].walletName);

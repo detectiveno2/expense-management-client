@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react';
 import moment from 'moment';
+import { useLocation } from 'react-router-dom';
 
 import AddExpenseModal from '../AddExpenseModal/AddExpenseModal';
 import ListWallets from '../ListWallets/ListWallets';
+import SelectMonthReport from '../SelectMonthReport/SelectMonthReport';
 
 import { UserContext } from '../../contexts/UserContext';
 import { MenuContext } from '../../contexts/MenuContext';
 import { WalletContext } from '../../contexts/WalletContext';
 
-import { ReactComponent as SearchIcon } from '../../images/search-icon.svg';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 import { ReactComponent as MenuIcon } from '../../images/menu.svg';
 import WalletIcon from '../../images/wallet-icon.png';
@@ -25,6 +26,9 @@ function Header() {
 
 	// Get current date.
 	const currentDate = moment().format('DD');
+
+	// Get location
+	let location = useLocation().pathname.slice(1);
 
 	const handleBurgerClick = () => {
 		setIsShow(!isShow);
@@ -58,6 +62,11 @@ function Header() {
 					)}
 				</div>
 			</div>
+			{location.indexOf('report') !== -1 && (
+				<div>
+					<SelectMonthReport />
+				</div>
+			)}
 			<div className="HeaderRightWrapper">
 				<div className="HeaderRightContent">
 					<ul>
@@ -67,11 +76,6 @@ function Header() {
 									<CalendarIcon width="20" height="20" />
 									<span>{currentDate}</span>
 								</div>
-							</button>
-						</li>
-						<li>
-							<button>
-								<SearchIcon width="20" height="20" />
 							</button>
 						</li>
 						<li>

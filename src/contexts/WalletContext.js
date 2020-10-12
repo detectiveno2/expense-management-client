@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import moment from 'moment';
 
-import walletApi from '../api/walletApi';
 import { UserContext } from './UserContext';
+import walletApi from '../api/walletApi';
 
 export const WalletContext = React.createContext();
 
@@ -25,6 +25,8 @@ const calculateFlow = (transactions) => {
 export const WalletProvider = (props) => {
 	const { token, currentUser } = useContext(UserContext);
 
+	const [isLoaded, setIsLoaded] = useState(false);
+
 	const [wallets, setWallets] = useState(null);
 	const [currentWallet, setCurrentWallet] = useState(null);
 	const [virtualWallet, setVirtualWallet] = useState(null);
@@ -33,7 +35,9 @@ export const WalletProvider = (props) => {
 		const getWalletsUser = async () => {
 			try {
 				const { wallets: gotWallets, virtualWallet } = await walletApi.get();
+
 				setWallets(gotWallets);
+				setIsLoaded(true);
 				setCurrentWallet(virtualWallet);
 				setVirtualWallet(virtualWallet);
 			} catch (error) {
@@ -81,6 +85,7 @@ export const WalletProvider = (props) => {
 
 		const { inflow, outflow } = calculateFlow(transactionsOfMonth);
 		const total = currentWallet.accountBalance;
+
 		return {
 			total,
 			inflow,
@@ -90,16 +95,45 @@ export const WalletProvider = (props) => {
 		};
 	};
 
+	const getExpenseOfDayInMonth = (month, currentWallet) => {
+		const transactionsOfMonth = currentWallet.transactions.filter(
+			(transaction) => {
+				return (
+					moment(transaction.date).format('MM/YYYY') ===
+					moment(month).format('MM/YYYY')
+				);
+			}
+		);
+
+		// get all transactions in month
+		const result = transactionsOfMonth.map((transactionInDay) => {
+			return {
+				date: moment(transactionInDay.date).format('YYYY/MM/DD'),
+				expense: transactionInDay.expenses.reduce((a, b) => a + b.expense, 0),
+			};
+		});
+		return result;
+	};
+
+	const getAllExpense = (currentWallet) => {
+		return currentWallet.transactions.map(transaction => {
+			return {
+				date: moment(transaction.date).format('YYYY/MM/DD'),
+				expense: transaction.expenses.reduce((a, b) => a + b.expense, 0),
+			}
+		})
+	}
+
 	const onLogout = () => {
 		setWallets(null);
 		setCurrentWallet(null);
 		setVirtualWallet(null);
 	};
-
 	return (
 		<WalletContext.Provider
 			value={{
 				wallets,
+				isLoaded,
 				setWallets,
 				currentWallet,
 				getExpenseOfMonth,
@@ -108,6 +142,8 @@ export const WalletProvider = (props) => {
 				virtualWallet,
 				setVirtualWallet,
 				onLogout,
+				getExpenseOfDayInMonth,
+				getAllExpense
 			}}
 		>
 			{props.children}

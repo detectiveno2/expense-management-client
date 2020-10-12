@@ -10,6 +10,7 @@ import { UserContext } from './contexts/UserContext';
 
 import './App.css';
 import 'antd/dist/antd.css';
+import Report from './pages/Report/Report';
 
 function App() {
 	const { token } = useContext(UserContext);
@@ -19,12 +20,7 @@ function App() {
 				<div className="main wrap-content">
 					<Menu />
 					<Header />
-					<div
-						className={classNames('pages', {
-							'm-0': !token,
-							'p-0': !token,
-						})}
-					>
+					<div className="pages">
 						<Switch>
 							<PrivateRoute exact path="/" component={() => <Dashboard />} />
 							<PrivateRoute
@@ -32,6 +28,7 @@ function App() {
 								path="/about-us"
 								component={() => <AboutUs />}
 							/>
+							<PrivateRoute path="/report" component={() => <Report />} />
 							<PrivateRoute path="/my-wallet" component={() => <MyWallet />} />
 							<PrivateRoute
 								path="/account/password"

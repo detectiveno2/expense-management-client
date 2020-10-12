@@ -76,9 +76,12 @@ export default function () {
 						</div>
 						<div className="login-form ">
 							<p>Using Expense Management App account</p>
-							<form autocomplete="off" onSubmit={onSubmit}>
+							<form autoComplete="off" onSubmit={onSubmit}>
 								<div className="form-email">
 									<input
+										className={classNames({
+											reduced: email.length > 0,
+										})}
 										required
 										id="email"
 										type="email"
@@ -87,7 +90,7 @@ export default function () {
 											setErr(null);
 										}}
 									/>
-									<label for="email">Email</label>
+									<label htmlFor="email">Email</label>
 								</div>
 								<div className="form-password">
 									<input
@@ -99,7 +102,7 @@ export default function () {
 											setErr(null);
 										}}
 									/>
-									<label for="password">Password</label>
+									<label htmlFor="password">Password</label>
 								</div>
 								{err && (
 									<p className="auth-err">
