@@ -116,13 +116,13 @@ export const WalletProvider = (props) => {
 	};
 
 	const getAllExpense = (currentWallet) => {
-		return currentWallet.transactions.map(transaction => {
+		return currentWallet.transactions.map((transaction) => {
 			return {
 				date: moment(transaction.date).format('YYYY/MM/DD'),
 				expense: transaction.expenses.reduce((a, b) => a + b.expense, 0),
-			}
-		})
-	}
+			};
+		});
+	};
 
 	const onLogout = () => {
 		setWallets(null);
@@ -143,7 +143,7 @@ export const WalletProvider = (props) => {
 				setVirtualWallet,
 				onLogout,
 				getExpenseOfDayInMonth,
-				getAllExpense
+				getAllExpense,
 			}}
 		>
 			{props.children}

@@ -20,7 +20,7 @@ function App() {
 				<div className="main wrap-content">
 					<Menu />
 					<Header />
-					<div className="pages">
+					<div className={classNames({ pages: token })}>
 						<Switch>
 							<PrivateRoute exact path="/" component={() => <Dashboard />} />
 							<PrivateRoute
