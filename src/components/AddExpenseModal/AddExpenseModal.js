@@ -13,7 +13,12 @@ import ExpenseModal from '../ExpenseModal/ExpenseModal';
 import './AddExpenseModal.css';
 
 function AddExpenseModal() {
-	const { wallets, updateWallet, setCurrentWallet } = useContext(WalletContext);
+	const {
+		wallets,
+		updateWallet,
+		setCurrentWallet,
+		setVirtualWallet,
+	} = useContext(WalletContext);
 	const currentDate = moment();
 
 	// Define state.
@@ -64,8 +69,8 @@ function AddExpenseModal() {
 
 		try {
 			const { newData, virtualWallet } = await expenseApi.add(data);
-			console.log({ newData, virtualWallet, walletName: newData.walletName });
 			updateWallet(newData);
+			setVirtualWallet(virtualWallet);
 			setCurrentWallet(newData);
 
 			const successStr = 'Bạn đã thêm giao dịch thành công!';
@@ -79,6 +84,7 @@ function AddExpenseModal() {
 			setExpense('');
 			setDescription('');
 			setLoading(false);
+			setVisible(false);
 		} catch (error) {
 			const errorStr = error.response.data;
 
@@ -113,18 +119,15 @@ function AddExpenseModal() {
 
 	// Helper functions.
 	const changeDateSelect = (date, dateString) => {
-		console.log(date, dateString);
 		setDate(date);
 	};
 
 	const changeWalletSelect = (walletName) => {
-		console.log(`selected ${walletName}`);
 		setWalletName(walletName);
 	};
 
 	const changeTypeSelect = (type) => {
 		const isIncome = type || false;
-		console.log(isIncome);
 		setIsIncome(isIncome);
 	};
 
@@ -152,6 +155,15 @@ function AddExpenseModal() {
 	};
 
 	const showModal = () => {
+		if (wallets.length <= 0) {
+			setVisible(false);
+			swal({
+				text: 'Xin hãy tạo ví trước khi sử dụng tính năng này!',
+				title: 'Lỗi!',
+				icon: 'warning',
+			});
+			return;
+		}
 		setVisible(true);
 	};
 

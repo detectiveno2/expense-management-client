@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
 
