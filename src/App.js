@@ -3,14 +3,20 @@ import classNames from 'classnames';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute } from './routes/index';
-import { Login, Register, Dashboard, MyWallet, AboutUs } from './pages/index';
+import {
+	Login,
+	Register,
+	Dashboard,
+	MyWallet,
+	AboutUs,
+	Report,
+} from './pages/index';
 import { Menu, Header, ChangePassword } from './components/index';
 
 import { UserContext } from './contexts/UserContext';
 
 import './App.css';
 import 'antd/dist/antd.css';
-import Report from './pages/Report/Report';
 
 function App() {
 	const { token } = useContext(UserContext);
@@ -20,7 +26,7 @@ function App() {
 				<div className="main wrap-content">
 					<Menu />
 					<Header />
-					<div className="pages">
+					<div className={classNames({ pages: token })}>
 						<Switch>
 							<PrivateRoute exact path="/" component={() => <Dashboard />} />
 							<PrivateRoute

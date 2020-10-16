@@ -18,7 +18,6 @@ function DeleteWalletBtn({ className, walletId, backToList }) {
 	const deleteWallet = async (walletId) => {
 		try {
 			const { wallets, virtualWallet } = await walletApi.deleteWallet(walletId);
-			console.log(wallets, virtualWallet);
 			setWallets(wallets);
 			setVirtualWallet(virtualWallet);
 			setCurrentWallet(virtualWallet);
