@@ -89,7 +89,7 @@ export default function Transactions() {
 							<span>{`${(inflow + outflow).toLocaleString()} đ`}</span>
 						</div>
 						<Link
-							to={`/report?date=${startOfMonth.toISOString()}`}
+							to={`/report/${startOfMonth.format('YYYY-MM')}`}
 							onClick={() => setIsActive('report')}
 						>
 							Xem báo cáo cụ thể
