@@ -63,7 +63,7 @@ function Header() {
 				</div>
 			</div>
 			{location.indexOf('report') !== -1 && (
-				<div>
+				<div className="select-month-report">
 					<SelectMonthReport />
 				</div>
 			)}

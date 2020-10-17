@@ -3,17 +3,10 @@ import moment from 'moment';
 import { DatePicker } from 'antd';
 import { useHistory } from 'react-router-dom';
 
-import { WalletContext } from '../../contexts/WalletContext';
+import './SelectMonthReport.css';
 
 export default function () {
-	const { wallets } = useContext(WalletContext);
-
 	const history = useHistory();
-
-	let walletNames;
-	if (wallets && wallets.length > 0) {
-		walletNames = wallets.map((item) => item.walletName);
-	}
 
 	// onchange select wallet
 	const onChange = (date, dateString) => {
