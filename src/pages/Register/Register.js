@@ -44,7 +44,7 @@ export default function () {
 				setRegistered(true);
 
 				//alert registered success
-				swal('Success', 'Thank you!', 'success');
+				swal('Xong!', 'Đăng kí thành công, vui lòng đăng nhập.', 'success');
 			} catch (err) {
 				setErr(err.response.data);
 				setIsLoading(false);
