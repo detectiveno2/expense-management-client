@@ -10,6 +10,7 @@ import {
 	MyWallet,
 	AboutUs,
 	Report,
+	Using,
 } from './pages/index';
 import { Menu, Header, ChangePassword } from './components/index';
 
@@ -46,6 +47,7 @@ function App() {
 								path="/register"
 								component={() => <Register />}
 							/>
+							<PublicRoute exact path="/using" component={() => <Using />} />
 						</Switch>
 					</div>
 				</div>
